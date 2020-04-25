@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/renteasy</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="marketplace@localhost" uuid="b187ca3b-b81f-4d1e-aeb4-9adfd50a3762">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/marketplace</jdbc-url>
+    </data-source>
   </component>
 </project>
