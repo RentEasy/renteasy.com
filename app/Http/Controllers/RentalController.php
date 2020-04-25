@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Property;
 use App\Rental;
+use App\RentalPhoto;
 use Illuminate\Http\Request;
 
 class RentalController extends Controller
@@ -54,6 +55,7 @@ class RentalController extends Controller
             'zipcode' => $request->zipcode,
         ]);
 
+
         $rental = new Rental();
         $rental->rent_deposit = $request->rent_deposit;
         $rental->rent_monthly = $request->rent_monthly;
@@ -62,7 +64,20 @@ class RentalController extends Controller
         $rental->landlord()->associate($request->user());
         $property->rentals()->save($rental);
 
-        return redirect("/rentals/$rental->id");
+        foreach($request->file('photos') as $i => $file) {
+            $path = $file->storePublicly("public/rentals/{$rental->id}");
+            if (!$path) {
+                // failed to upload?
+            }
+
+            $photo = new RentalPhoto();
+            $photo->name = $file->getFilename();
+            $photo->filename = $path;
+            $photo->order = $i;
+            $rental->photos()->save($photo);
+        }
+
+        return redirect(route('rentals.show', ['rental' => $rental]));
     }
 
     /**

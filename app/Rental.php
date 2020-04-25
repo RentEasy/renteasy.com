@@ -49,4 +49,15 @@ class Rental extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function photos()
+    {
+        return $this->hasMany(RentalPhoto::class);
+    }
+
+    public function getPrimaryPhoto()
+    {
+        return $this->photos()->first();
+    }
+
 }
