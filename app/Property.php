@@ -53,6 +53,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Property whereYearBuilt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Property whereZipcode($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Rental[] $rentals
+ * @property-read int|null $rentals_count
  */
 class Property extends Model
 {

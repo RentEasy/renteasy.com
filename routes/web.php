@@ -21,4 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/about/for-renters', 'AboutController@forRenters')->name('about.for-renters');
+Route::get('/about/for-landlords', 'AboutController@forLandlords')->name('about.for-landlords');
+
 Route::resource('rentals', 'RentalController');

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
 <body>
 
 <!-- START NAV -->
-<nav class="navbar is-white">
+<nav class="navbar is-white is-fixed-top">
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item brand-text" href="{{ url('/') }}">
@@ -34,12 +34,25 @@
         </div>
         <div id="navMenu" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="{{ route('home') }}">
-                    Home
-                </a>
                 <a class="navbar-item" href="{{ route('rentals.index') }}">
                     {{ __('Rentals') }}
                 </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        About
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a href="{{ route('about.for-renters') }}" class="navbar-item">
+                            For Renters
+                        </a>
+                        <a href="{{ route('about.for-landlords') }}" class="navbar-item">
+                            For Landlords
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-end">
                 @guest
                     <a class="navbar-item" href="{{ route('login') }}">
                         {{ __('Login') }}
@@ -50,6 +63,9 @@
                         </a>
                     @endif
                 @else
+                    <a class="navbar-item" href="{{ route('home') }}">
+                        Dashboard
+                    </a>
                     <a href="{{ route('home') }}" class="navbar-item">
                         {{ Auth::user()->name }}
                     </a>

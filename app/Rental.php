@@ -37,6 +37,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Rental whereUnit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Rental whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\User $landlord
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\RentalPhoto[] $photos
+ * @property-read int|null $photos_count
+ * @property-read \App\Property $property
  */
 class Rental extends Model
 {
@@ -57,6 +61,13 @@ class Rental extends Model
 
     public function getPrimaryPhoto()
     {
+        $first = $this->photos()->first();
+        if (!$first) {
+            $fakePhoto = new RentalPhoto();
+            $fakePhoto->filename = 'https://picsum.photos/300/200';
+            $fakePhoto->rental_id = $this->id;
+            return $fakePhoto;
+        }
         return $this->photos()->first();
     }
 
