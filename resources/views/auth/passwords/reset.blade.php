@@ -1,5 +1,7 @@
 @extends('layouts.full')
 
+@section('title', 'Reset Password')
+
 @section('content')
 
     <h3 class="title has-text-black">Reset Password</h3>

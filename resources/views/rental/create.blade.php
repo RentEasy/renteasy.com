@@ -1,6 +1,11 @@
-@extends('layouts.full')
+@extends('layouts.slim')
+
+@section('title', 'Create a Rental')
 
 @section('content')
+<div class="content">
+
+    <h1>Create a Rental</h1>
 
     <a href="/rentals">Back to Rentals</a>
 
@@ -21,10 +26,12 @@
         <x-inputs.money key="rent_deposit" label="Deposit"/>
         <x-inputs.money key="rent_monthly" label="Monthly Rent"/>
 
-        <div class="file">
-            <label class="file-label">
-                <input class="file-input" type="file" name="photos" multiple>
-                <span class="file-cta">
+        <div class="field">
+            <label class="label" for="formfile">Photos</label>
+            <div class="file">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="photos" multiple>
+                    <span class="file-cta">
                                       <span class="file-icon">
                                         <i class="fas fa-upload"></i>
                                       </span>
@@ -32,11 +39,14 @@
                                         Choose some photos…
                                       </span>
                                     </span>
-            </label>
+                </label>
+            </div>
         </div>
+
 
         <div class="control">
             <button type="submit" class="button is-link">Submit</button>
         </div>
     </form>
+</div>
 @endsection

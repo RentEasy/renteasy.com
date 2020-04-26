@@ -1,5 +1,7 @@
 @extends('layouts.login')
 
+@section('title', 'Register')
+
 @section('content')
     <h3 class="title has-text-black">Register</h3>
     <hr class="login-hr">

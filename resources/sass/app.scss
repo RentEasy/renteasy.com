@@ -8,7 +8,19 @@
 @import "~bulma-carousel/dist/css/bulma-carousel.min.css";
 
 .container-margin-top {
-    margin-top: 2rem;
+    //margin-top: 2rem;
+    margin-top: 24px;
+}
+
+.rental-card {
+    .title {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    .subtitle {
+        font-size: 1rem;
+        font-weight: 300;
+    }
 }
 
 //

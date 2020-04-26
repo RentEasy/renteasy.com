@@ -12007,7 +12007,17 @@ label.panel-block:hover {
 }
 
 .container-margin-top {
-  margin-top: 2rem;
+  margin-top: 24px;
+}
+
+.rental-card .title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.rental-card .subtitle {
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 #login .hero .nav,

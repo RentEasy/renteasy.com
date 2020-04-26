@@ -71,4 +71,14 @@ class Rental extends Model
         return $this->photos()->first();
     }
 
+    public function getRentMonthlyAttribute($value)
+    {
+        return number_format($value, 2);
+    }
+
+    public function getRentDepositAttribute($value)
+    {
+        return number_format($value, 2);
+    }
+
 }

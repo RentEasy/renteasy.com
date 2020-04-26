@@ -1,15 +1,24 @@
 @extends('layouts.full')
 
+@section('title', 'Rentals')
+
 @section('content')
 
 
     <div class="box cta">
         <div class="level">
             <div class="level-left">
-                <input class="input is-flex" type="text" placeholder="Search for properties">
+                <div class="level-item">
+                    <input class="input is-flex" type="text" placeholder="Search for properties">
+                </div>
+                <div class="level-item">
+                    <p>Showing {{ $rentals->perPage() }} of {{  $rentals->total() }} rentals</p>
+                </div>
             </div>
             <div class="level-right">
-                <a class="button is-link" href="{{ route('rentals.create') }}">Create Rental</a>
+                <div class="level-item">
+                    <a class="button is-link" href="{{ route('rentals.create') }}">Create Rental</a>
+                </div>
             </div>
         </div>
     </div>
@@ -25,23 +34,13 @@
     <div class="columns is-multiline is-mobile">
     @foreach ($rentals as $rental)
         <div class="column is-one-quarter">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-16by9">
-                        <img src="{{ asset($rental->getPrimaryPhoto()->filename) }}" alt="">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <p class="subtitle">{{ $rental->property->address }}</p>
-                </div>
-                <footer class="card-footer">
-                    <a href="#" class="card-footer-item">❤️</a>
-                    <a href="{{ route('rentals.show', ['rental' => $rental]) }}" class="card-footer-item">View Property</a>
-                </footer>
-            </div>
+            <x-rental-card :rental="$rental" />
         </div>
     @endforeach
     </div>
 
-    {{ $rentals->links() }}
+
+    <div class="box cta">
+        {{ $rentals->links() }}
+    </div>
 @endsection

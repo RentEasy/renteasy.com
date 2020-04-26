@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class RentalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index','show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -90,7 +95,7 @@ class RentalController extends Controller
     {
         return view('rental.show')->with([
             'rental' => $rental,
-            'similarRentals' => Rental::limit(10)->inRandomOrder()->get()
+            'similarRentals' => Rental::limit(3)->inRandomOrder()->get()
         ]);
     }
 

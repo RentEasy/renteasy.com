@@ -1,5 +1,7 @@
 @extends('layouts.hero')
 
+@section('title', 'Home')
+
 @section('content')
-f
+
 @endsection

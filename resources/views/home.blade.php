@@ -1,5 +1,7 @@
 @extends('layouts.full')
 
+@section('title', 'Dashboard')
+
 @section('content')
         <div class="columns">
             <div class="column is-3 ">

@@ -1,5 +1,7 @@
 @extends('layouts.full')
 
+@section('title', 'For Renters')
+
 @section('content')
     <div class="content">
         <h1>For Renters</h1>
