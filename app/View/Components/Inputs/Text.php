@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Inputs;
 
 use Illuminate\View\Component;
 
-class MoneyInput extends Component
+class Text extends Component
 {
     /**
      * Server key for the input.
@@ -40,6 +40,6 @@ class MoneyInput extends Component
      */
     public function render()
     {
-        return view('components.money-input');
+        return view('components.inputs.text');
     }
 }

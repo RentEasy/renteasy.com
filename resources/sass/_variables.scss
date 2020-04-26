@@ -1,19 +1,29 @@
-// Body
-$body-bg: #f8fafc;
+@charset "utf-8";
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+$family-sans-serif: "Questrial", sans-serif;
+$body-background-color: #ECF0F3;
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+
+//
+//// Set your brand colors
+//$purple: #8A4D76;
+//$pink: #FA7C91;
+//$brown: #757763;
+//$beige-light: #D0D1CD;
+//$beige-lighter: #EFF0EB;
+//
+// Update Bulma's global variables
+//$grey-dark: $brown;
+//$grey-light: $beige-light;
+//$primary: $purple;
+//$link: $pink;
+//$widescreen-enabled: false;
+//$fullhd-enabled: false;
+//
+//// Update some of Bulma's component variables
+//$body-background-color: $beige-lighter;
+//$control-border-width: 2px;
+//$input-border-color: transparent;
+//$input-shadow: none;

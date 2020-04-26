@@ -88,7 +88,10 @@ class RentalController extends Controller
      */
     public function show(Rental $rental)
     {
-        return view('rental.show')->with('rental', $rental);
+        return view('rental.show')->with([
+            'rental' => $rental,
+            'similarRentals' => Rental::all()
+        ]);
     }
 
     /**

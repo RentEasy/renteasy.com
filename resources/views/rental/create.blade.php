@@ -1,39 +1,42 @@
-@extends('layouts.app')
+@extends('layouts.full')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Rentals</div>
 
-                    <div class="card-body">
-                        <a href="/rentals">Back to Rentals</a>
+    <a href="/rentals">Back to Rentals</a>
 
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <form method="POST" action="/rentals" enctype="multipart/form-data">
-                            @csrf
-
-                            <x-text-input key="address" label="Address"/>
-                            <x-text-input key="city" label="City"/>
-                            <x-text-input key="state" label="State"/>
-                            <x-text-input key="zipcode" label="Zipcode"/>
-
-                            <x-money-input key="rent_deposit" label="Deposit"/>
-                            <x-money-input key="rent_monthly" label="Monthly Rent"/>
-
-                            <input type="file" multiple name="photos[]">
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
         </div>
-    </div>
+    @endif
+
+    <form method="POST" action="/rentals" enctype="multipart/form-data">
+        @csrf
+
+        <x-inputs.text key="address" label="Address"/>
+        <x-inputs.text key="city" label="City"/>
+        <x-inputs.text key="state" label="State"/>
+        <x-inputs.text key="zipcode" label="Zipcode"/>
+
+        <x-inputs.money key="rent_deposit" label="Deposit"/>
+        <x-inputs.money key="rent_monthly" label="Monthly Rent"/>
+
+        <div class="file">
+            <label class="file-label">
+                <input class="file-input" type="file" name="photos" multiple>
+                <span class="file-cta">
+                                      <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                      </span>
+                                      <span class="file-label">
+                                        Choose some photos…
+                                      </span>
+                                    </span>
+            </label>
+        </div>
+
+        <div class="control">
+            <button type="submit" class="button is-link">Submit</button>
+        </div>
+    </form>
 @endsection

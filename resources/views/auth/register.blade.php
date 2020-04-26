@@ -1,77 +1,59 @@
-@extends('layouts.app')
+@extends('layouts.login')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <h3 class="title has-text-black">Register</h3>
+    <hr class="login-hr">
+    <p class="subtitle has-text-black">Create your RentEasy account.</p>
+    <div class="box">
+        <form class="login-form" method="POST" action="{{ route('register') }}">
+            {{ csrf_field() }}
+            <div class="field">
+                <div class="control">
+                    <input type="text" name="name" value="{{ old('name') }}"
+                           class="input is-large @error('name') is-danger @enderror"
+                           placeholder="Your Name" autofocus required>
                 </div>
+
+                @error('name')
+                <p class="help is-danger">{{ $message }}</p>
+                @enderror
             </div>
-        </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="email" name="email" value="{{ old('email') }}"
+                           class="input is-large @error('email') is-danger @enderror"
+                           placeholder="Your Email" required>
+                </div>
+
+                @error('email')
+                <p class="help is-danger">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="password" name="password"
+                           class="input is-large @error('password') is-danger @enderror"
+                           placeholder="Your Password" required>
+                </div>
+                @error('password')
+                <p class="help is-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input type="password" name="password_confirmation"
+                           class="input is-large @error('password_confirmation') is-danger @enderror"
+                           placeholder="Confirm Password" required>
+                </div>
+                @error('password_confirmation')
+                <p class="help is-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Register <i class="fa fa-sign-in"
+                                                                                   aria-hidden="true"></i>
+            </button>
+        </form>
     </div>
-</div>
 @endsection
