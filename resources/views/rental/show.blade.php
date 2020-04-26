@@ -45,8 +45,7 @@
                         </div>
                         <div class="media-content">
                             <p class="title is-4">{{ $rental->property->address }}</p>
-                            <p class="subtitle is-6">{{ $rental->property->city }}
-                                , {{ $rental->property->state }} {{ $rental->property->zipcode }}</p>
+                            <p class="subtitle is-6">{{ $rental->property->city }}, {{ $rental->property->state }} {{ $rental->property->zipcode }}</p>
                         </div>
                     </div>
 
@@ -60,10 +59,6 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-
-                        {{ $rental }}
-
 
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Phasellus nec iaculis mauris. <a>@bulmaio</a>.

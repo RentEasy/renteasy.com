@@ -229,4 +229,6 @@ return [
 
     ],
 
+    'seed_directory' => env('SEED_DIRECTORY'),
+
 ];

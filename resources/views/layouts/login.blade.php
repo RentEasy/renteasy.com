@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('body')
+    @include('layouts.nav')
+
     <section id="login" class="hero">
         <div class="hero-body">
             <div class="container has-text-centered">

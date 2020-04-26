@@ -12006,10 +12006,8 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
-html,
-body {
-  height: 100%;
-  background: #ECF0F3;
+.container-margin-top {
+  margin-top: 2rem;
 }
 
 #login .hero .nav,

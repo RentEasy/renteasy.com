@@ -1,7 +1,20 @@
 @extends('layouts.full')
 
 @section('content')
-    <a class="btn btn-primary" href="{{ route('rentals.create') }}">Create Rental</a>
+
+
+    <div class="box cta">
+        <div class="level">
+            <div class="level-left">
+                <input class="input is-flex" type="text" placeholder="Search for properties">
+            </div>
+            <div class="level-right">
+                <a class="button is-link" href="{{ route('rentals.create') }}">Create Rental</a>
+            </div>
+        </div>
+    </div>
+
+
 
     @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -14,12 +27,12 @@
         <div class="column is-one-quarter">
             <div class="card">
                 <div class="card-image">
-                    <figure class="image">
+                    <figure class="image is-16by9">
                         <img src="{{ asset($rental->getPrimaryPhoto()->filename) }}" alt="">
                     </figure>
                 </div>
                 <div class="card-content">
-                    <p class="title">{{ $rental->property->address }}</p>
+                    <p class="subtitle">{{ $rental->property->address }}</p>
                 </div>
                 <footer class="card-footer">
                     <a href="#" class="card-footer-item">❤️</a>

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             selector: '.siema',
             duration: 200,
             easing: 'ease-out',
-            perPage: 1,
+            perPage: 2,
             startIndex: 0,
             draggable: true,
             multipleDrag: true,

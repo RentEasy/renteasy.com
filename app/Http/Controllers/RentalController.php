@@ -17,7 +17,7 @@ class RentalController extends Controller
     public function index()
     {
         return view('rental.index', [
-            'rentals' => Rental::paginate(18)
+            'rentals' => Rental::paginate(16)
         ]);
     }
 
@@ -90,7 +90,7 @@ class RentalController extends Controller
     {
         return view('rental.show')->with([
             'rental' => $rental,
-            'similarRentals' => Rental::all()
+            'similarRentals' => Rental::limit(10)->inRandomOrder()->get()
         ]);
     }
 

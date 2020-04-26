@@ -6,6 +6,11 @@
 
 @import "~bulma/bulma.sass";
 @import "~bulma-carousel/dist/css/bulma-carousel.min.css";
+
+.container-margin-top {
+    margin-top: 2rem;
+}
+
 //
 //
 //html,body {
@@ -14,10 +19,6 @@
 //    //font-weight: 300;
 //}
 
-html, body {
-    height: 100%;
-    background: #ECF0F3;
-}
 //nav.navbar {
 //    border-top: 4px solid #276cda;
 //    margin-bottom: 1rem;
