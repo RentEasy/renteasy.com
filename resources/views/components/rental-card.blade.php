@@ -1,7 +1,7 @@
 <div class="card rental-card">
     <div class="card-image">
         <figure class="image is-16by9">
-            <img src="{{ asset($rental->getPrimaryPhoto()->filename) }}" alt="">
+            <img src="{{ asset('storage/' . $rental->getPrimaryPhoto()->filename) }}" alt="">
         </figure>
     </div>
     <div class="card-content">

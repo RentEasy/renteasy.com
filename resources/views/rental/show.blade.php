@@ -28,7 +28,7 @@
                     <div class="siema">
                         @foreach($rental->photos as $photo)
                             <figure class="image is-16by9">
-                                <img src="{{ asset($photo->filename) }}" alt="{{ $photo->name }}">
+                                <img src="{{ asset('storage/' . $photo->filename) }}" alt="{{ $photo->name }}">
                             </figure>
                         @endforeach
                     </div>
