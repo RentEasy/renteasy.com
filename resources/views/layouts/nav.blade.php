@@ -44,11 +44,8 @@
                         </a>
                     @endif
                 @else
-                    <a class="navbar-item" href="{{ route('home') }}">
+                    <a class="navbar-item" href="{{ route('dashboard') }}">
                         Dashboard
-                    </a>
-                    <a href="{{ route('home') }}" class="navbar-item">
-                        {{ Auth::user()->name }}
                     </a>
                     <a class="navbar-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
