@@ -12020,6 +12020,25 @@ label.panel-block:hover {
   font-weight: 300;
 }
 
+.hero.has-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center 70%;
+     object-position: center 70%;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-background.is-transparent {
+  opacity: 0.3;
+}
+
 #login .hero .nav,
 #login .hero.is-success .nav {
   box-shadow: none;

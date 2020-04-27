@@ -21,6 +21,9 @@
                     </a>
 
                     <div class="navbar-dropdown">
+                        <a href="{{ route('about.company') }}" class="navbar-item">
+                            Company
+                        </a>
                         <a href="{{ route('about.for-renters') }}" class="navbar-item">
                             For Renters
                         </a>
