@@ -26,4 +26,11 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function rentals(Request $request)
+    {
+        return view('dashboard.rentals', [
+            'rentals' => $request->user()->rentals()->paginate(30)
+        ]);
+    }
+
 }

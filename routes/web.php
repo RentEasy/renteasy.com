@@ -24,6 +24,6 @@ Route::get('/about/for-renters', 'AboutController@forRenters')->name('about.for-
 Route::get('/about/for-landlords', 'AboutController@forLandlords')->name('about.for-landlords');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/dashboard/rentals', 'DashboardController@index')->name('dashboard.rentals');
+Route::get('/dashboard/rentals', 'DashboardController@rentals')->name('dashboard.rentals');
 
 Route::resource('rentals', 'RentalController');
