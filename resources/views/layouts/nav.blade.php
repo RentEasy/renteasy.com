@@ -44,7 +44,7 @@
                         </a>
                     @endif
                 @else
-                    <a class="navbar-item" href="{{ route('dashboard') }}">
+                    <a class="navbar-item" href="{{ route('dashboard.index') }}">
                         Dashboard
                     </a>
                     <a class="navbar-item" href="{{ route('logout') }}"

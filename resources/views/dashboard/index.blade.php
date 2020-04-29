@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <a href="{{ route('dashboard.rentals') }}" class="card-footer-item">View All</a>
+                    <a href="{{ route('dashboard.rentals.index') }}" class="card-footer-item">View All</a>
                 </footer>
             </div>
         </div>

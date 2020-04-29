@@ -16,9 +16,6 @@
                 </div>
             </div>
             <div class="level-right">
-                <div class="level-item">
-                    <a class="button is-link" href="{{ route('rentals.create') }}">Create Rental</a>
-                </div>
             </div>
         </div>
     </div>

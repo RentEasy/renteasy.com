@@ -12039,6 +12039,19 @@ label.panel-block:hover {
   opacity: 0.3;
 }
 
+#tabs-with-content .tabs:not(:last-child) {
+  margin-bottom: 0;
+}
+
+#tabs-with-content .tab-content {
+  padding: 1rem;
+  display: none;
+}
+
+#tabs-with-content .tab-content.is-active {
+  display: block;
+}
+
 #login .hero .nav,
 #login .hero.is-success .nav {
   box-shadow: none;

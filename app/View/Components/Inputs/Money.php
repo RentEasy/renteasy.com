@@ -6,19 +6,9 @@ use Illuminate\View\Component;
 
 class Money extends Component
 {
-    /**
-     * Server key for the input.
-     *
-     * @var string
-     */
     public $key;
-
-    /**
-     * User friendly label of the input field
-     *
-     * @var string
-     */
     public $label;
+    public $value;
 
     /**
      * Create the component instance.
@@ -27,10 +17,11 @@ class Money extends Component
      * @param  string  $label
      * @return void
      */
-    public function __construct($key, $label)
+    public function __construct($key, $label, $value = null)
     {
         $this->key = $key;
         $this->label = $label;
+        $this->value = $value ?? old($key);
     }
 
     /**

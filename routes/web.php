@@ -23,7 +23,11 @@ Route::get('/about/company', 'AboutController@company')->name('about.company');
 Route::get('/about/for-renters', 'AboutController@forRenters')->name('about.for-renters');
 Route::get('/about/for-landlords', 'AboutController@forLandlords')->name('about.for-landlords');
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/dashboard/rentals', 'DashboardController@rentals')->name('dashboard.rentals');
+Route::middleware(['auth'])->namespace('Dashboard')->prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/', 'DashboardController@index')->name('index');
+    Route::resource('/rentals', 'RentalController');
+});
 
-Route::resource('rentals', 'RentalController');
+Route::resource('/rentals', 'RentalController', [
+    'only' => ['index', 'show']
+]);

@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form method="POST" action="/rentals" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('dashboard.rentals.store') }}" enctype="multipart/form-data">
         @csrf
 
         <x-inputs.text key="address" label="Address"/>

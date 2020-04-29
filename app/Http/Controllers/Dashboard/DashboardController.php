@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -23,13 +24,6 @@ class DashboardController extends Controller
             'totalRentals' => $rentals->count(),
             'monthlyIncome' => $monthlyIncome,
             'ytdIncome' => $ytdIncome
-        ]);
-    }
-
-    public function rentals(Request $request)
-    {
-        return view('dashboard.rentals', [
-            'rentals' => $request->user()->rentals()->paginate(30)
         ]);
     }
 

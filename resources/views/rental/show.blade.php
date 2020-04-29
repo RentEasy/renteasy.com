@@ -42,6 +42,11 @@
                                 <p class="subtitle is-6">
                                     {{ $rental->property->city }}, {{ $rental->property->state }}
                                     {{ $rental->property->zipcode }}</p>
+
+                                @if(Auth::user()->id == $rental->landlord_id)
+                                    <a href="{{ route('dashboard.rentals.show', [$rental]) }}" class="button is-link">Manage this property</a>
+                                @endif
+
                             </div>
                         </div>
                         <div class="level-right">
@@ -52,7 +57,6 @@
                         </div>
                     </div>
                     <div class="content">
-
 
                         <a href="{{ route('rentals.index') }}">Back to Rentals</a>
 

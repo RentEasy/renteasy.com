@@ -6,31 +6,24 @@ use Illuminate\View\Component;
 
 class Text extends Component
 {
-    /**
-     * Server key for the input.
-     *
-     * @var string
-     */
     public $key;
 
-    /**
-     * User friendly label of the input field
-     *
-     * @var string
-     */
     public $label;
+
+    public $value;
 
     /**
      * Create the component instance.
      *
-     * @param  string  $key
-     * @param  string  $label
-     * @return void
+     * @param string $key
+     * @param string $label
+     * @param string $value
      */
-    public function __construct($key, $label)
+    public function __construct($key, $label, $value = null)
     {
         $this->key = $key;
         $this->label = $label;
+        $this->value = $value ?? old($key);
     }
 
     /**

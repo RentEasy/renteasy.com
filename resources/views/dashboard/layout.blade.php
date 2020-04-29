@@ -8,8 +8,8 @@
                     General
                 </p>
                 <ul class="menu-list">
-                    <li><a class="{{ set_active('dashboard') }}" href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li><a class="{{ set_active('dashboard.rentals') }}" href="{{ route('dashboard.rentals') }}">Rentals</a></li>
+                    <li><a class="{{ set_active('dashboard.index') }}" href="{{ route('dashboard.index') }}">Dashboard</a></li>
+                    <li><a class="{{ set_active('dashboard.rentals.index') }}" href="{{ route('dashboard.rentals.index') }}">Rentals</a></li>
                     <li><a>Other</a></li>
                 </ul>
                 <p class="menu-label">
