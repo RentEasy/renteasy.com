@@ -45326,13 +45326,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
       multipleDrag: true,
       threshold: 20,
       loop: true
-    });
-    document.querySelector('.prev').addEventListener('click', function () {
-      return mySiema.prev();
-    });
-    document.querySelector('.next').addEventListener('click', function () {
-      return mySiema.next();
-    });
+    }); // document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
+    // document.querySelector('.next').addEventListener('click', () => mySiema.next());
   }
 
   var tabsWithContent = function () {
@@ -45359,16 +45354,34 @@ document.addEventListener('DOMContentLoaded', function (event) {
       return _toConsumableArray(el.parentElement.children).indexOf(el);
     };
 
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        deactvateAllTabs();
-        hideTabsContent();
-        tab.classList.add('is-active');
-        activateTabsContent(tab);
+    if (tabs.length > 0) {
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          deactvateAllTabs();
+          hideTabsContent();
+          tab.classList.add('is-active');
+          activateTabsContent(tab);
+        });
+      });
+      tabs[0].click();
+    }
+  }();
+
+  (function () {
+    var modalTriggers = document.querySelectorAll('[data-modal]');
+    modalTriggers.forEach(function (el) {
+      var modal = document.getElementById(el.dataset.modal);
+      el.addEventListener('click', function () {
+        return modal.classList.add('is-active');
+      });
+      modal.querySelector('.modal-background').addEventListener('click', function () {
+        return modal.classList.remove('is-active');
+      });
+      modal.querySelector('.modal-close').addEventListener('click', function () {
+        return modal.classList.remove('is-active');
       });
     });
-    tabs[0].click();
-  }();
+  })();
 });
 
 /***/ }),
@@ -45503,8 +45516,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

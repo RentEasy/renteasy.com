@@ -31,3 +31,4 @@ Route::middleware(['auth'])->namespace('Dashboard')->prefix('dashboard')->name('
 Route::resource('/rentals', 'RentalController', [
     'only' => ['index', 'show']
 ]);
+Route::post('/rentals/{rental}/apply', 'RentalController@apply')->name('rentals.apply');

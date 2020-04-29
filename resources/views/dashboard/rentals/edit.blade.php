@@ -13,7 +13,9 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('rentals.update', [$rental]) }}" enctype="multipart/form-data">
+    <a href="{{ route('dashboard.rentals.show', [$rental]) }}">Back to Rental</a>
+
+    <form method="POST" action="{{ route('dashboard.rentals.update', [$rental]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

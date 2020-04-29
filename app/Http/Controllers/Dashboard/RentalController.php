@@ -108,7 +108,7 @@ class RentalController extends Controller
      */
     public function edit(Rental $rental)
     {
-        return view('dashboard.rental.edit')->with([
+        return view('dashboard.rentals.edit')->with([
             'rental' => $rental
         ]);
     }

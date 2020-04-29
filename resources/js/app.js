@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             threshold: 20,
             loop: true
         });
-        document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
-        document.querySelector('.next').addEventListener('click', () => mySiema.next());
+        // document.querySelector('.prev').addEventListener('click', () => mySiema.prev());
+        // document.querySelector('.next').addEventListener('click', () => mySiema.next());
     }
 
     let tabsWithContent = (function () {
@@ -97,16 +97,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return [...el.parentElement.children].indexOf(el);
         };
 
-        tabs.forEach(function (tab) {
-            tab.addEventListener('click', function () {
-                deactvateAllTabs();
-                hideTabsContent();
-                tab.classList.add('is-active');
-                activateTabsContent(tab);
-            });
-        });
 
-        tabs[0].click();
+        if(tabs.length > 0) {
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    deactvateAllTabs();
+                    hideTabsContent();
+                    tab.classList.add('is-active');
+                    activateTabsContent(tab);
+                });
+            });
+
+            tabs[0].click();
+        }
+
+    })();
+
+    (function() {
+        let modalTriggers = document.querySelectorAll('[data-modal]');
+        modalTriggers.forEach(function(el) {
+            let modal = document.getElementById(el.dataset.modal);
+            el.addEventListener('click', () => modal.classList.add('is-active'));
+
+            modal.querySelector('.modal-background').addEventListener('click', () => modal.classList.remove('is-active'));
+            modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('is-active'));
+        });
     })();
 
 
