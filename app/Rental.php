@@ -41,6 +41,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\RentalPhoto[] $photos
  * @property-read int|null $photos_count
  * @property-read \App\Property $property
+ * @property int|null $current_tenancy_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\RentalApplication[] $applications
+ * @property-read int|null $applications_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Rental whereCurrentTenancyId($value)
  */
 class Rental extends Model
 {

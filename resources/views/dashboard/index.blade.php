@@ -80,7 +80,7 @@
             <div class="card">
                 <header class="card-header">
                     <p class="card-header-title">
-                        Inventory Search
+                        Applications
                     </p>
                     <a href="#" class="card-header-icon" aria-label="more options">
                   <span class="icon">
@@ -90,15 +90,17 @@
                 </header>
                 <div class="card-content">
                     <div class="content">
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-large" type="text" placeholder="">
-                            <span class="icon is-medium is-left">
-                      <i class="fa fa-search"></i>
-                    </span>
-                            <span class="icon is-medium is-right">
-                      <i class="fa fa-check"></i>
-                    </span>
-                        </div>
+                        <table class="table is-fullwidth is-striped">
+                            <tbody>
+                            @foreach($applications as $application)
+                                <tr>
+                                    <td width="5%"><i class="fa fa-bell-o"></i></td>
+                                    <td>{{ $application->user->name }} @ {{ $application->rental->property->address }}</td>
+                                    <td class="level-right"><a class="button is-small is-primary" href="{{ route('dashboard.rentals.show', [$application->rental]) }}">Review</a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

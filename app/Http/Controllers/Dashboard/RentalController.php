@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Property;
 use App\Rental;
+use App\RentalApplication;
 use App\RentalPhoto;
+use App\RentalTenancy;
 use Illuminate\Http\Request;
 
 class RentalController extends Controller
@@ -134,5 +136,33 @@ class RentalController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function approveApplication(Rental $rental, RentalApplication $app, Request $request)
+    {
+        $tenancy = new RentalTenancy();
+        $tenancy->rental_id = $app->rental_id;
+        $tenancy->landlord_id = $app->rental->landlord_id;
+        $tenancy->tenant_id = $app->user_id;
+
+        $tenancy->rent_periodicity = 'P1M';
+
+        $tenancy->rent_deposit = $app->rental->rent_deposit;
+        $tenancy->rent_monthly = $app->rental->rent_monthly;
+
+        $tenancy->application_fees = 0.00;
+
+        $tenancy->late_payment_fees = 0.00;
+        $tenancy->late_payment_after = 'P5D';
+        $tenancy->late_payment_periodicity = 'P1D';
+
+        $tenancy->save();
+
+        $rental->current_tenancy_id = $tenancy->id;
+        $rental->save();
+
+        // @TODO: Reject other applications... Domain logic!
+
+        return redirect()->back();
     }
 }

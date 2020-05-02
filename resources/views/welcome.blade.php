@@ -9,7 +9,7 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <h1 class="title">
-                    Modern Rental Management, <br>for the busy landlord
+                    Modern Rental Management, <br>minus the property management company
                 </h1>
                 <p class="has-text-centered">
                     <a href="{{ route('about.for-landlords') }}" class="button is-medium is-info">

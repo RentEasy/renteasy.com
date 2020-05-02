@@ -58,7 +58,7 @@
                                 @foreach($rental->applications as $application)
                                     <article class="media">
                                         <figure class="media-left">
-                                            <p class="image is-64x64">
+                                            <p class="image is-64x64 is-rounded">
                                                 <img src="https://bulma.io/images/placeholders/128x128.png">
                                             </p>
                                         </figure>
@@ -72,7 +72,18 @@
                                             </div>
                                         </div>
                                         <div class="media-right">
-                                            <button class="button is-primary">Review</button>
+                                            <div class="buttons">
+                                                <form method="POST" action="{{ route('dashboard.rentals.application.approve', [$rental, $application]) }}">
+                                                    @csrf
+
+                                                    <button type="submit" class="button is-primary">Approve</button>
+                                                </form>
+                                                <form method="POST" action="{{ route('dashboard.rentals.application.reject', [$rental, $application]) }}">
+                                                    @csrf
+
+                                                    <button type="submit" class="button is-danger">Reject</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </article>
                                 @endforeach

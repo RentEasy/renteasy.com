@@ -31,6 +31,10 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Rental[] $rentals
+ * @property-read int|null $rentals_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\RentalApplication[] $applications
+ * @property-read int|null $applications_count
  */
 class User extends Authenticatable
 {
@@ -66,5 +70,10 @@ class User extends Authenticatable
     public function rentals()
     {
         return $this->hasMany(Rental::class, 'landlord_id');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(RentalApplication::class);
     }
 }
