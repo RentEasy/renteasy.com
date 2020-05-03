@@ -35,4 +35,16 @@ class AboutController extends Controller
     {
         return view('about.cookie');
     }
+
+    public function newsletter(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'agree' => 'required|accepted'
+        ]);
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
 }

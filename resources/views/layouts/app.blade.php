@@ -26,34 +26,7 @@
             <div class="columns">
                 <div class="column is-3 is-offset-2">
                     <h2><strong>Subscribe to our Newsletter</strong></h2>
-                    <form action="" method="POST" accept-charset="utf-8">
-                        <div class="field">
-                            <div class="control has-icons-left is-expanded">
-                                <input type="email" name="email" class="input is-medium is-flat"
-                                       placeholder="Your Email" required>
-                                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
-
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox">
-                                    I agree to the <a href="#">terms and conditions</a>
-                                </label>
-                            </div>
-                        </div>
-
-
-                        <div class="field">
-                            <div class="control">
-                                <button class="button is-medium is-link">
-                                    <strong>Subscribe</strong>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <newsletter submit-route="{{ route('about.newsletter') }}"></newsletter>
                 </div>
                 <div class="column is-3">
                     <h2><strong>Blog</strong></h2>
