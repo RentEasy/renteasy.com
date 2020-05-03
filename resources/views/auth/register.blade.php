@@ -5,7 +5,7 @@
 @section('content')
     <h3 class="title has-text-black">Register</h3>
     <hr class="login-hr">
-    <p class="subtitle has-text-black">Create your RentEasy account.</p>
+    <p class="subtitle has-text-black">Create your {{ config('app.name') }} account.</p>
     <div class="box">
         <form class="login-form" method="POST" action="{{ route('register') }}">
             {{ csrf_field() }}
@@ -53,7 +53,7 @@
                 <p class="help is-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <button class="button is-block is-info is-large is-fullwidth">Register <i class="fa fa-sign-in"
+            <button class="button is-block is-primary is-large is-fullwidth">Register <i class="fa fa-sign-in"
                                                                                    aria-hidden="true"></i>
             </button>
         </form>

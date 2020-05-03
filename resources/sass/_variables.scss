@@ -5,8 +5,33 @@
 $family-sans-serif: "Questrial", sans-serif;
 $body-background-color: #ECF0F3;
 
+$color1: #594157ff;
+$color2: #7d8cc4ff;
+$color3: #556595ff;
+$color4: #a0d2dbff;
+$color5: #bee7e8ff;
+// green  #7DAA92
+// red    #8E4A49
+// light blue #BEE7E8
 
-$info: #556595;
+$purple: #556595;
+$left-purple: #415389;
+$right-purple: #596998;
+
+$primary: $purple;
+//$info: $right-purple; // $purple
+//$info: #A0D2DB;
+$success: #7DAA92;
+$info: #BEE7E8;
+$link: $primary;
+$danger: #8E4A49;
+
+
+$navbar-padding-vertical: 0;
+
+.navbar {
+    background-image: linear-gradient(to right, $left-purple, $right-purple);
+}
 
 .navbar-item.brand-text {
     padding-top: 0;

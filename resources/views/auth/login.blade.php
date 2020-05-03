@@ -37,7 +37,7 @@
                     Remember me
                 </label>
             </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login <i class="fa fa-sign-in"
+            <button class="button is-block is-primary is-large is-fullwidth">Login <i class="fa fa-sign-in"
                                                                                    aria-hidden="true"></i>
             </button>
         </form>

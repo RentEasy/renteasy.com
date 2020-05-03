@@ -1,12 +1,9 @@
-@extends('layouts.full')
+@extends('layouts.slim')
 
 @section('title', 'For Landlords')
 
 @section('content')
     <div class="content">
-        <h1>For Landlords</h1>
-
-
         <div class="columns is-vcentered">
             <div class="column">
                 <figure class="image">

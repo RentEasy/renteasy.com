@@ -1,12 +1,9 @@
-@extends('layouts.full')
+@extends('layouts.slim')
 
 @section('title', 'For Renters')
 
 @section('content')
     <div class="content">
-        <h1>For Renters</h1>
-
-
         <div class="columns is-vcentered">
             <div class="column">
                 <figure class="image">
@@ -18,7 +15,8 @@
                 <p>A single app for your entire rental life. Browse properties, create applications, move in, and then
                     continue to use our app to manage your new home.</p>
 
-                <p>Instead of paying various application fees, you instead just pay the RentEasy Application Fee, and
+                <p>Instead of paying various application fees, you instead just pay the {{ config('app.name') }}
+                    Application Fee, and
                     any
                     applications you make through us are free!</p>
 
@@ -34,7 +32,8 @@
 
                 <p>Low-fee payment of rent and other property bills. Pay rent and other utility sharing programs to your
                     landlord without writing a paper check.</p>
-                <p>Have peace of mind knowing your security deposit is being handled by RentEasy in an automated
+                <p>Have peace of mind knowing your security deposit is being handled by {{ config('app.name') }} in an
+                    automated
                     interest-bearing account.</p>
             </div>
             <div class="column">

@@ -43,7 +43,7 @@
                                     {{ $rental->property->city }}, {{ $rental->property->state }}
                                     {{ $rental->property->zipcode }}</p>
 
-                                @if(Auth::user()->id == $rental->landlord_id)
+                                @if(!Auth::guest() && Auth::user()->id == $rental->landlord_id)
                                     <a href="{{ route('dashboard.rentals.show', [$rental]) }}" class="button is-link">Manage this property</a>
                                 @endif
 
@@ -54,8 +54,8 @@
                                 <p class="title is-4">${{ $rental->rent_monthly }}/mo</p>
                                 <p class="subtitle is-6">${{ $rental->rent_deposit }} deposit</p>
 
-                                @if(Auth::user()->id !== $rental->landlord_id)
-                                    <a href="#" data-modal="application" class="button is-info">Apply</a>
+                                @if(Auth::guest() or Auth::user()->id !== $rental->landlord_id)
+                                    <a href="#" data-modal="application" class="button is-block is-info">Apply</a>
                                 @endif
                             </div>
                         </div>

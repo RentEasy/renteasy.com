@@ -1,8 +1,8 @@
-<nav class="navbar is-fixed-top is-info">
+<nav class="navbar is-fixed-top is-primary">
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item brand-text" href="{{ url('/') }}">
-                <img src="{{ asset('img/leasary-with-text.png') }}" alt="Leasary">
+                <img src="{{ asset('img/leasary-with-text.png') }}" alt="{{ config('app.name') }}">
             </a>
             <div class="navbar-burger burger" data-target="navMenu">
                 <span></span>
