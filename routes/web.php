@@ -28,6 +28,7 @@ Route::middleware(['auth'])->namespace('Dashboard')->prefix('dashboard')->name('
     Route::resource('/rentals', 'RentalController');
     Route::post('/rentals/{rental}/approve/{app}', 'RentalController@approveApplication')->name('rentals.application.approve');
     Route::post('/rentals/{rental}/reject/{app}', 'RentalController@rejectApplication')->name('rentals.application.reject');
+    Route::get('/rentals/{rental}/lease/{tenancy}', 'RentalController@lease')->name('rentals.application.lease');
 });
 
 Route::resource('/rentals', 'RentalController', [

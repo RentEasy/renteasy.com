@@ -138,6 +138,14 @@ class RentalController extends Controller
         //
     }
 
+    public function lease(Rental $rental, RentalTenancy $tenancy)
+    {
+        return view('dashboard.lease.lease')->with([
+            'rental' => $rental,
+            'tenancy' => $tenancy
+        ]);
+    }
+
     public function approveApplication(Rental $rental, RentalApplication $app, Request $request)
     {
         $tenancy = new RentalTenancy();

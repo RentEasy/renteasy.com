@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item brand-text" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                <img src="{{ asset('img/leasary-with-text.png') }}" alt="Leasary">
             </a>
             <div class="navbar-burger burger" data-target="navMenu">
                 <span></span>

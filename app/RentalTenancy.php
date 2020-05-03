@@ -53,6 +53,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RentalTenancy extends Model
 {
+    protected $dates = [
+        'signed_at',
+        'start_at',
+        'end_at',
+    ];
+
     public function setRentDepositAttribute($value)
     {
         $this->attributes['rent_deposit'] = str_replace(',', '', $value);

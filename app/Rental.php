@@ -80,6 +80,16 @@ class Rental extends Model
         return $this->photos()->first();
     }
 
+    public function addressHeader()
+    {
+        return "{$this->property->address} {$this->unit}";
+    }
+
+    public function addressFooter()
+    {
+        return "{$this->property->city}, {$this->property->state} {$this->property->zipcode}";
+    }
+
     public function getRentMonthlyAttribute($value)
     {
         return number_format($value, 2);
