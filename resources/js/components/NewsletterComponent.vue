@@ -1,13 +1,13 @@
 <template>
-    <form name="email-form" >
+    <form name="email-form" @submit.prevent="onSubmit">
 
         <div class="notification is-success" v-show="success">
-            <button class="delete" v-on:click="success = false"></button>
+            <button type="button" class="delete" v-on:click="success = false"></button>
             You have been subscribed to our mailing list!
         </div>
 
         <div class="notification is-danger" v-show="error">
-            <button class="delete" v-on:click="error = false"></button>
+            <button type="button" class="delete" v-on:click="error = false"></button>
             There was a problem submitting your request!
         </div>
 
@@ -24,7 +24,7 @@
             <div class="control">
                 <label class="checkbox">
                     <input name="agree" v-model="agree" type="checkbox">
-                    I agree to the <a href="#">terms and conditions</a>
+                    I agree to the <a :href="privacyRoute">privacy policy</a>
                 </label>
             </div>
         </div>
@@ -32,7 +32,7 @@
 
         <div class="field">
             <div class="control">
-                <button class="button is-medium is-link" type="submit">
+                <button class="button is-medium is-link" type="submit" :disabled="!!disabled" >
                     <strong>Subscribe</strong>
                 </button>
             </div>
@@ -42,26 +42,29 @@
 
 <script>
     export default {
-        props: ['submitRoute'],
+        props: ['submitRoute', 'privacyRoute'],
         data: () => ({
             success: false,
             error: false,
             email: null,
-            agree: false
+            agree: false,
+            disabled: false
         }),
         methods: {
             onSubmit(event) {
+                this.error = false;
+                this.success = false;
+
                 let parent = this;
                 window.axios.post(this.submitRoute, {
                     email: this.email,
                     agree: this.agree,
                 }).then(function (response) {
                     parent.success = true;
-                    console.log(response);
-                })
-                    .catch(function (error) {
-                        parent.error = true;
-                    });
+                    parent.disabled = true;
+                }).catch(function (error) {
+                    parent.error = true;
+                });
 
                 this.$emit('form-submitted');
             }

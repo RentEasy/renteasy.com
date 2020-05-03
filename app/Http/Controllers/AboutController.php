@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Newsletter;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -41,6 +42,10 @@ class AboutController extends Controller
         $request->validate([
             'email' => 'required|email',
             'agree' => 'required|accepted'
+        ]);
+
+        Newsletter::updateOrCreate([
+            'email' => $request->email
         ]);
 
         return response()->json([

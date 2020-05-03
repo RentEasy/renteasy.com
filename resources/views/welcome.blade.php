@@ -32,9 +32,6 @@
         <div class="columns features">
             <div class="column">
                 <div class="card is-shady">
-                    <div class="card-image has-text-centered">
-                        <i class="fa fa-empire"></i>
-                    </div>
                     <div class="card-content">
                         <div class="content">
                             <div class="columns is-vcentered">

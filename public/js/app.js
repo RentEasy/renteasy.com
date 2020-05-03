@@ -1984,24 +1984,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['submitRoute'],
+  props: ['submitRoute', 'privacyRoute'],
   data: function data() {
     return {
       success: false,
       error: false,
       email: null,
-      agree: false
+      agree: false,
+      disabled: false
     };
   },
   methods: {
     onSubmit: function onSubmit(event) {
+      this.error = false;
+      this.success = false;
       var parent = this;
       window.axios.post(this.submitRoute, {
         email: this.email,
         agree: this.agree
       }).then(function (response) {
         parent.success = true;
-        console.log(response);
+        parent.disabled = true;
       })["catch"](function (error) {
         parent.error = true;
       });
@@ -33183,138 +33186,169 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { attrs: { name: "email-form" } }, [
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.success,
-            expression: "success"
-          }
-        ],
-        staticClass: "notification is-success"
-      },
-      [
-        _c("button", {
-          staticClass: "delete",
-          on: {
-            click: function($event) {
-              _vm.success = false
-            }
-          }
-        }),
-        _vm._v("\n        You have been subscribed to our mailing list!\n    ")
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.error,
-            expression: "error"
-          }
-        ],
-        staticClass: "notification is-danger"
-      },
-      [
-        _c("button", {
-          staticClass: "delete",
-          on: {
-            click: function($event) {
-              _vm.error = false
-            }
-          }
-        }),
-        _vm._v("\n        There was a problem submitting your request!\n    ")
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "field" }, [
-      _c("div", { staticClass: "control has-icons-left is-expanded" }, [
-        _c("input", {
+  return _c(
+    "form",
+    {
+      attrs: { name: "email-form" },
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.onSubmit($event)
+        }
+      }
+    },
+    [
+      _c(
+        "div",
+        {
           directives: [
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.email,
-              expression: "email"
+              name: "show",
+              rawName: "v-show",
+              value: _vm.success,
+              expression: "success"
             }
           ],
-          staticClass: "input is-medium is-flat",
-          attrs: {
-            type: "email",
-            name: "email",
-            placeholder: "Your Email",
-            required: ""
-          },
-          domProps: { value: _vm.email },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+          staticClass: "notification is-success"
+        },
+        [
+          _c("button", {
+            staticClass: "delete",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.success = false
               }
-              _vm.email = $event.target.value
             }
-          }
-        }),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "field" }, [
-      _c("div", { staticClass: "control" }, [
-        _c("label", { staticClass: "checkbox" }, [
+          }),
+          _vm._v(
+            "\n        You have been subscribed to our mailing list!\n    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.error,
+              expression: "error"
+            }
+          ],
+          staticClass: "notification is-danger"
+        },
+        [
+          _c("button", {
+            staticClass: "delete",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.error = false
+              }
+            }
+          }),
+          _vm._v("\n        There was a problem submitting your request!\n    ")
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "field" }, [
+        _c("div", { staticClass: "control has-icons-left is-expanded" }, [
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.agree,
-                expression: "agree"
+                value: _vm.email,
+                expression: "email"
               }
             ],
-            attrs: { name: "agree", type: "checkbox" },
-            domProps: {
-              checked: Array.isArray(_vm.agree)
-                ? _vm._i(_vm.agree, null) > -1
-                : _vm.agree
+            staticClass: "input is-medium is-flat",
+            attrs: {
+              type: "email",
+              name: "email",
+              placeholder: "Your Email",
+              required: ""
             },
+            domProps: { value: _vm.email },
             on: {
-              change: function($event) {
-                var $$a = _vm.agree,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 && (_vm.agree = $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      (_vm.agree = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-                  }
-                } else {
-                  _vm.agree = $$c
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
+                _vm.email = $event.target.value
               }
             }
           }),
-          _vm._v("\n                I agree to the "),
-          _c("a", { attrs: { href: "#" } }, [_vm._v("terms and conditions")])
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field" }, [
+        _c("div", { staticClass: "control" }, [
+          _c("label", { staticClass: "checkbox" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.agree,
+                  expression: "agree"
+                }
+              ],
+              attrs: { name: "agree", type: "checkbox" },
+              domProps: {
+                checked: Array.isArray(_vm.agree)
+                  ? _vm._i(_vm.agree, null) > -1
+                  : _vm.agree
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.agree,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.agree = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.agree = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.agree = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v("\n                I agree to the "),
+            _c("a", { attrs: { href: _vm.privacyRoute } }, [
+              _vm._v("privacy policy")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field" }, [
+        _c("div", { staticClass: "control" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button is-medium is-link",
+              attrs: { type: "submit", disabled: !!_vm.disabled }
+            },
+            [_c("strong", [_vm._v("Subscribe")])]
+          )
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -33323,23 +33357,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "icon is-small is-left" }, [
       _c("i", { staticClass: "fas fa-envelope" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field" }, [
-      _c("div", { staticClass: "control" }, [
-        _c(
-          "button",
-          {
-            staticClass: "button is-medium is-link",
-            attrs: { type: "submit" }
-          },
-          [_c("strong", [_vm._v("Subscribe")])]
-        )
-      ])
     ])
   }
 ]

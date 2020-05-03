@@ -26,7 +26,7 @@
             <div class="columns">
                 <div class="column is-3 is-offset-2">
                     <h2><strong>Subscribe to our Newsletter</strong></h2>
-                    <newsletter submit-route="{{ route('about.newsletter') }}"></newsletter>
+                    <newsletter privacy-route="{{ route('about.privacy') }}" submit-route="{{ route('about.newsletter') }}"></newsletter>
                 </div>
                 <div class="column is-3">
                     <h2><strong>Blog</strong></h2>
