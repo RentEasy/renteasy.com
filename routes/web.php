@@ -22,6 +22,9 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about/company', 'AboutController@company')->name('about.company');
 Route::get('/about/for-renters', 'AboutController@forRenters')->name('about.for-renters');
 Route::get('/about/for-landlords', 'AboutController@forLandlords')->name('about.for-landlords');
+Route::get('/about/privacy', 'AboutController@privacy')->name('about.privacy');
+Route::get('/about/terms', 'AboutController@terms')->name('about.terms');
+Route::get('/about/cookie', 'AboutController@cookie')->name('about.cookie');
 
 Route::middleware(['auth'])->namespace('Dashboard')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', 'DashboardController@index')->name('index');

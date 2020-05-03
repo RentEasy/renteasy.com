@@ -20,4 +20,19 @@ class AboutController extends Controller
     {
         return view('about.company');
     }
+
+    public function privacy()
+    {
+        return view('about.privacy');
+    }
+
+    public function terms()
+    {
+        return view('about.terms');
+    }
+
+    public function cookie()
+    {
+        return view('about.cookie');
+    }
 }
