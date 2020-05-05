@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
+    <meta name="description"
+          content="Leasary is a rental property marketplace focused on modernizing the traditionally pen-and-paper rental industry. We help landlords & tenants solve frustrating issues like applications, maintenance, and payments while also building innovative contract generation, and marketplaces for new tenants.">
 
     <script src="{{ asset('js/app.js') }}?hash={{ md5_file(public_path('js/app.js')) }}" defer></script>
 
@@ -32,18 +34,12 @@
             <div class="columns">
                 <div class="column is-3 is-offset-2">
                     <h2><strong>Subscribe to our Newsletter</strong></h2>
-                    <newsletter privacy-route="{{ route('about.privacy') }}" submit-route="{{ route('about.newsletter') }}"></newsletter>
+                    <newsletter privacy-route="{{ route('about.privacy') }}"
+                                submit-route="{{ route('about.newsletter') }}"></newsletter>
                 </div>
                 <div class="column is-3">
                     <h2><strong>Blog</strong></h2>
                     <ul>
-                        <li><a href="#">Labore et dolore magna aliqua</a></li>
-                        <li><a href="#">Kanban airis sum eschelor</a></li>
-                        <li><a href="#">Modular modern free</a></li>
-                        <li><a href="#">The king of clubs</a></li>
-                        <li><a href="#">The Discovery Dissipation</a></li>
-                        <li><a href="#">Course Correction</a></li>
-                        <li><a href="#">Better Angels</a></li>
                     </ul>
                 </div>
                 <div class="column is-4">
@@ -61,7 +57,8 @@
                 </div>
                 <div class="control level-item">
                     <div class="content">
-                        <a href="{{ route('about.privacy') }}">Privacy Policy</a> - <a href="{{ route('about.cookie') }}">Cookie Policy</a>
+                        <a href="{{ route('about.privacy') }}">Privacy Policy</a> - <a
+                            href="{{ route('about.cookie') }}">Cookie Policy</a>
                     </div>
                 </div>
             </div>

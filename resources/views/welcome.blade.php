@@ -1,6 +1,6 @@
 @extends('layouts.hero')
 
-@section('title', 'Home')
+@section('title', 'Rental Property Marketplace')
 
 @section('content')
 
