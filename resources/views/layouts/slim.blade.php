@@ -3,7 +3,7 @@
 @section('body')
     @include('layouts.nav')
 
-    <div class="columns is-mobile is-centered">
+    <div class="columns is-centered">
         <div class="column is-8">
             <div class="card is-shady">
                 <header class="card-header">

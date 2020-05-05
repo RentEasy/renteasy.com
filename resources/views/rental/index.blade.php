@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <div class="columns is-multiline is-mobile">
+    <div class="columns is-multiline">
     @foreach ($rentals as $rental)
         <div class="column is-one-quarter">
             <x-rental-card :rental="$rental" />

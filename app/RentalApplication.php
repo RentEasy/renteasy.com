@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RentalApplication extends Model
 {
+
     public function rental()
     {
         return $this->belongsTo(Rental::class);

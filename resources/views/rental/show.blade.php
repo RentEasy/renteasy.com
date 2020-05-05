@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="columns">
-        <div class="column is-one-quarter">
+        <div class="column is-one-quarter is-hidden-mobile">
             <div class="card">
                 <div class="card-content">
                     <a href="{{ route('rentals.index') }}" class="button is-link is-outlined is-fullwidth">
@@ -54,7 +54,9 @@
                                 <p class="title is-4">${{ $rental->rent_monthly }}/mo</p>
                                 <p class="subtitle is-6">${{ $rental->rent_deposit }} deposit</p>
 
-                                @if(Auth::guest() or Auth::user()->id !== $rental->landlord_id)
+                                @if(Auth::guest())
+                                    <a href="{{ route('rentals.apply', $rental) }}" class="button is-block is-info">Apply</a>
+                                @elseif(Auth::user()->id !== $rental->landlord_id)
                                     <a href="#" data-modal="application" class="button is-block is-info">Apply</a>
                                 @endif
                             </div>
@@ -90,7 +92,7 @@
                         Submitting an application to this property will send a notification to the landlord for processing.
                     </p>
 
-                    <form action="{{ route('rentals.apply', [$rental]) }}" method="post">
+                    <form action="{{ route('rentals.simple-apply', [$rental]) }}" method="post">
                         @csrf
 
                         <button class="button is-primary" type="submit">Submit!</button>

@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class RentalController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +36,21 @@ class RentalController extends Controller
         ]);
     }
 
-    public function apply(Rental $rental, Request $request)
+    public function apply(Rental $rental)
+    {
+        return view('rental.apply')->with([
+            'rental' => $rental,
+            'termOptions' => config('options.application.terms'),
+            'rentOrOwnOptions' => config('options.application.rentOrOwn'),
+            'petTypeOptions' => config('options.application.petTypes'),
+            'stateOptions' => config('options.states'),
+            'relationOptions' => config('options.application.relations'),
+            'identificationTypeOptions' => config('options.application.identificationTypes'),
+            'employmentStatusOptions' => config('options.application.employmentStatus'),
+        ]);
+    }
+
+    public function simpleApply(Rental $rental, Request $request)
     {
         $app = new RentalApplication();
         $app->applied_at = new \DateTime();
