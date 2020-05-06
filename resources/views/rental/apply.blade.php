@@ -6,22 +6,42 @@
     <div class="content">
         <h2>Lease Overview</h2>
 
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field">
+                    <label class="label">From</label>
+                    <p class="control is-expanded has-icons-left">
+                        <input class="input" type="text" placeholder="Name">
+                        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">From</label>
+                    <p class="control is-expanded has-icons-left has-icons-right">
+                        <input class="input is-success" type="email" placeholder="Email" value="alex@smith.com">
+                        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+                        <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <h3>About You</h3>
         <div class="columns">
             <div class="column">
-                <div class="field is-grouped">
-                    <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-body">
                         <x-inputs.text key="first_name" label="First Name"/>
-                    </p>
-                    <p class="control">
                         <x-inputs.text key="middle_name" label="Middle Name"/>
-                    </p>
-                    <p class="control">
                         <x-inputs.text key="last_name" label="Last Name"/>
-                    </p>
-                    <p class="control">
                         <x-inputs.text key="suffix" label="Suffix"/>
-                    </p>
+                    </div>
                 </div>
                 <div class="field is-grouped">
                     <p class="control">
@@ -42,18 +62,31 @@
                     </p>
                 </div>
 
-                <h3>Pets</h3>
+                <h3>Identification</h3>
                 <div class="field is-grouped">
                     <p class="control">
-                        <x-inputs.dropdown key="pet_type" label="Pet Type" :options="$petTypeOptions"/>
+                        <x-inputs.dropdown key="id_type" label="ID Type" :options="$identificationTypeOptions"/>
                     </p>
                     <p class="control">
-                        <x-inputs.text key="pet_breed" label="Pet Breed"/>
+                        <x-inputs.dropdown key="id_state" label="ID State" :options="$stateOptions"/>
                     </p>
                     <p class="control">
-                        <x-inputs.text key="pet_weight" label="Pet Weight"/>
+                        <x-inputs.text key="id_number" label="ID Number"/>
                     </p>
                 </div>
+
+            </div>
+
+            <div class="column is-4">
+                <p>These contact details are used to prepare your lease, and give the landlord contact information after
+                    they approve your application.</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="columns">
+            <div class="column">
 
                 <h3>Residence History</h3>
                 <div class="field is-grouped">
@@ -63,19 +96,16 @@
                     <p class="control">
                         <x-inputs.text key="unit_apt" label="Unit / Apt"/>
                     </p>
+                </div>
+                <div class="field is-grouped">
                     <p class="control">
                         <x-inputs.text key="city" label="City"/>
                     </p>
-                </div>
-                <div class="field is-grouped">
                     <p class="control">
                         <x-inputs.dropdown key="state" label="State" :options="$stateOptions"/>
                     </p>
                     <p class="control">
                         <x-inputs.text key="zip" label="Zipcode"/>
-                    </p>
-                    <p class="control">
-                        <x-inputs.text key="country" label="Country"/>
                     </p>
                 </div>
                 <div class="field is-grouped">
@@ -100,6 +130,16 @@
                         <x-inputs.text key="months" label="Months"/>
                     </p>
                 </div>
+            </div>
+            <div class="column is-4">
+                <p>Bla bla</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="columns">
+            <div class="column">
 
                 <h3>Employment History</h3>
                 <div class="field is-grouped">
@@ -131,6 +171,17 @@
                     </p>
                 </div>
 
+            </div>
+            <div class="column is-4">
+                <p>bla bla</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="columns">
+            <div class="column">
+
                 <h3>Income History</h3>
                 <div class="field is-grouped">
                     <p class="control">
@@ -159,17 +210,27 @@
                         <x-inputs.text key="ref_phone" label="Phone"/>
                     </p>
                 </div>
+            </div>
+            <div class="column is-4">
+                <p>Bla bla</p>
+            </div>
+        </div>
 
-                <h3>Identification</h3>
+        <hr>
+
+        <div class="columns">
+            <div class="column">
+
+                <h3>Pets</h3>
                 <div class="field is-grouped">
                     <p class="control">
-                        <x-inputs.dropdown key="id_type" label="ID Type" :options="$identificationTypeOptions"/>
+                        <x-inputs.dropdown key="pet_type" label="Pet Type" :options="$petTypeOptions"/>
                     </p>
                     <p class="control">
-                        <x-inputs.dropdown key="id_state" label="ID State" :options="$stateOptions"/>
+                        <x-inputs.text key="pet_breed" label="Pet Breed"/>
                     </p>
                     <p class="control">
-                        <x-inputs.text key="id_number" label="ID Number"/>
+                        <x-inputs.text key="pet_weight" label="Pet Weight"/>
                     </p>
                 </div>
 
@@ -190,12 +251,11 @@
                 </div>
 
             </div>
-
             <div class="column is-4">
-                <p>These contact details are used to prepare your lease, and give the landlord contact information after
-                    they approve your application.</p>
+                <p>bla bla bla</p>
             </div>
         </div>
+
 
         <div class="columns">
             <div class="column">
