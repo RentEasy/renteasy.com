@@ -39,6 +39,7 @@ Route::resource('/rentals', 'RentalController', [
     'only' => ['index', 'show']
 ]);
 Route::get('/rentals/{rental}/apply', 'RentalController@apply')->name('rentals.apply');
+Route::post('/rentals/{rental}/submit-application', 'RentalController@submitApplication')->name('rentals.submitApplication');
 
 Route::middleware(['auth'])->group(function() {
     Route::post('/rentals/{rental}/simple-apply', 'RentalController@simpleApply')->name('rentals.simple-apply');

@@ -8,11 +8,6 @@
                 <option @if(old($key) == $k) selected @endif name="{{ $k }}">{{ $v }}</option>
                 @endforeach
             </select>
-            @error($key)
-            <span class="icon is-small is-right">
-              <i class="fa fa-exclamation-triangle"></i>
-            </span>
-            @enderror
         </div>
     </div>
     @error($key)

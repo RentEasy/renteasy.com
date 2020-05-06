@@ -4,7 +4,7 @@
     @include('layouts.nav')
 
     <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column is-8-widescreen is-12-desktop">
             <div class="card is-shady">
                 <header class="card-header">
                     <p class="card-header-title is-centered is-size-3">
