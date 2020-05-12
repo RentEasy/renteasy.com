@@ -76,4 +76,36 @@ class User extends Authenticatable
     {
         return $this->hasMany(RentalApplication::class);
     }
+
+    public function employment()
+    {
+        return $this->hasMany(UserEmployment::class);
+    }
+
+    public function identification()
+    {
+        return $this->hasMany(UserIdentification::class);
+    }
+
+    public function pets()
+    {
+        return $this->hasMany(UserPet::class);
+    }
+
+    public function references()
+    {
+        return $this->hasMany(UserReference::class);
+    }
+
+    public function rentalHistory()
+    {
+        return $this->hasMany(UserRentalHistory::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(UserVehicle::class);
+    }
+
+
 }

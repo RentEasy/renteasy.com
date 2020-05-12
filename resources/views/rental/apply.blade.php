@@ -59,33 +59,66 @@
                 <div class="column">
 
                     <h3>Residence History</h3>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.text key="street_address" label="Street Address"/>
-                            <x-inputs.text key="unit_apt" label="Unit / Apt"/>
+                    <form-rows v-slot:default="slotProps">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <text-input group="rental_history" id="street_address" label="Street Address" :iteration="slotProps.iteration"/>
+                                <text-input group="rental_history" id="unit_apt" label="Unit / Apt" :iteration="slotProps.iteration"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.text key="city" label="City"/>
-                            <x-inputs.dropdown key="state" label="State" :options="$stateOptions"/>
-                            <x-inputs.text key="zip" label="Zipcode"/>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <text-input group="rental_history" id="city" label="City" :iteration="slotProps.iteration"/>
+                                <x-inputs.dropdown key="state" label="State" :options="$stateOptions"/>
+                                <text-input group="rental_history" id="zip" label="Zipcode" :iteration="slotProps.iteration"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.text key="landlord_name" label="Landlord Name"/>
-                            <x-inputs.text key="landlord_phone" label="Landlord Phone"/>
-                            <x-inputs.money key="rent_monthly" label="Rent Monthly"/>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <text-input group="rental_history" id="landlord_name" label="Landlord Name" :iteration="slotProps.iteration"/>
+                                <text-input group="rental_history" id="landlord_phone" label="Landlord Phone" :iteration="slotProps.iteration"/>
+                                <x-inputs.money key="rent_monthly" label="Rent Monthly"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.dropdown key="rent_own_other" label="Rent / Own" :options="$rentOrOwnOptions"/>
-                            <x-inputs.text key="years" label="Years"/>
-                            <x-inputs.text key="months" label="Months"/>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.dropdown key="rent_own_other" label="Rent / Own" :options="$rentOrOwnOptions"/>
+                                <text-input group="rental_history" id="years" label="Years" :iteration="slotProps.iteration"/>
+                                <text-input group="rental_history" id="months" label="Months" :iteration="slotProps.iteration"/>
+                            </div>
                         </div>
-                    </div>
+                    </form-rows>
+
+                    <form-rows>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.text key="street_address" label="Street Address"/>
+                                <x-inputs.text key="unit_apt" label="Unit / Apt"/>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.text key="city" label="City"/>
+                                <x-inputs.dropdown key="state" label="State" :options="$stateOptions"/>
+                                <x-inputs.text key="zip" label="Zipcode"/>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.text key="landlord_name" label="Landlord Name"/>
+                                <x-inputs.text key="landlord_phone" label="Landlord Phone"/>
+                                <x-inputs.money key="rent_monthly" label="Rent Monthly"/>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.dropdown key="rent_own_other" label="Rent / Own" :options="$rentOrOwnOptions"/>
+                                <x-inputs.text key="years" label="Years"/>
+                                <x-inputs.text key="months" label="Months"/>
+                            </div>
+                        </div>
+                    </form-rows>
+
                 </div>
                 <div class="column is-4">
                     <p>Bla bla</p>
@@ -98,23 +131,25 @@
                 <div class="column">
 
                     <h3>Employment History</h3>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.dropdown key="employer_status" label="Status"
-                                               :options="$employmentStatusOptions"/>
-                            <x-inputs.text key="employer_name" label="Employer Name"/>
-                            <x-inputs.text key="employer_position" label="Your Position"/>
-                            <x-inputs.text key="employer_start_date" label="Start Date"/>
+                    <form-rows>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.dropdown key="employer_status" label="Status"
+                                                   :options="$employmentStatusOptions"/>
+                                <x-inputs.text key="employer_name" label="Employer Name"/>
+                                <x-inputs.text key="employer_position" label="Your Position"/>
+                                <x-inputs.text key="employer_start_date" label="Start Date"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.text key="employer_city" label="City"/>
-                            <x-inputs.dropdown key="employer_state" label="State" :options="$stateOptions"/>
-                            <x-inputs.text key="employer_supervisor" label="Supervisor"/>
-                            <x-inputs.text key="employer_supervisor_phone" label="Supervisor Phone"/>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.text key="employer_city" label="City"/>
+                                <x-inputs.dropdown key="employer_state" label="State" :options="$stateOptions"/>
+                                <x-inputs.text key="employer_supervisor" label="Supervisor"/>
+                                <x-inputs.text key="employer_supervisor_phone" label="Supervisor Phone"/>
+                            </div>
                         </div>
-                    </div>
+                    </form-rows>
                 </div>
                 <div class="column is-4">
                     <p>bla bla</p>
@@ -137,14 +172,16 @@
                     </div>
 
                     <h3>References</h3>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.text key="ref_first_name" label="First Name"/>
-                            <x-inputs.text key="ref_last_name" label="Last Name"/>
-                            <x-inputs.dropdown key="ref_relation" label="Relation" :options="$relationOptions"/>
-                            <x-inputs.text key="ref_phone" label="Phone"/>
+                    <form-rows>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.text key="ref_first_name" label="First Name"/>
+                                <x-inputs.text key="ref_last_name" label="Last Name"/>
+                                <x-inputs.dropdown key="ref_relation" label="Relation" :options="$relationOptions"/>
+                                <x-inputs.text key="ref_phone" label="Phone"/>
+                            </div>
                         </div>
-                    </div>
+                    </form-rows>
                 </div>
                 <div class="column is-4">
                     <p>Bla bla</p>
@@ -157,23 +194,27 @@
                 <div class="column">
 
                     <h3>Pets</h3>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.dropdown key="pet_type" label="Pet Type" :options="$petTypeOptions"/>
-                            <x-inputs.text key="pet_breed" label="Pet Breed"/>
-                            <x-inputs.text key="pet_weight" label="Pet Weight"/>
+                    <form-rows>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <x-inputs.dropdown key="pet_type" label="Pet Type" :options="$petTypeOptions"/>
+                                <x-inputs.text key="pet_breed" label="Pet Breed"/>
+                                <x-inputs.text key="pet_weight" label="Pet Weight"/>
+                            </div>
                         </div>
-                    </div>
+                    </form-rows>
 
                     <h3>Vehicles</h3>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <x-inputs.text key="vehicle_year" label="Year"/>
-                            <x-inputs.text key="vehicle_make" label="Make"/>
-                            <x-inputs.text key="vehicle_model" label="Model"/>
-                            <x-inputs.text key="vehicle_plate" label="Plate"/>
+                    <form-rows v-slot:default="slotProps">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <text-input group="vehicle" id="vehicle_year" label="Year" :iteration="slotProps.iteration"></text-input>
+                                <text-input group="vehicle" id="vehicle_make" label="Make" :iteration="slotProps.iteration"></text-input>
+                                <text-input group="vehicle" id="vehicle_model" label="Model" :iteration="slotProps.iteration"></text-input>
+                                <text-input group="vehicle" id="vehicle_plate" label="Plate" :iteration="slotProps.iteration"></text-input>
+                            </div>
                         </div>
-                    </div>
+                    </form-rows>
                 </div>
                 <div class="column is-4">
                     <p>bla bla bla</p>
