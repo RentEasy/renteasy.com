@@ -39,14 +39,7 @@ class RentalController extends Controller
     public function apply(Rental $rental)
     {
         return view('rental.apply')->with([
-            'rental' => $rental,
-            'termOptions' => config('options.application.terms'),
-            'rentOrOwnOptions' => config('options.application.rentOrOwn'),
-            'petTypeOptions' => config('options.application.petTypes'),
-            'stateOptions' => config('options.states'),
-            'relationOptions' => config('options.application.relations'),
-            'identificationTypeOptions' => config('options.application.identificationTypes'),
-            'employmentStatusOptions' => config('options.application.employmentStatus'),
+            'rental' => $rental
         ]);
     }
 
@@ -64,7 +57,7 @@ class RentalController extends Controller
             'id_type' => 'required',
             'id_state' => 'required',
             'id_number' => 'required',
-// Many
+            // Many
             'rental_history.*.street_address' => 'required',
             'rental_history.*.unit_apt' => 'required',
             'rental_history.*.city' => 'required',
@@ -76,7 +69,7 @@ class RentalController extends Controller
             'rental_history.*.rent_own_other' => 'required',
             'rental_history.*.years' => 'required',
             'rental_history.*.months' => 'required',
-// Many
+            // Many
             'employer.*.employer_status' => 'required',
             'employer.*.employer_name' => 'required',
             'employer.*.employer_position' => 'required',
@@ -102,7 +95,6 @@ class RentalController extends Controller
             'vehicle.*,vehicle_make' => '',
             'vehicle.*,vehicle_model' => '',
             'vehicle.*,vehicle_plate' => '',
-
             'password' => 'required',
             'password_confirmation' => 'required',
         ]);
@@ -119,6 +111,19 @@ class RentalController extends Controller
         $rental->applications()->save($app);
 
         return redirect()->back()->with('status', 'Successfully submitted application!');
+    }
+
+    public function getFormOptions()
+    {
+        return response()->json([
+            'termOptions' => config('options.application.terms'),
+            'rentOrOwnOptions' => config('options.application.rentOrOwn'),
+            'petTypeOptions' => config('options.application.petTypes'),
+            'stateOptions' => config('options.states'),
+            'relationOptions' => config('options.application.relations'),
+            'identificationTypeOptions' => config('options.application.identificationTypes'),
+            'employmentStatusOptions' => config('options.application.employmentStatus'),
+        ]);
     }
 
 }

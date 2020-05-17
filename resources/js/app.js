@@ -23,8 +23,10 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('newsletter', require('./components/NewsletterComponent.vue').default);
+Vue.component('app-form', require('./components/AppForm.vue').default);
 Vue.component('form-rows', require('./components/FormRows.vue').default);
 Vue.component('text-input', require('./components/inputs/TextInput.vue').default);
+Vue.component('dropdown-input', require('./components/inputs/DropdownInput.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

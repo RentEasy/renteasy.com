@@ -39,7 +39,22 @@ Route::resource('/rentals', 'RentalController', [
     'only' => ['index', 'show']
 ]);
 Route::get('/rentals/{rental}/apply', 'RentalController@apply')->name('rentals.apply');
+Route::get('/rentals/{rental}/form-options', 'RentalController@getFormOptions')->name('rentals.getFormOptions');
 Route::post('/rentals/{rental}/submit-application', 'RentalController@submitApplication')->name('rentals.submitApplication');
+//
+//Route::prefix('/rentals/{rental}/apply')->group(function() {
+//    Route::get('/about', 'ApplyController@about')->name('rentals.apply');
+//    Route::get('/employment', 'ApplyController@employment')->name('rentals.apply.employment');
+//    Route::get('/residence', 'ApplyController@residence')->name('rentals.apply.residence');
+//    Route::get('/occupants', 'ApplyController@occupants')->name('rentals.apply.occupants');
+//    Route::get('/final', 'ApplyController@final')->name('rentals.apply.final');
+//
+//    Route::post('/about', 'ApplyController@saveAbout')->name('rentals.apply.saveAbout');
+//    Route::post('/employment', 'ApplyController@saveEmployment')->name('rentals.apply.saveEmployment');
+//    Route::post('/residence', 'ApplyController@saveResidence')->name('rentals.apply.saveResidence');
+//    Route::post('/occupants', 'ApplyController@saveOccupants')->name('rentals.apply.saveOccupants');
+//    Route::post('/final', 'ApplyController@saveFinal')->name('rentals.apply.saveFinal');
+//});
 
 Route::middleware(['auth'])->group(function() {
     Route::post('/rentals/{rental}/simple-apply', 'RentalController@simpleApply')->name('rentals.simple-apply');
