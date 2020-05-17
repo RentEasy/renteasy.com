@@ -82,10 +82,12 @@ class RentalController extends Controller
             'income_comments' => 'required',
             'income_proof' => 'required',
 // Many
+            'reference' => 'required|array|min:1',
             'reference.*.ref_first_name' => 'required',
             'reference.*.ref_last_name' => 'required',
             'reference.*.ref_relation' => 'required',
             'reference.*.ref_phone' => 'required',
+
 // Many
             'pet.*.pet_type' => 'required',
             'pet.*.pet_breed' => 'required',

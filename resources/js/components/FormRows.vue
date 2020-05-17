@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div v-for="n in rows">
+        <div v-for="(row, index) in rows">
             <article class="media">
                 <div class="media-content">
-                    <slot v-bind:iteration="n"></slot>
+                    <slot v-bind:row="row" v-bind:errors="getErrors(index)"></slot>
                 </div>
                 <div class="media-right">
-                    <button type="button" class="delete" v-show="rows > 1" v-on:click="deleteOne"></button>
+                    <button type="button" class="delete" v-show="rows.length > 1" v-on:click="deleteOne(index)"></button>
                 </div>
             </article>
         </div>
@@ -16,20 +16,30 @@
 
 <script>
     export default {
+        props: ['errors'],
         data: () => ({
-            rows: 1
+            // One row by default, user can supply the rest, validations happen on backend
+            rows: [{}],
         }),
-        methods: {
-            addMore() {
-                this.rows++;
-            },
-            deleteOne() {
-                this.rows--;
+        watch: {
+            rows: function (newRows, oldRows) {
+                this.$emit('input', newRows);
             }
         },
-        mounted() {
-            console.log(this);
-            console.log('Component mounted.')
+        methods: {
+            addMore() {
+                this.rows.push({});
+            },
+            deleteOne(i) {
+                this.rows.splice(i, 1);
+            },
+            getErrors(index) {
+                if(this.errors && index in this.errors) {
+                    return this.errors[index]
+                }
+
+                return [];
+            }
         },
     }
 </script>

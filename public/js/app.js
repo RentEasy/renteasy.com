@@ -2006,6 +2006,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['submitRoute', 'formOptionsRoute'],
   mounted: function mounted() {
@@ -2036,10 +2066,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    setErrors: function setErrors(errors) {
+      this.errors = this.dotToObject(errors);
+    },
     submit: function submit() {
       var _this2 = this;
-
-      console.log(this.fields);
 
       if (this.loaded) {
         this.loaded = false;
@@ -2053,10 +2084,11 @@ __webpack_require__.r(__webpack_exports__);
           _this2.success = true;
         })["catch"](function (error) {
           _this2.loaded = true;
-          console.log(error);
+          console.error(error.response.data.errors);
 
           if (error.response.status === 422) {
-            _this2.errors = error.response.data.errors || {};
+            _this2.setErrors(error.response.data.errors || {});
+
             _this2.errorMessage = error.response.data.message || null;
             window.scrollTo(0, 0);
           }
@@ -2127,22 +2159,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['errors'],
   data: function data() {
     return {
-      rows: 1
+      // One row by default, user can supply the rest, validations happen on backend
+      rows: [{}]
     };
+  },
+  watch: {
+    rows: function rows(newRows, oldRows) {
+      this.$emit('input', newRows);
+    }
   },
   methods: {
     addMore: function addMore() {
-      this.rows++;
+      this.rows.push({});
     },
-    deleteOne: function deleteOne() {
-      this.rows--;
+    deleteOne: function deleteOne(i) {
+      this.rows.splice(i, 1);
+    },
+    getErrors: function getErrors(index) {
+      if (this.errors && index in this.errors) {
+        return this.errors[index];
+      }
+
+      return [];
     }
-  },
-  mounted: function mounted() {
-    console.log(this);
-    console.log('Component mounted.');
   }
 });
 
@@ -33454,7 +33496,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "columns", attrs: { id: "app-about" } }, [
         _c(
           "div",
           { staticClass: "column" },
@@ -33591,127 +33633,414 @@ var render = function() {
             _vm._v(" "),
             _c("h3", [_vm._v("Identification")]),
             _vm._v(" "),
-            _c("div", { staticClass: "field is-horizontal" }, [
-              _c(
-                "div",
-                { staticClass: "field-body" },
-                [
-                  _c("dropdown-input", {
-                    attrs: {
-                      errors: _vm.errors.id_type,
-                      label: "ID Type",
-                      options: _vm.options.identificationTypeOptions
-                    },
-                    model: {
-                      value: _vm.fields.id_type,
-                      callback: function($$v) {
-                        _vm.$set(_vm.fields, "id_type", $$v)
-                      },
-                      expression: "fields.id_type"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("dropdown-input", {
-                    attrs: {
-                      errors: _vm.errors.id_state,
-                      label: "ID State",
-                      options: _vm.options.stateOptions
-                    },
-                    model: {
-                      value: _vm.fields.id_state,
-                      callback: function($$v) {
-                        _vm.$set(_vm.fields, "id_state", $$v)
-                      },
-                      expression: "fields.id_state"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("text-input", {
-                    attrs: { errors: _vm.errors.id_number, label: "ID Number" },
-                    model: {
-                      value: _vm.fields.id_number,
-                      callback: function($$v) {
-                        _vm.$set(_vm.fields, "id_number", $$v)
-                      },
-                      expression: "fields.id_number"
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
+            _c("form-rows", {
+              attrs: { errors: _vm.errors.identification },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(slotProps) {
+                    return [
+                      _c("div", { staticClass: "field is-horizontal" }, [
+                        _c(
+                          "div",
+                          { staticClass: "field-body" },
+                          [
+                            _c("dropdown-input", {
+                              attrs: {
+                                errors: slotProps.errors.id_type,
+                                label: "ID Type",
+                                options: _vm.options.identificationTypeOptions
+                              },
+                              model: {
+                                value: slotProps.row.id_type,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "id_type", $$v)
+                                },
+                                expression: "slotProps.row.id_type"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("dropdown-input", {
+                              attrs: {
+                                errors: slotProps.errors.id_state,
+                                label: "ID State",
+                                options: _vm.options.stateOptions
+                              },
+                              model: {
+                                value: slotProps.row.id_state,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "id_state", $$v)
+                                },
+                                expression: "slotProps.row.id_state"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.id_number,
+                                label: "ID Number"
+                              },
+                              model: {
+                                value: slotProps.row.id_number,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "id_number", $$v)
+                                },
+                                expression: "slotProps.row.id_number"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.fields.identification,
+                callback: function($$v) {
+                  _vm.$set(_vm.fields, "identification", $$v)
+                },
+                expression: "fields.identification"
+              }
+            }),
             _vm._v(" "),
             _c("h3", [_vm._v("References")]),
             _vm._v(" "),
-            _vm._l(_vm.fields.references, function(row) {
-              return _c("form-rows", [
-                _c(
-                  "div",
-                  { staticClass: "field is-horizontal", attrs: { row: row } },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "field-body" },
-                      [
-                        _c("text-input", {
-                          attrs: {
-                            errors: _vm.errors.ref_first_name,
-                            label: "First Name"
-                          },
-                          model: {
-                            value: row.ref_first_name,
-                            callback: function($$v) {
-                              _vm.$set(row, "ref_first_name", $$v)
-                            },
-                            expression: "row.ref_first_name"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("text-input", {
-                          attrs: {
-                            errors: _vm.errors.ref_last_name,
-                            label: "Last Name"
-                          },
-                          model: {
-                            value: row.ref_last_name,
-                            callback: function($$v) {
-                              _vm.$set(row, "ref_last_name", $$v)
-                            },
-                            expression: "row.ref_last_name"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("dropdown-input", {
-                          attrs: {
-                            errors: _vm.errors.ref_relation,
-                            label: "Relation",
-                            options: _vm.options.relationOptions
-                          },
-                          model: {
-                            value: row.ref_relation,
-                            callback: function($$v) {
-                              _vm.$set(row, "ref_relation", $$v)
-                            },
-                            expression: "row.ref_relation"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("text-input", {
-                          key: "ref_phone",
-                          attrs: { label: "Phone" }
-                        })
-                      ],
-                      1
-                    )
-                  ]
-                )
-              ])
+            _c("form-rows", {
+              attrs: { errors: _vm.errors.reference },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(slotProps) {
+                    return [
+                      _c("div", { staticClass: "field is-horizontal" }, [
+                        _c(
+                          "div",
+                          { staticClass: "field-body" },
+                          [
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.ref_first_name,
+                                label: "First Name"
+                              },
+                              model: {
+                                value: slotProps.row.ref_first_name,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "ref_first_name", $$v)
+                                },
+                                expression: "slotProps.row.ref_first_name"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.ref_last_name,
+                                label: "Last Name"
+                              },
+                              model: {
+                                value: slotProps.row.ref_last_name,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "ref_last_name", $$v)
+                                },
+                                expression: "slotProps.row.ref_last_name"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("dropdown-input", {
+                              attrs: {
+                                errors: slotProps.errors.ref_relation,
+                                label: "Relation",
+                                options: _vm.options.relationOptions
+                              },
+                              model: {
+                                value: slotProps.row.ref_relation,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "ref_relation", $$v)
+                                },
+                                expression: "slotProps.row.ref_relation"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.ref_phone,
+                                label: "Phone"
+                              },
+                              model: {
+                                value: slotProps.row.ref_phone,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "ref_phone", $$v)
+                                },
+                                expression: "slotProps.row.ref_phone"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.fields.reference,
+                callback: function($$v) {
+                  _vm.$set(_vm.fields, "reference", $$v)
+                },
+                expression: "fields.reference"
+              }
             })
           ],
-          2
+          1
         ),
         _vm._v(" "),
         _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns", attrs: { id: "app-income" } }, [
+        _c("div", { staticClass: "column" }, [
+          _c("h3", [_vm._v("Income History")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _c(
+              "div",
+              { staticClass: "field-body" },
+              [
+                _c("text-input", {
+                  attrs: {
+                    errors: _vm.errors.income_annual,
+                    label: "Annualized Income"
+                  },
+                  model: {
+                    value: _vm.fields.income_annual,
+                    callback: function($$v) {
+                      _vm.$set(_vm.fields, "income_annual", $$v)
+                    },
+                    expression: "fields.income_annual"
+                  }
+                }),
+                _vm._v(" "),
+                _c("text-input", {
+                  attrs: {
+                    errors: _vm.errors.income_comments,
+                    label: "Comments"
+                  },
+                  model: {
+                    value: _vm.fields.income_comments,
+                    callback: function($$v) {
+                      _vm.$set(_vm.fields, "income_comments", $$v)
+                    },
+                    expression: "fields.income_comments"
+                  }
+                }),
+                _vm._v(" "),
+                _c("text-input", {
+                  attrs: {
+                    errors: _vm.errors.income_proof,
+                    label: "Income Proof"
+                  },
+                  model: {
+                    value: _vm.fields.income_proof,
+                    callback: function($$v) {
+                      _vm.$set(_vm.fields, "income_proof", $$v)
+                    },
+                    expression: "fields.income_proof"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns", attrs: { id: "app-employment" } }, [
+        _c(
+          "div",
+          { staticClass: "column" },
+          [
+            _c("h3", [_vm._v("Employment History")]),
+            _vm._v(" "),
+            _c("form-rows", {
+              attrs: { errors: _vm.errors.employer },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(slotProps) {
+                    return [
+                      _c("div", { staticClass: "field is-horizontal" }, [
+                        _c(
+                          "div",
+                          { staticClass: "field-body" },
+                          [
+                            _c("dropdown-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_status,
+                                label: "Status",
+                                options: _vm.options.employmentStatusOptions
+                              },
+                              model: {
+                                value: slotProps.row.employer_status,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_status",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.employer_status"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_name,
+                                label: "Employer Name"
+                              },
+                              model: {
+                                value: slotProps.row.employer_name,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "employer_name", $$v)
+                                },
+                                expression: "slotProps.row.employer_name"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_position,
+                                label: "Your Position"
+                              },
+                              model: {
+                                value: slotProps.row.employer_position,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_position",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.employer_position"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_start_date,
+                                label: "Start Date"
+                              },
+                              model: {
+                                value: slotProps.row.employer_start_date,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_start_date",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.employer_start_date"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "field is-horizontal" }, [
+                        _c(
+                          "div",
+                          { staticClass: "field-body" },
+                          [
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_city,
+                                label: "City"
+                              },
+                              model: {
+                                value: slotProps.row.employer_city,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "employer_city", $$v)
+                                },
+                                expression: "slotProps.row.employer_city"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("dropdown-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_state,
+                                label: "State",
+                                options: _vm.options.stateOptions
+                              },
+                              model: {
+                                value: slotProps.row.employer_state,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "employer_state", $$v)
+                                },
+                                expression: "slotProps.row.employer_state"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.employer_supervisor,
+                                label: "Supervisor"
+                              },
+                              model: {
+                                value: slotProps.row.employer_supervisor,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_supervisor",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.employer_supervisor"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors:
+                                  slotProps.errors.employer_supervisor_phone,
+                                label: "Supervisor Phone"
+                              },
+                              model: {
+                                value: slotProps.row.employer_supervisor_phone,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_supervisor_phone",
+                                    $$v
+                                  )
+                                },
+                                expression:
+                                  "slotProps.row.employer_supervisor_phone"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.fields.employer,
+                callback: function($$v) {
+                  _vm.$set(_vm.fields, "employer", $$v)
+                },
+                expression: "fields.employer"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(2)
       ]),
       _vm._v(" "),
       _vm.success
@@ -33739,6 +34068,22 @@ var staticRenderFns = [
           "These contact details are used to prepare your lease, and give the landlord contact information\n                after they approve your application."
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("p", [_vm._v("Bla bla")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("p", [_vm._v("bla bla")])
     ])
   }
 ]
@@ -33813,13 +34158,18 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._l(_vm.rows, function(n) {
+      _vm._l(_vm.rows, function(row, index) {
         return _c("div", [
           _c("article", { staticClass: "media" }, [
             _c(
               "div",
               { staticClass: "media-content" },
-              [_vm._t("default", null, { iteration: n })],
+              [
+                _vm._t("default", null, {
+                  row: row,
+                  errors: _vm.getErrors(index)
+                })
+              ],
               2
             ),
             _vm._v(" "),
@@ -33829,13 +34179,17 @@ var render = function() {
                   {
                     name: "show",
                     rawName: "v-show",
-                    value: _vm.rows > 1,
-                    expression: "rows > 1"
+                    value: _vm.rows.length > 1,
+                    expression: "rows.length > 1"
                   }
                 ],
                 staticClass: "delete",
                 attrs: { type: "button" },
-                on: { click: _vm.deleteOne }
+                on: {
+                  click: function($event) {
+                    return _vm.deleteOne(index)
+                  }
+                }
               })
             ])
           ])
@@ -46358,6 +46712,31 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.mixin({
+  methods: {
+    dotToObject: function dotToObject(o) {
+      var oo = {},
+          t,
+          parts,
+          part;
+
+      for (var k in o) {
+        t = oo;
+        parts = k.split('.');
+        var key = parts.pop();
+
+        while (parts.length) {
+          part = parts.shift();
+          t = t[part] = t[part] || {};
+        }
+
+        t[key] = o[k];
+      }
+
+      return oo;
+    }
+  }
+});
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('newsletter', __webpack_require__(/*! ./components/NewsletterComponent.vue */ "./resources/js/components/NewsletterComponent.vue")["default"]);
 Vue.component('app-form', __webpack_require__(/*! ./components/AppForm.vue */ "./resources/js/components/AppForm.vue")["default"]);
@@ -46937,8 +47316,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -21,6 +21,25 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.mixin({
+    methods: {
+        dotToObject(o) {
+            let oo = {}, t, parts, part;
+            for (let k in o) {
+                t = oo;
+                parts = k.split('.');
+                let key = parts.pop();
+                while (parts.length) {
+                    part = parts.shift();
+                    t = t[part] = t[part] || {};
+                }
+                t[key] = o[k]
+            }
+            return oo;
+        }
+    }
+});
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('newsletter', require('./components/NewsletterComponent.vue').default);
 Vue.component('app-form', require('./components/AppForm.vue').default);
@@ -46,7 +65,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if ($navbarBurgers.length > 0) {
 
         // Add a click event on each of them
-        $navbarBurgers.forEach( el => {
+        $navbarBurgers.forEach(el => {
             el.addEventListener('click', () => {
 
                 // Get the target from the "data-target" attribute
@@ -61,7 +80,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 
-    if(document.querySelector('.siema')) {
+    if (document.querySelector('.siema')) {
 
         const mySiema = new Siema({
             selector: '.siema',
@@ -103,7 +122,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         };
 
 
-        if(tabs.length > 0) {
+        if (tabs.length > 0) {
 
             tabs.forEach(function (tab) {
                 tab.addEventListener('click', function () {
@@ -119,9 +138,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     })();
 
-    (function() {
+    (function () {
         let modalTriggers = document.querySelectorAll('[data-modal]');
-        modalTriggers.forEach(function(el) {
+        modalTriggers.forEach(function (el) {
             let modal = document.getElementById(el.dataset.modal);
             el.addEventListener('click', () => modal.classList.add('is-active'));
 

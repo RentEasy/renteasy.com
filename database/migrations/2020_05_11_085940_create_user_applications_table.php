@@ -14,19 +14,19 @@ class CreateUserApplicationsTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('last_name');
-            $table->string('suffix');
-            $table->string('phone');
+            $table->string('first_name')->default('');
+            $table->string('middle_name')->default('');
+            $table->string('last_name')->default('');
+            $table->string('suffix')->nullable();
+            $table->string('phone')->nullable();
         });
 
         foreach(\App\User::all() as $user) {
             $names = $this->split_name($user->name);
 
-            $user->first_name = $names['first_name'];
-            $user->middle_name = $names['middle_name'];
-            $user->last_name = $names['last_name'];
+            $user->first_name = $names['first_name'] ?? '';
+            $user->middle_name = $names['middle_name'] ?? '';
+            $user->last_name = $names['last_name'] ?? '';
 
             $user->save();
         }

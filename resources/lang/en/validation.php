@@ -130,8 +130,17 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'reference.*.ref_first_name' => [
+            'required' => 'Reference first name is required.',
+        ],
+        'reference.*.ref_last_name' => [
+            'required' => 'Reference last name is required.',
+        ],
+        'reference.*.ref_relation' => [
+            'required' => 'Reference relation is required.',
+        ],
+        'reference.*.ref_phone' => [
+            'required' => 'Reference phone number is required.',
         ],
     ],
 
