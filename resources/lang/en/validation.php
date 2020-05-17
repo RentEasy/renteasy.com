@@ -130,6 +130,9 @@ return [
     */
 
     'custom' => [
+        'reference' => [
+            'required' => 'At least one reference is required.'
+        ],
         'reference.*.ref_first_name' => [
             'required' => 'Reference first name is required.',
         ],
@@ -141,6 +144,14 @@ return [
         ],
         'reference.*.ref_phone' => [
             'required' => 'Reference phone number is required.',
+        ],
+
+
+        'rental_history' => [
+            'required' => 'At least one previous tenancy is required.'
+        ],
+        'employer' => [
+            'required' => 'At least one previous employer is required.'
         ],
     ],
 

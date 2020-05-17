@@ -6,6 +6,10 @@ use App\Property;
 use App\Rental;
 use App\RentalApplication;
 use App\RentalPhoto;
+use App\User;
+use App\UserEmployment;
+use App\UserReference;
+use DB;
 use Illuminate\Http\Request;
 
 class RentalController extends Controller
@@ -54,10 +58,12 @@ class RentalController extends Controller
             'preferred_term' => '',
             'email' => 'required',
             'phone' => 'required',
-            'id_type' => 'required',
-            'id_state' => 'required',
-            'id_number' => 'required',
+            'identification' => 'required|array|min:1',
+            'identification.*.id_type' => 'required',
+            'identification.*.id_state' => 'required',
+            'identification.*.id_number' => 'required',
             // Many
+            'rental_history' => 'required|array|min:1',
             'rental_history.*.street_address' => 'required',
             'rental_history.*.unit_apt' => 'required',
             'rental_history.*.city' => 'required',
@@ -70,6 +76,7 @@ class RentalController extends Controller
             'rental_history.*.years' => 'required',
             'rental_history.*.months' => 'required',
             // Many
+            'employer' => 'required|array|min:1',
             'employer.*.employer_status' => 'required',
             'employer.*.employer_name' => 'required',
             'employer.*.employer_position' => 'required',
@@ -100,6 +107,42 @@ class RentalController extends Controller
             'password' => 'required',
             'password_confirmation' => 'required',
         ]);
+
+        DB::transaction(function () use($request) {
+            foreach($request->get('employer', []) as $employerInput) {
+                $ue = new UserEmployment();
+                $ue->status = $employerInput->employer_status;
+                $ue->name = $employerInput->employer_name;
+                $ue->position = $employerInput->employer_position;
+                $ue->start_date = $employerInput->employer_start_date;
+                $ue->end_date = $employerInput->employer_end_date;
+                $ue->city = $employerInput->employer_city;
+                $ue->state = $employerInput->employer_state;
+                $ue->supervisor = $employerInput->employer_supervisor;
+                $ue->supervisor_phone = $employerInput->employer_supervisor_phone;
+                $ue->save();
+
+            }
+
+            foreach($request->get('reference', []) as $referenceInput) {
+                $ref = new UserReference();
+                $ref->first_name = $referenceInput->ref_first_name;
+                $ref->last_name = $referenceInput->ref_last_name;
+                $ref->relation = $referenceInput->ref_relation;
+                $ref->phone = $referenceInput->ref_phone;
+                $ref->save();
+            }
+            foreach($request->get('rental_history', []) as $rentalHistoryInput) {
+
+            }
+            foreach($request->get('vehicle', []) as $vehiclInput) {
+
+            }
+            foreach($request->get('pet', []) as $petInput) {
+
+            }
+
+        });
 
         dd($request->input());
     }
