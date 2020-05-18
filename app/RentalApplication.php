@@ -38,4 +38,36 @@ class RentalApplication extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function employments()
+    {
+        return $this->hasMany(RentalApplicationEmployment::class);
+    }
+
+    public function identifications()
+    {
+        return $this->hasMany(RentalApplicationIdentification::class);
+    }
+
+    public function pets()
+    {
+        return $this->hasMany(RentalApplicationPet::class);
+    }
+
+    public function references()
+    {
+        return $this->hasMany(RentalApplicationReference::class);
+    }
+
+    public function rentalHistories()
+    {
+        return $this->hasMany(RentalApplicationRentalHistory::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(RentalApplicationVehicle::class);
+    }
+
+
 }

@@ -35,11 +35,11 @@ class CreateUserApplicationsTable extends Migration
             $table->dropColumn('name');
         });
 
-        Schema::create('user_pets', function (Blueprint $table) {
+        Schema::create('rental_application_pets', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rental_application_id');
+            $table->foreign('rental_application_id')->references('id')->on('rental_applications');
 
             $table->string('type');
             $table->string('breed');
@@ -48,11 +48,11 @@ class CreateUserApplicationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('user_vehicles', function (Blueprint $table) {
+        Schema::create('rental_application_vehicles', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rental_application_id');
+            $table->foreign('rental_application_id')->references('id')->on('rental_applications');
 
             $table->string('year');
             $table->string('make');
@@ -62,11 +62,11 @@ class CreateUserApplicationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('user_identifications', function (Blueprint $table) {
+        Schema::create('rental_application_identifications', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rental_application_id');
+            $table->foreign('rental_application_id')->references('id')->on('rental_applications');
 
             $table->string('type');
             $table->string('state');
@@ -75,16 +75,16 @@ class CreateUserApplicationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('user_employment', function (Blueprint $table) {
+        Schema::create('rental_application_employments', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rental_application_id');
+            $table->foreign('rental_application_id')->references('id')->on('rental_applications');
 
             $table->string('status');
             $table->string('name');
             $table->string('position');
-            $table->date('state_date');
+            $table->date('start_date');
             $table->date('end_date');
             $table->string('city');
             $table->string('state');
@@ -96,11 +96,11 @@ class CreateUserApplicationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('user_reference', function (Blueprint $table) {
+        Schema::create('rental_application_references', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rental_application_id');
+            $table->foreign('rental_application_id')->references('id')->on('rental_applications');
 
             $table->string('first_name');
             $table->string('last_name');
@@ -110,11 +110,11 @@ class CreateUserApplicationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('user_rental_history', function (Blueprint $table) {
+        Schema::create('rental_application_rental_histories', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rental_application_id');
+            $table->foreign('rental_application_id')->references('id')->on('rental_applications');
 
             $table->string('street_address');
             $table->string('unit_apt');
@@ -141,7 +141,7 @@ class CreateUserApplicationsTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('name');
+            $table->string('name')->default('');
         });
 
         foreach(\App\User::all() as $user) {
@@ -159,12 +159,12 @@ class CreateUserApplicationsTable extends Migration
                 'phone',
             ]);
         });
-        Schema::dropIfExists('user_pets');
-        Schema::dropIfExists('user_vehicles');
-        Schema::dropIfExists('user_identifications');
-        Schema::dropIfExists('user_employment');
-        Schema::dropIfExists('user_reference');
-        Schema::dropIfExists('user_rental_history');
+        Schema::dropIfExists('rental_application_pets');
+        Schema::dropIfExists('rental_application_vehicles');
+        Schema::dropIfExists('rental_application_identifications');
+        Schema::dropIfExists('rental_application_employment');
+        Schema::dropIfExists('rental_application_reference');
+        Schema::dropIfExists('rental_application_rental_history');
     }
 
     private function split_name($name)

@@ -2162,16 +2162,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['submitRoute', 'formOptionsRoute'],
   mounted: function mounted() {
@@ -2245,8 +2235,7 @@ __webpack_require__.r(__webpack_exports__);
         this.errors = {};
         this.errorMessage = null;
         axios.post(this.submitRoute, this.fields).then(function (response) {
-          _this2.fields = {}; //Clear input fields.
-
+          // this.fields = {}; //Clear input fields.
           _this2.loaded = true;
           _this2.success = true;
         })["catch"](function (error) {
@@ -2503,7 +2492,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['label', 'errors'],
+  props: {
+    type: {
+      type: String,
+      "default": "text"
+    },
+    label: {
+      type: String
+    },
+    errors: {
+      type: Array
+    }
+  },
   data: function data() {
     return {
       value: ''
@@ -33783,7 +33783,11 @@ var render = function() {
                 { staticClass: "field-body" },
                 [
                   _c("text-input", {
-                    attrs: { errors: _vm.errors.email, label: "Email" },
+                    attrs: {
+                      type: "email",
+                      errors: _vm.errors.email,
+                      label: "Email"
+                    },
                     model: {
                       value: _vm.fields.email,
                       callback: function($$v) {
@@ -33794,7 +33798,11 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("text-input", {
-                    attrs: { errors: _vm.errors.phone, label: "Phone" },
+                    attrs: {
+                      type: "tel",
+                      errors: _vm.errors.phone,
+                      label: "Phone"
+                    },
                     model: {
                       value: _vm.fields.phone,
                       callback: function($$v) {
@@ -33997,67 +34005,6 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "columns", attrs: { id: "app-income" } }, [
-        _c("div", { staticClass: "column" }, [
-          _c("h3", [_vm._v("Income History")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field is-horizontal" }, [
-            _c(
-              "div",
-              { staticClass: "field-body" },
-              [
-                _c("text-input", {
-                  attrs: {
-                    errors: _vm.errors.income_annual,
-                    label: "Annualized Income"
-                  },
-                  model: {
-                    value: _vm.fields.income_annual,
-                    callback: function($$v) {
-                      _vm.$set(_vm.fields, "income_annual", $$v)
-                    },
-                    expression: "fields.income_annual"
-                  }
-                }),
-                _vm._v(" "),
-                _c("text-input", {
-                  attrs: {
-                    errors: _vm.errors.income_comments,
-                    label: "Comments"
-                  },
-                  model: {
-                    value: _vm.fields.income_comments,
-                    callback: function($$v) {
-                      _vm.$set(_vm.fields, "income_comments", $$v)
-                    },
-                    expression: "fields.income_comments"
-                  }
-                }),
-                _vm._v(" "),
-                _c("text-input", {
-                  attrs: {
-                    errors: _vm.errors.income_proof,
-                    label: "Income Proof"
-                  },
-                  model: {
-                    value: _vm.fields.income_proof,
-                    callback: function($$v) {
-                      _vm.$set(_vm.fields, "income_proof", $$v)
-                    },
-                    expression: "fields.income_proof"
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(1)
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
       _c("div", { staticClass: "columns", attrs: { id: "app-employment" } }, [
         _c(
           "div",
@@ -34140,33 +34087,6 @@ var render = function() {
                             _vm._v(" "),
                             _c("text-input", {
                               attrs: {
-                                errors: slotProps.errors.employer_start_date,
-                                label: "Start Date"
-                              },
-                              model: {
-                                value: slotProps.row.employer_start_date,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    slotProps.row,
-                                    "employer_start_date",
-                                    $$v
-                                  )
-                                },
-                                expression: "slotProps.row.employer_start_date"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "field is-horizontal" }, [
-                        _c(
-                          "div",
-                          { staticClass: "field-body" },
-                          [
-                            _c("text-input", {
-                              attrs: {
                                 errors: slotProps.errors.employer_city,
                                 label: "City"
                               },
@@ -34191,6 +34111,53 @@ var render = function() {
                                   _vm.$set(slotProps.row, "employer_state", $$v)
                                 },
                                 expression: "slotProps.row.employer_state"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "field is-horizontal" }, [
+                        _c(
+                          "div",
+                          { staticClass: "field-body" },
+                          [
+                            _c("text-input", {
+                              attrs: {
+                                type: "date",
+                                errors: slotProps.errors.employer_start_date,
+                                label: "Start Date"
+                              },
+                              model: {
+                                value: slotProps.row.employer_start_date,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_start_date",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.employer_start_date"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                type: "date",
+                                errors: slotProps.errors.employer_end_date,
+                                label: "End Date"
+                              },
+                              model: {
+                                value: slotProps.row.employer_end_date,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "employer_end_date",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.employer_end_date"
                               }
                             }),
                             _vm._v(" "),
@@ -34234,6 +34201,61 @@ var render = function() {
                           ],
                           1
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "field is-horizontal" }, [
+                        _c(
+                          "div",
+                          { staticClass: "field-body" },
+                          [
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.income_annual,
+                                label: "Annualized Income"
+                              },
+                              model: {
+                                value: slotProps.row.income_annual,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "income_annual", $$v)
+                                },
+                                expression: "slotProps.row.income_annual"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.income_comments,
+                                label: "Comments"
+                              },
+                              model: {
+                                value: slotProps.row.income_comments,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    slotProps.row,
+                                    "income_comments",
+                                    $$v
+                                  )
+                                },
+                                expression: "slotProps.row.income_comments"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("text-input", {
+                              attrs: {
+                                errors: slotProps.errors.income_proof,
+                                label: "Income Proof"
+                              },
+                              model: {
+                                value: slotProps.row.income_proof,
+                                callback: function($$v) {
+                                  _vm.$set(slotProps.row, "income_proof", $$v)
+                                },
+                                expression: "slotProps.row.income_proof"
+                              }
+                            })
+                          ],
+                          1
+                        )
                       ])
                     ]
                   }
@@ -34251,7 +34273,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(1)
       ]),
       _vm._v(" "),
       _c("hr"),
@@ -34496,7 +34518,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(2)
       ]),
       _vm._v(" "),
       _c("hr"),
@@ -34619,6 +34641,7 @@ var render = function() {
                             _c("text-input", {
                               key: "vehicle_year",
                               attrs: {
+                                type: "number",
                                 errors: slotProps.errors.vehicle_year,
                                 label: "Year"
                               },
@@ -34695,7 +34718,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(3)
       ]),
       _vm._v(" "),
       _c("hr"),
@@ -34720,7 +34743,11 @@ var render = function() {
               { staticClass: "field-body" },
               [
                 _c("text-input", {
-                  attrs: { errors: _vm.errors.password, label: "Password" },
+                  attrs: {
+                    type: "password",
+                    errors: _vm.errors.password,
+                    label: "Password"
+                  },
                   model: {
                     value: _vm.fields.password,
                     callback: function($$v) {
@@ -34732,6 +34759,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("text-input", {
                   attrs: {
+                    type: "password",
                     errors: _vm.errors.password_confirmation,
                     label: "Password Confirmation"
                   },
@@ -34749,7 +34777,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(4)
       ]),
       _vm._v(" "),
       _vm.success
@@ -34777,14 +34805,6 @@ var staticRenderFns = [
           "These contact details are used to prepare your lease, and give the landlord contact information\n                after they approve your application."
         )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-4" }, [
-      _c("p", [_vm._v("Bla bla")])
     ])
   },
   function() {
@@ -35217,20 +35237,24 @@ var render = function() {
   return _c("div", { staticClass: "field" }, [
     _c("label", { staticClass: "label" }, [_vm._v(_vm._s(_vm.label))]),
     _vm._v(" "),
-    _c("div", { staticClass: "control is-expanded has-icons-right" }, [
-      _c("input", {
-        class: [{ "is-danger": _vm.errors }, "input"],
-        attrs: { type: "text" },
-        domProps: { value: _vm.value },
-        on: { input: _vm.handleInput }
-      }),
-      _vm._v(" "),
-      _vm.errors
-        ? _c("span", { staticClass: "icon is-small is-right" }, [
-            _c("i", { staticClass: "fas fa-exclamation-triangle" })
-          ])
-        : _vm._e()
-    ]),
+    _c(
+      "div",
+      { class: [{ "has-icons-right": _vm.errors }, "control", "is-expanded"] },
+      [
+        _c("input", {
+          class: [{ "is-danger": _vm.errors }, "input"],
+          attrs: { type: _vm.type },
+          domProps: { value: _vm.value },
+          on: { input: _vm.handleInput }
+        }),
+        _vm._v(" "),
+        _vm.errors
+          ? _c("span", { staticClass: "icon is-small is-right" }, [
+              _c("i", { staticClass: "fas fa-exclamation-triangle" })
+            ])
+          : _vm._e()
+      ]
+    ),
     _vm._v(" "),
     _vm.errors
       ? _c("p", { staticClass: "help is-danger" }, [
@@ -48049,8 +48073,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

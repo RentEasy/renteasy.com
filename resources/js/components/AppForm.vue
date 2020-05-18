@@ -34,8 +34,8 @@
                 <h3>Contact Information</h3>
                 <div class="field is-horizontal">
                     <div class="field-body">
-                        <text-input v-model="fields.email" :errors="errors.email" label="Email"/>
-                        <text-input v-model="fields.phone" :errors="errors.phone" label="Phone"/>
+                        <text-input type="email" v-model="fields.email" :errors="errors.email" label="Email"/>
+                        <text-input type="tel" v-model="fields.phone" :errors="errors.phone" label="Phone"/>
                     </div>
                 </div>
 
@@ -84,24 +84,6 @@
 
         <hr>
 
-        <div id="app-income" class="columns">
-            <div class="column">
-                <h3>Income History</h3>
-                <div class="field is-horizontal">
-                    <div class="field-body">
-                        <text-input v-model="fields.income_annual" :errors="errors.income_annual" label="Annualized Income"/>
-                        <text-input v-model="fields.income_comments" :errors="errors.income_comments" label="Comments"/>
-                        <text-input v-model="fields.income_proof" :errors="errors.income_proof" label="Income Proof"/>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-4">
-                <p>Bla bla</p>
-            </div>
-        </div>
-
-        <hr>
-
         <div id="app-employment" class="columns">
             <div class="column">
                 <h3>Employment History</h3>
@@ -117,15 +99,23 @@
                                                :options="options.employmentStatusOptions"/>
                             <text-input v-model="slotProps.row.employer_name" :errors="slotProps.errors.employer_name" label="Employer Name"/>
                             <text-input v-model="slotProps.row.employer_position" :errors="slotProps.errors.employer_position" label="Your Position"/>
-                            <text-input v-model="slotProps.row.employer_start_date" :errors="slotProps.errors.employer_start_date" label="Start Date"/>
+                            <text-input v-model="slotProps.row.employer_city" :errors="slotProps.errors.employer_city" label="City"/>
+                            <dropdown-input v-model="slotProps.row.employer_state" :errors="slotProps.errors.employer_state" label="State" :options="options.stateOptions"/>
                         </div>
                     </div>
                     <div class="field is-horizontal">
                         <div class="field-body">
-                            <text-input v-model="slotProps.row.employer_city" :errors="slotProps.errors.employer_city" label="City"/>
-                            <dropdown-input v-model="slotProps.row.employer_state" :errors="slotProps.errors.employer_state" label="State" :options="options.stateOptions"/>
+                            <text-input type="date" v-model="slotProps.row.employer_start_date" :errors="slotProps.errors.employer_start_date" label="Start Date"/>
+                            <text-input type="date" v-model="slotProps.row.employer_end_date" :errors="slotProps.errors.employer_end_date" label="End Date"/>
                             <text-input v-model="slotProps.row.employer_supervisor" :errors="slotProps.errors.employer_supervisor" label="Supervisor"/>
                             <text-input v-model="slotProps.row.employer_supervisor_phone" :errors="slotProps.errors.employer_supervisor_phone" label="Supervisor Phone"/>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <text-input v-model="slotProps.row.income_annual" :errors="slotProps.errors.income_annual" label="Annualized Income"/>
+                            <text-input v-model="slotProps.row.income_comments" :errors="slotProps.errors.income_comments" label="Comments"/>
+                            <text-input v-model="slotProps.row.income_proof" :errors="slotProps.errors.income_proof" label="Income Proof"/>
                         </div>
                     </div>
                 </form-rows>
@@ -214,7 +204,7 @@
                 <form-rows v-model.sync="fields.vehicle" :errors="errors.vehicle" v-slot:default="slotProps">
                     <div class="field is-horizontal">
                         <div class="field-body">
-                            <text-input v-model="slotProps.row.vehicle_year" :errors="slotProps.errors.vehicle_year" key="vehicle_year" label="Year"/>
+                            <text-input type="number" v-model="slotProps.row.vehicle_year" :errors="slotProps.errors.vehicle_year" key="vehicle_year" label="Year"/>
                             <text-input v-model="slotProps.row.vehicle_make" :errors="slotProps.errors.vehicle_make" key="vehicle_make" label="Make"/>
                             <text-input v-model="slotProps.row.vehicle_model" :errors="slotProps.errors.vehicle_model" key="vehicle_model" label="Model"/>
                             <text-input v-model="slotProps.row.vehicle_plate" :errors="slotProps.errors.vehicle_plate" key="vehicle_plate" label="Plate"/>
@@ -240,8 +230,8 @@
 
                 <div class="field is-horizontal">
                     <div class="field-body">
-                        <text-input v-model="fields.password" :errors="errors.password" label="Password"/>
-                        <text-input v-model="fields.password_confirmation" :errors="errors.password_confirmation" label="Password Confirmation"/>
+                        <text-input type="password" v-model="fields.password" :errors="errors.password" label="Password"/>
+                        <text-input type="password" v-model="fields.password_confirmation" :errors="errors.password_confirmation" label="Password Confirmation"/>
                     </div>
                 </div>
             </div>
@@ -339,7 +329,7 @@
                     this.errors = {};
                     this.errorMessage = null;
                     axios.post(this.submitRoute, this.fields).then(response => {
-                        this.fields = {}; //Clear input fields.
+                        // this.fields = {}; //Clear input fields.
                         this.loaded = true;
                         this.success = true;
                     }).catch(error => {
