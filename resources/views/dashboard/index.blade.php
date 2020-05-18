@@ -7,7 +7,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    Hello, {{ Auth::user()->name }}.
+                    Hello, {{ Auth::user()->fullName() }}.
                 </h1>
                 <h2 class="subtitle">
                     I hope you are having a great day!
@@ -95,7 +95,7 @@
                             @foreach($applications as $application)
                                 <tr>
                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                    <td>{{ $application->user->name }} @ {{ $application->rental->property->address }}</td>
+                                    <td>{{ $application->user->fullName() }} @ {{ $application->rental->property->address }}</td>
                                     <td class="level-right"><a class="button is-small is-primary" href="{{ route('dashboard.rentals.show', [$application->rental]) }}">Review</a></td>
                                 </tr>
                             @endforeach

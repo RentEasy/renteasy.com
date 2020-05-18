@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RentalApplicationConfirmation;
 use App\Property;
 use App\Rental;
 use App\RentalApplication;
@@ -21,6 +22,7 @@ use App\UserVehicle;
 use DB;
 use Hash;
 use Illuminate\Http\Request;
+use Mail;
 
 class RentalController extends Controller
 {
@@ -118,7 +120,7 @@ class RentalController extends Controller
             'password_confirmation' => 'required',
         ]);
 
-        DB::transaction(function () use($request, $rental) {
+        list($user, $application) = DB::transaction(function() use($request, $rental) {
             $user = User::create([
                 'first_name' => $request->get('first_name'),
                 'middle_name' => $request->get('middle_name', ''),
@@ -203,8 +205,11 @@ class RentalController extends Controller
 
                 $application->pets()->save($pet);
             }
+
+            return [$user, $application];
         });
 
+        Mail::to($user)->send(new RentalApplicationConfirmation($application));
 
         return response()->json();
     }

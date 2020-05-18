@@ -41,8 +41,8 @@
     <ol>
         <li>
             PARTIES: This lease is made on <span class="filled">{{ $tenancy->signed_at->format('M jS') }}, {{ $tenancy->signed_at->format('Y') }}</span>
-            between the LANDLORD: <span class="filled">{{ $rental->landlord->name }}</span>, address: <span class="filled">LANDLORD_ADDR</span>
-            and the TENANTS: <span class="filled">{{ $tenancy->tenant->name }}</span>
+            between the LANDLORD: <span class="filled">{{ $rental->landlord->fullName() }}</span>, address: <span class="filled">LANDLORD_ADDR</span>
+            and the TENANTS: <span class="filled">{{ $tenancy->tenant->fullName() }}</span>
         </li>
         <li>
             PROPERTY: The landlord agrees to rent to the tenant the property described as:
