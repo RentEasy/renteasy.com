@@ -55,18 +55,48 @@
                         </div>
                         <div>
                             <section class="tab-content">
-                                @foreach($rental->applications as $application)
+                                @foreach($rental->applications()->with('employments', 'identifications', 'pets', 'references', 'rentalHistories', 'vehicles')->get() as $application)
                                     <article class="media">
-                                        <figure class="media-left">
-                                            <p class="image is-64x64 is-rounded">
-                                                <img src="https://bulma.io/images/placeholders/128x128.png">
+                                        <div class="media-left">
+                                            <p class="image is-128x128">
+                                                <img src="https://i.imgur.com/ypaern2.png" alt="">
                                             </p>
-                                        </figure>
+                                        </div>
                                         <div class="media-content">
                                             <div class="content">
+                                                <strong>{{ $application->user->fullName() }}</strong> <small>{{ $application->applied_at }}</small>
+
+                                                <section>
+                                                    <h3>Employment History</h3>
+                                                    @foreach($application->employments as $employment)
+                                                        <div class="columns">
+                                                            <div class="column">
+                                                                <strong>Position</strong>
+                                                                <p>{{ $employment->position }}</p>
+
+                                                                <strong>Tenure</strong>
+                                                                <p>{{ $employment->tenure() }}</p>
+                                                            </div>
+                                                            <div class="column">
+                                                                <strong>Business</strong>
+                                                                <p>
+                                                                    {{ $employment->name }}<br>
+                                                                    {{ $employment->city }}, {{ $employment->state }}
+                                                                </p>
+
+                                                                <strong>Supervisor Contact</strong>
+                                                                <p>{{ $employment->supervisor }} at {{ $employment->supervisor_phone }}</p>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+
+                                                    <h3>Rental History</h3>
+                                                </section>
+
                                                 <p>
-                                                    <strong>{{ $application->user->fullName() }}</strong> <small>{{ $application->applied_at }}</small>
+
                                                     <br>
+                                                    <pre>{{ json_encode($application, JSON_PRETTY_PRINT) }}</pre>
                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
                                                 </p>
                                             </div>

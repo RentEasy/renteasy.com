@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function fullName()
     {
-        return `$this->first_name $this->middle_name $this->last_name`;
+        return "$this->first_name $this->middle_name $this->last_name";
     }
 
     public function rentals()
