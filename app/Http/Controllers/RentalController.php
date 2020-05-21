@@ -65,16 +65,17 @@ class RentalController extends Controller
             'first_name' => 'required',
             'middle_name' => '',
             'last_name' => 'required',
+            'date_of_birth' => 'required|date',
             'suffix' => '',
-            'preferred_move_in' => '',
+            'preferred_move_in' => 'date',
             'preferred_term' => '',
-            'email' => 'required|unique:users,email',
             'phone' => 'required',
+
             'identification' => 'required|array|min:1',
             'identification.*.id_type' => 'required',
             'identification.*.id_state' => 'required',
             'identification.*.id_number' => 'required',
-            // Many
+
             'rental_history' => 'required|array|min:1',
             'rental_history.*.street_address' => 'required',
             'rental_history.*.unit_apt' => '',
@@ -85,15 +86,15 @@ class RentalController extends Controller
             'rental_history.*.landlord_phone' => 'required',
             'rental_history.*.rent_monthly' => 'required',
             'rental_history.*.rent_own_other' => 'required',
-            'rental_history.*.years' => 'required',
-            'rental_history.*.months' => 'required',
-            // Many
+            'rental_history.*.start_date' => 'required|date',
+            'rental_history.*.end_date' => 'date',
+
             'employer' => 'required|array|min:1',
             'employer.*.employer_status' => 'required',
             'employer.*.employer_name' => 'required',
             'employer.*.employer_position' => 'required',
-            'employer.*.employer_start_date' => 'required',
-            'employer.*.employer_end_date' => 'required',
+            'employer.*.employer_start_date' => 'required|date',
+            'employer.*.employer_end_date' => 'date',
             'employer.*.employer_city' => 'required',
             'employer.*.employer_state' => 'required',
             'employer.*.employer_supervisor' => 'required',
@@ -101,24 +102,24 @@ class RentalController extends Controller
             'employer.*.income_annual' => 'required',
             'employer.*.income_comments' => 'required',
             'employer.*.income_proof' => 'required',
-// Many
+
             'reference' => 'required|array|min:1',
             'reference.*.ref_first_name' => 'required',
             'reference.*.ref_last_name' => 'required',
             'reference.*.ref_relation' => 'required',
             'reference.*.ref_phone' => 'required',
 
-// Many
             'pet.*.pet_type' => 'required',
             'pet.*.pet_breed' => 'required',
             'pet.*.pet_weight' => 'required',
-// Many
-            'vehicle.*,vehicle_year' => '',
-            'vehicle.*,vehicle_make' => '',
-            'vehicle.*,vehicle_model' => '',
-            'vehicle.*,vehicle_plate' => '',
-            'password' => 'required',
-            'password_confirmation' => 'required',
+
+            'vehicle.*,vehicle_year' => 'required',
+            'vehicle.*,vehicle_make' => 'required',
+            'vehicle.*,vehicle_model' => 'required',
+            'vehicle.*,vehicle_plate' => 'required',
+
+            'email' => ['required', 'string', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         list($user, $application) = DB::transaction(function() use($request, $rental) {
@@ -141,8 +142,8 @@ class RentalController extends Controller
                 $ue->status = $employerInput['employer_status'];
                 $ue->name = $employerInput['employer_name'];
                 $ue->position = $employerInput['employer_position'];
-                $ue->start_date = new \DateTime();
-                $ue->end_date = new \DateTime();
+                $ue->start_date = $employerInput['employer_start_date'];
+                $ue->end_date = $employerInput['employer_end_date'] ?? null;
                 $ue->city = $employerInput['employer_city'];
                 $ue->state = $employerInput['employer_state'];
                 $ue->supervisor = $employerInput['employer_supervisor'];
@@ -184,8 +185,8 @@ class RentalController extends Controller
                 $rHistory->landlord_phone = $rentalHistoryInput['landlord_phone'];
                 $rHistory->rent_monthly = $rentalHistoryInput['rent_monthly'];
                 $rHistory->rent_own_other = $rentalHistoryInput['rent_own_other'];
-                $rHistory->start_date = new \DateTime();
-                $rHistory->end_date = new \DateTime();
+                $rHistory->start_date = $rentalHistoryInput['start_date'];
+                $rHistory->end_date = $rentalHistoryInput['end_date'] ?? null;
 
                 $application->rentalHistories()->save($rHistory);
             }

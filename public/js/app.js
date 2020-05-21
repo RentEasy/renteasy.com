@@ -2162,6 +2162,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['submitRoute', 'formOptionsRoute'],
   mounted: function mounted() {
@@ -33744,6 +33745,22 @@ var render = function() {
                   _vm._v(" "),
                   _c("text-input", {
                     attrs: {
+                      type: "date",
+                      errors: _vm.errors.date_of_birth,
+                      label: "Date of Birth"
+                    },
+                    model: {
+                      value: _vm.fields.date_of_birth,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fields, "date_of_birth", $$v)
+                      },
+                      expression: "fields.date_of_birth"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("text-input", {
+                    attrs: {
+                      type: "date",
                       errors: _vm.errors.preferred_move_in,
                       label: "Preferred Move In"
                     },
@@ -34470,32 +34487,32 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("text-input", {
-                              key: "years",
                               attrs: {
-                                errors: slotProps.errors.years,
-                                label: "Years"
+                                type: "date",
+                                errors: slotProps.errors.start_date,
+                                label: "Start Date"
                               },
                               model: {
-                                value: slotProps.row.years,
+                                value: slotProps.row.start_date,
                                 callback: function($$v) {
-                                  _vm.$set(slotProps.row, "years", $$v)
+                                  _vm.$set(slotProps.row, "start_date", $$v)
                                 },
-                                expression: "slotProps.row.years"
+                                expression: "slotProps.row.start_date"
                               }
                             }),
                             _vm._v(" "),
                             _c("text-input", {
-                              key: "months",
                               attrs: {
-                                errors: slotProps.errors.months,
-                                label: "Months"
+                                type: "date",
+                                errors: slotProps.errors.end_date,
+                                label: "End Date"
                               },
                               model: {
-                                value: slotProps.row.months,
+                                value: slotProps.row.end_date,
                                 callback: function($$v) {
-                                  _vm.$set(slotProps.row, "months", $$v)
+                                  _vm.$set(slotProps.row, "end_date", $$v)
                                 },
-                                expression: "slotProps.row.months"
+                                expression: "slotProps.row.end_date"
                               }
                             })
                           ],
@@ -48073,8 +48090,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

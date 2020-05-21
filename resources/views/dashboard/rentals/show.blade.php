@@ -66,7 +66,7 @@
                                             <div class="content">
                                                 <strong>{{ $application->user->fullName() }}</strong> <small>{{ $application->applied_at }}</small>
 
-                                                <section>
+                                                <section class="section">
                                                     <h3>Employment History</h3>
                                                     @foreach($application->employments as $employment)
                                                         <div class="columns">
@@ -75,7 +75,10 @@
                                                                 <p>{{ $employment->position }}</p>
 
                                                                 <strong>Tenure</strong>
-                                                                <p>{{ $employment->tenure() }}</p>
+                                                                <p>
+                                                                    {{ $employment->tenure() }}<br>
+                                                                    {{ $employment->start_date->format('M Y') }} - {{ $employment->end_date->format('M Y') ?? 'Current' }}
+                                                                </p>
                                                             </div>
                                                             <div class="column">
                                                                 <strong>Business</strong>
@@ -90,7 +93,7 @@
                                                         </div>
                                                     @endforeach
                                                 </section>
-                                                <section>
+                                                <section class="section">
                                                     <h3>Rental History</h3>
 
                                                     <progress class="progress is-success is-large" value="60" max="100">60%</progress>
@@ -119,7 +122,7 @@
                                                         </div>
                                                     @endforeach
                                                 </section>
-                                                <section>
+                                                <section class="section">
                                                     <h3>Pets & Vehicles</h3>
 
                                                     <table>
@@ -164,8 +167,8 @@
 
                                                 </section>
 
-                                                <section>
-                                                    <h3>References</h3>
+                                                <section class="section">
+                                                    <h3>References & Identifications</h3>
                                                     <div class="columns">
                                                         @foreach($application->references as $ref)
                                                         <div class="column">
@@ -177,29 +180,32 @@
                                                         </div>
                                                         @endforeach
                                                     </div>
+                                                    <div class="columns">
+                                                        @foreach($application->identifications as $id)
+                                                        <div class="column">
+                                                            <p>
+                                                                {{ $id->type }}<br>
+                                                                {{ $id->state }}<br>
+                                                                {{ $id->number }}
+                                                            </p>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
                                                 </section>
-
-                                                <p>
-
-                                                    <br>
-                                                    <pre>{{ json_encode($application, JSON_PRETTY_PRINT) }}</pre>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                                                </p>
                                             </div>
                                         </div>
                                         <div class="media-right">
-                                            <div class="buttons">
                                                 <form method="POST" action="{{ route('dashboard.rentals.application.approve', [$rental, $application]) }}">
                                                     @csrf
 
                                                     <button type="submit" class="button is-primary">Approve</button>
                                                 </form>
+                                                <br>
                                                 <form method="POST" action="{{ route('dashboard.rentals.application.reject', [$rental, $application]) }}">
                                                     @csrf
 
                                                     <button type="submit" class="button is-danger">Reject</button>
                                                 </form>
-                                            </div>
                                         </div>
                                     </article>
                                 @endforeach

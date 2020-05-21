@@ -24,7 +24,8 @@
                 <div class="field is-horizontal">
                     <div class="field-body">
                         <text-input v-model="fields.suffix" :errors="errors.suffix" label="Suffix"/>
-                        <text-input v-model="fields.preferred_move_in" :errors="errors.preferred_move_in"
+                        <text-input type="date" v-model="fields.date_of_birth" :errors="errors.date_of_birth" label="Date of Birth"/>
+                        <text-input type="date" v-model="fields.preferred_move_in" :errors="errors.preferred_move_in"
                                     label="Preferred Move In"/>
                         <dropdown-input v-model="fields.preferred_term" :errors="errors.preferred_term"
                                         label="Preferred Term" :options="options.termOptions"/>
@@ -162,8 +163,8 @@
                     <div class="field is-horizontal">
                         <div class="field-body">
                             <dropdown-input v-model="slotProps.row.rent_own_other" :errors="slotProps.errors.rent_own_other" key="rent_own_other" label="Rent / Own" :options="options.rentOrOwnOptions"/>
-                            <text-input v-model="slotProps.row.years" :errors="slotProps.errors.years" key="years" label="Years"/>
-                            <text-input v-model="slotProps.row.months" :errors="slotProps.errors.months" key="months" label="Months"/>
+                            <text-input type="date" v-model="slotProps.row.start_date" :errors="slotProps.errors.start_date" label="Start Date"/>
+                            <text-input type="date" v-model="slotProps.row.end_date" :errors="slotProps.errors.end_date" label="End Date"/>
                         </div>
                     </div>
                 </form-rows>
