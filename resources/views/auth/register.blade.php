@@ -11,9 +11,21 @@
             {{ csrf_field() }}
             <div class="field">
                 <div class="control">
-                    <input type="text" name="name" value="{{ old('name') }}"
-                           class="input is-large @error('name') is-danger @enderror"
-                           placeholder="Your Name" autofocus required>
+                    <input type="text" name="first_name" value="{{ old('first_name') }}"
+                           class="input is-large @error('first_name') is-danger @enderror"
+                           placeholder="First Name" autofocus required>
+                </div>
+
+                @error('name')
+                <p class="help is-danger">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="text" name="last_name" value="{{ old('last_name') }}"
+                           class="input is-large @error('last_name') is-danger @enderror"
+                           placeholder="Last Name" required>
                 </div>
 
                 @error('name')
