@@ -9,6 +9,7 @@ use App\RentalApplication;
 use App\RentalPhoto;
 use App\RentalTenancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class RentalController extends Controller
 {
@@ -98,7 +99,7 @@ class RentalController extends Controller
     {
         return view('dashboard.rentals.show')->with([
             'rental' => $rental,
-            'similarRentals' => Rental::limit(3)->inRandomOrder()->get()
+            'applications' => $rental->applications()->active()->with('employments', 'identifications', 'pets', 'references', 'rentalHistories', 'vehicles')->get()
         ]);
     }
 
@@ -144,6 +145,19 @@ class RentalController extends Controller
             'rental' => $rental,
             'tenancy' => $tenancy
         ]);
+    }
+
+    public function rejectApplication(Rental $rental, RentalApplication $app, Request $request)
+    {
+        $request->validate([
+//            'reject_reason' => 'required'
+        ]);
+
+        $app->rejected_at = new \DateTime();
+        $app->reject_reason = $request->get('reject_reason');
+        $app->save();
+
+        return redirect()->back();
     }
 
     public function approveApplication(Rental $rental, RentalApplication $app, Request $request)

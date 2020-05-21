@@ -55,7 +55,7 @@
                         </div>
                         <div>
                             <section class="tab-content">
-                                @foreach($rental->applications()->with('employments', 'identifications', 'pets', 'references', 'rentalHistories', 'vehicles')->get() as $application)
+                                @foreach($applications as $application)
                                     <article class="media">
                                         <div class="media-left">
                                             <p class="image is-128x128">
@@ -89,8 +89,94 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
-
+                                                </section>
+                                                <section>
                                                     <h3>Rental History</h3>
+
+                                                    <progress class="progress is-success is-large" value="60" max="100">60%</progress>
+
+                                                    @foreach($application->rentalHistories as $history)
+                                                        <div class="columns">
+                                                            <div class="column">
+                                                                <strong>Address</strong>
+                                                                <p>
+                                                                    {{ $history->street_address }}<br>
+                                                                    {{ $history->city }}, {{ $history->state }}
+                                                                </p>
+
+                                                                <strong>Tenure</strong>
+                                                                <p>{{ $history->tenure() }}</p>
+                                                            </div>
+                                                            <div class="column">
+                                                                <strong>Monthly Rent</strong>
+                                                                <p>
+                                                                    ${{ $history->rent_monthly }}
+                                                                </p>
+
+                                                                <strong>Previous Landlord</strong>
+                                                                <p>{{ $history->landlord_name }} tel:{{ $history->landlord_phone }}</p>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </section>
+                                                <section>
+                                                    <h3>Pets & Vehicles</h3>
+
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Type</th>
+                                                            <th>Breed</th>
+                                                            <th>Weight</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($application->pets as $pet)
+                                                            <tr>
+                                                                <td>{{ $pet->type }}</td>
+                                                                <td>{{ $pet->breed }}</td>
+                                                                <td>{{ $pet->weight }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Year</th>
+                                                            <th>Make</th>
+                                                            <th>Model</th>
+                                                            <th>Plate</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($application->vehicles as $car)
+                                                            <tr>
+                                                                <td>{{ $car->year }}</td>
+                                                                <td>{{ $car->make }}</td>
+                                                                <td>{{ $car->model }}</td>
+                                                                <td>{{ $car->plate }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+
+                                                </section>
+
+                                                <section>
+                                                    <h3>References</h3>
+                                                    <div class="columns">
+                                                        @foreach($application->references as $ref)
+                                                        <div class="column">
+                                                            <p>
+                                                                {{ $ref->first_name }} {{ $ref->last_name }}<br>
+                                                                {{ $ref->relation }}<br>
+                                                                {{ $ref->phone }}
+                                                            </p>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
                                                 </section>
 
                                                 <p>

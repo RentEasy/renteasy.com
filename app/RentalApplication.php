@@ -29,6 +29,11 @@ use Illuminate\Database\Eloquent\Model;
 class RentalApplication extends Model
 {
 
+    public function scopeActive($query)
+    {
+        return $query->whereNull('rejected_at');
+    }
+
     public function rental()
     {
         return $this->belongsTo(Rental::class);

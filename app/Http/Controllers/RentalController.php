@@ -77,7 +77,7 @@ class RentalController extends Controller
             // Many
             'rental_history' => 'required|array|min:1',
             'rental_history.*.street_address' => 'required',
-            'rental_history.*.unit_apt' => 'required',
+            'rental_history.*.unit_apt' => '',
             'rental_history.*.city' => 'required',
             'rental_history.*.state' => 'required',
             'rental_history.*.zip' => 'required',
@@ -93,6 +93,7 @@ class RentalController extends Controller
             'employer.*.employer_name' => 'required',
             'employer.*.employer_position' => 'required',
             'employer.*.employer_start_date' => 'required',
+            'employer.*.employer_end_date' => 'required',
             'employer.*.employer_city' => 'required',
             'employer.*.employer_state' => 'required',
             'employer.*.employer_supervisor' => 'required',
