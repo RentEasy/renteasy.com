@@ -12,7 +12,7 @@
                     </p>
                 </header>
                 <div class="card-content">
-                    @if(config('app.env') == 'local')
+                    @if(config('app.env') == 'production')
                         <div class="notification is-warning">
                             <strong>Warning!</strong> This is our public testing site for now, no rentals that appear here are actual. Site functionality will work, but it will not translate into any real world outcomes.
                         </div>
