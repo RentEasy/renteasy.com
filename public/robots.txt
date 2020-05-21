@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /rentals/*/apply
+Disallow: /rentals/*/apply/*

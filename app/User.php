@@ -47,6 +47,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
+        'first_name', 'middle_name', 'last_name', 'suffix',
+        'phone'
     ];
 
     /**
@@ -67,6 +69,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function fullName()
+    {
+        return "$this->first_name $this->middle_name $this->last_name";
+    }
+
     public function rentals()
     {
         return $this->hasMany(Rental::class, 'landlord_id');
@@ -76,4 +83,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(RentalApplication::class);
     }
+
 }
