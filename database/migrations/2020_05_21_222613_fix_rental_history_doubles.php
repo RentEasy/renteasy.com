@@ -16,9 +16,8 @@ class FixRentalHistoryDoubles extends Migration
         Schema::table('rental_application_rental_histories', function(Blueprint $table) {
             $table->double('new_rent_monthly')->default(0.00);
         });
-        foreach(\App\RentalApplicationRentalHistory::all() as $rh) {
-            $rh->new_rent_monthly = floatval($rh->rent_monthly);
-            $rh->save();
+        foreach(DB::table('rental_application_rental_histories')->get() as $rh) {
+            DB::table('rental_application_rental_histories')->where('id', $rh->id)->update(['new_rent_monthly' => floatval($rh->rent_monthly)]);
         }
         Schema::table('rental_application_rental_histories', function(Blueprint $table) {
             $table->dropColumn('rent_monthly');

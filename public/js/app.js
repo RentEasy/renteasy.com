@@ -2402,6 +2402,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2417,6 +2421,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       zoom: 12,
+      bounds: null,
       center: Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["latLng"])(40.4419646, -80.0130456),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; & &hearts; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -2432,6 +2437,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    ready: function ready(inp) {
+      console.log(inp);
+    },
     pointToLatLng: function pointToLatLng(point) {
       return Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["latLng"])(point['latitude'], point['longitude']);
     },
@@ -2440,6 +2448,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     centerUpdate: function centerUpdate(center) {
       this.currentCenter = center;
+    },
+    boundsUpdated: function boundsUpdated(bounds) {
+      this.bounds = bounds;
     },
     showLongText: function showLongText() {
       this.showParagraph = !this.showParagraph;
@@ -2658,6 +2669,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2669,7 +2687,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       search: null,
-      properties: [],
+      rentals: [],
       points: [],
       totalItems: 100,
       shownItems: 10,
@@ -2680,27 +2698,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.fetchInfo();
+    this.fetch();
   },
   methods: {
-    search: function search() {
-      var parent = this;
-      window.axios.get(this.infoRoute, {}).then(function (response) {
-        parent.points = response.data.coordinates;
-        parent.totalItems = response.data.totalRentals;
-      })["catch"](function (error) {});
-    },
-    fetchInfo: function fetchInfo() {
-      var parent = this;
-      window.axios.get(this.infoRoute, {}).then(function (response) {
-        parent.points = response.data.coordinates;
-        parent.totalItems = response.data.totalRentals;
-      })["catch"](function (error) {});
-    },
-    fetchProperties: function fetchProperties() {
+    fetch: function fetch() {
       var parent = this;
       window.axios.get(this.propertyRoute, {}).then(function (response) {
-        parent.properties = response.data;
+        parent.rentals = response.data.rentals;
+        parent.points = response.data.coordinates;
       })["catch"](function (error) {
         parent.error = true;
       });
@@ -49287,6 +49292,7 @@ var render = function() {
     "div",
     { staticStyle: { height: "500px", width: "100%" } },
     [
+      _vm._v("\n\n    " + _vm._s(_vm.bounds) + "\n    "),
       _vm.showMap
         ? _c(
             "l-map",
@@ -49298,8 +49304,10 @@ var render = function() {
                 options: _vm.mapOptions
               },
               on: {
+                ready: _vm.ready,
                 "update:center": _vm.centerUpdate,
-                "update:zoom": _vm.zoomUpdate
+                "update:zoom": _vm.zoomUpdate,
+                "update:bounds": _vm.boundsUpdated
               }
             },
             [
@@ -49760,7 +49768,16 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("Map", { attrs: { points: _vm.points } })
+      _c("Map", { attrs: { points: _vm.points } }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "columns is-multiline" },
+        _vm._l(_vm.rentals, function(rental) {
+          return _c("div", { staticClass: "column is-one-quarter" })
+        }),
+        0
+      )
     ],
     1
   )
@@ -74942,15 +74959,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/rentals/ListView.vue ***!
   \******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ListView_vue_vue_type_template_id_9319c8e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListView.vue?vue&type=template&id=9319c8e4& */ "./resources/js/components/rentals/ListView.vue?vue&type=template&id=9319c8e4&");
 /* harmony import */ var _ListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListView.vue?vue&type=script&lang=js& */ "./resources/js/components/rentals/ListView.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -74980,7 +74996,7 @@ component.options.__file = "resources/js/components/rentals/ListView.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/rentals/ListView.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75026,8 +75042,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

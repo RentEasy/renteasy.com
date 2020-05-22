@@ -1,13 +1,17 @@
 <template>
     <div style="height: 500px; width: 100%">
+
+        {{ bounds }}
         <l-map
             v-if="showMap"
             :zoom="zoom"
             :center="center"
             :options="mapOptions"
             style="height: 80%"
+            @ready="ready"
             @update:center="centerUpdate"
             @update:zoom="zoomUpdate"
+            @update:bounds="boundsUpdated"
         >
             <l-tile-layer
                 :url="url"
@@ -58,6 +62,7 @@
         data() {
             return {
                 zoom: 12,
+                bounds: null,
                 center: latLng(40.4419646,-80.0130456),
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution:
@@ -74,6 +79,9 @@
             };
         },
         methods: {
+            ready(inp) {
+                console.log(inp)
+            },
             pointToLatLng(point) {
                 return latLng(point['latitude'], point['longitude']);
             },
@@ -82,6 +90,9 @@
             },
             centerUpdate(center) {
                 this.currentCenter = center;
+            },
+            boundsUpdated (bounds) {
+                this.bounds = bounds;
             },
             showLongText() {
                 this.showParagraph = !this.showParagraph;

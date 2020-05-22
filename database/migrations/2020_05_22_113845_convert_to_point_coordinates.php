@@ -15,11 +15,18 @@ class ConvertToPointCoordinates extends Migration
      */
     public function up()
     {
+        try {
+            DB::select("SELECT postgis_full_version();");
+        } catch(Exception $e) {
+            DB::rollBack();
+            DB::statement("CREATE EXTENSION postgis;");
+        }
+
         Schema::table('properties', function(Blueprint $table) {
             $table->point('new_coordinates')->nullable();
         });
 
-        foreach(\DB::table('properties')->get() as $p) {
+        foreach(\DB::table('properties')->whereNotNull('coordinates')->get() as $p) {
             list($lat, $lon) = $this->latLon($p->coordinates);
             $point = new Point($lat, $lon);
             \DB::table('properties')

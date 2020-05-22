@@ -18,6 +18,13 @@
 
         <Map :points="points" />
 
+
+        <div class="columns is-multiline">
+            <div class="column is-one-quarter" v-for="rental in rentals">
+
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -30,7 +37,7 @@ export default {
     props: ['infoRoute','propertyRoute'],
     data: () => ({
         search: null,
-        properties: [],
+        rentals: [],
         points: [],
         totalItems: 100,
         shownItems: 10,
@@ -40,32 +47,15 @@ export default {
         }
     }),
     mounted() {
-        this.fetchInfo();
+        this.fetch();
     },
     methods: {
-        search() {
-            let parent = this;
-            window.axios.get(this.infoRoute, {}).then(function(response) {
-                parent.points = response.data.coordinates;
-                parent.totalItems = response.data.totalRentals;
-            }).catch(function(error) {
-
-            });
-        },
-        fetchInfo() {
-            let parent = this;
-            window.axios.get(this.infoRoute, {}).then(function(response) {
-                parent.points = response.data.coordinates;
-                parent.totalItems = response.data.totalRentals;
-            }).catch(function(error) {
-
-            });
-        },
-        fetchProperties() {
+        fetch() {
             let parent = this;
             window.axios.get(this.propertyRoute, {
             }).then(function (response) {
-                parent.properties = response.data;
+                parent.rentals = response.data.rentals;
+                parent.points = response.data.coordinates;
             }).catch(function (error) {
                 parent.error = true;
             });
