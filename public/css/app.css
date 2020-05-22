@@ -17747,6 +17747,11 @@ label.panel-block:hover {
   display: block;
 }
 
+.navbar.is-fixed-bottom,
+.navbar.is-fixed-top {
+  z-index: 4000;
+}
+
 #login .hero .nav,
 #login .hero.is-success .nav {
   box-shadow: none;

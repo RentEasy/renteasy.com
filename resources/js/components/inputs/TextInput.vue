@@ -1,8 +1,8 @@
 <template>
     <div class="field">
-        <label class="label">{{ label }}</label>
+        <label class="label" v-if="label">{{ label }}</label>
         <div v-bind:class="[{ 'has-icons-right': errors}, 'control', 'is-expanded']">
-            <input :type="type" :value="value" @input="handleInput" v-bind:class="[{ 'is-danger': errors }, 'input']">
+            <input :type="type" :placeholder="placeholder" :value="value" @input="handleInput" v-bind:class="[{ 'is-danger': errors }, 'input']">
             <span class="icon is-small is-right" v-if="errors">
                 <i class="fas fa-exclamation-triangle"></i>
             </span>
@@ -17,6 +17,10 @@
             type: {
                 type: String,
                 default: "text"
+            },
+            placeholder: {
+                type: String,
+                default: ""
             },
             label: {
                 type: String

@@ -12,8 +12,7 @@ class RentalController extends Controller
 
     public function index()
     {
-        $rentals = Rental::with('property')->paginate(16);
-        $rentalsInRange = '';
+        $rentals = Rental::with('property')->paginate(8);
 
         return new RentalCollection($rentals);
     }
@@ -21,12 +20,12 @@ class RentalController extends Controller
     public function info()
     {
         $rentals = Rental::count();
-        $coordinates = Property::get()->pluck('coordinates');
+        $coordinates = Property::select(['id', 'coordinates'])->get();
 
         return response()->json([
             'totalRentals' => $rentals,
-            'coordinates' => $coordinates->map(function($v) {
-                return ['latitude' => $v->getLat(), 'longitude' => $v->getLng()];
+            'coordinates' => $coordinates->map(function($row) {
+                return ['id'=> $row->id, 'latitude' => $row->coordinates->getLat(), 'longitude' => $row->coordinates->getLng()];
             }),
         ]);
     }

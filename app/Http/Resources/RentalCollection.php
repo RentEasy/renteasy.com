@@ -15,7 +15,7 @@ class RentalCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'data' => RentalResource::collection($this->collection),
         ];
     }
 }

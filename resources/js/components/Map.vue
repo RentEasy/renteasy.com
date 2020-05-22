@@ -1,13 +1,10 @@
 <template>
-    <div style="height: 500px; width: 100%">
-
-        {{ bounds }}
+    <div style="height: 100%; width: 100%">
         <l-map
             v-if="showMap"
             :zoom="zoom"
             :center="center"
             :options="mapOptions"
-            style="height: 80%"
             @ready="ready"
             @update:center="centerUpdate"
             @update:zoom="zoomUpdate"
@@ -17,7 +14,7 @@
                 :url="url"
                 :attribution="attribution"
             />
-            <l-marker v-for="point in points" :key="point" :lat-lng="pointToLatLng(point)">
+            <l-marker v-for="point in points" :key="point.id" :lat-lng="pointToLatLng(point)">
                 <l-popup>
                     <div @click="innerClick">
                         I am a popup

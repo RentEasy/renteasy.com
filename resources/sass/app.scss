@@ -53,6 +53,10 @@
     display: block;
 }
 
+.navbar.is-fixed-bottom, .navbar.is-fixed-top {
+    z-index: 4000;
+}
+
 //
 //
 //html,body {
