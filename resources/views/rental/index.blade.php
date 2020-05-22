@@ -28,6 +28,8 @@
         </div>
     @endif
 
+    <div id="mapid"></div>
+
     <div class="columns is-multiline">
     @foreach ($rentals as $rental)
         <div class="column is-one-quarter">

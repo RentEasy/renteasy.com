@@ -84,7 +84,7 @@ class RentalController extends Controller
             'rental_history.*.zip' => 'required',
             'rental_history.*.landlord_name' => 'required',
             'rental_history.*.landlord_phone' => 'required',
-            'rental_history.*.rent_monthly' => 'required',
+            'rental_history.*.rent_monthly' => 'required|numeric',
             'rental_history.*.rent_own_other' => 'required',
             'rental_history.*.start_date' => 'required|date',
             'rental_history.*.end_date' => 'date',

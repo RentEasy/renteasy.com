@@ -1,4 +1,4 @@
-<div class="card rental-card">
+<div class="card rental-card generate-pin" data-coords-latitude="{{ $rental->property->latitude() }}" data-coords-longitude="{{ $rental->property->longitude() }}">
     <div class="card-image">
         <figure class="image is-16by9">
             <img src="{{ asset('storage/' . $rental->getPrimaryPhoto()->filename) }}" alt="">

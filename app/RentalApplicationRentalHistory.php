@@ -13,12 +13,13 @@ class RentalApplicationRentalHistory extends Model
     public function tenure()
     {
         $interval = $this->start_date->diff($this->end_date);
-        return $interval->y . " years, " . $interval->m." months";
+        return $interval->y . " years, " . $interval->m . " months";
     }
 
 
     public function getRentMonthlyAttribute($value)
     {
+        if (!$value) $value = 0.00;
         return number_format($value, 2);
     }
 

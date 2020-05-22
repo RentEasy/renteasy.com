@@ -157,7 +157,7 @@
                         <div class="field-body">
                             <text-input v-model="slotProps.row.landlord_name" :errors="slotProps.errors.landlord_name" key="landlord_name" label="Landlord Name"/>
                             <text-input v-model="slotProps.row.landlord_phone" :errors="slotProps.errors.landlord_phone" key="landlord_phone" label="Landlord Phone"/>
-                            <text-input v-model="slotProps.row.rent_monthly" :errors="slotProps.errors.rent_monthly" key="rent_monthly" label="Rent Monthly"/>
+                            <text-input type="number" v-model="slotProps.row.rent_monthly" :errors="slotProps.errors.rent_monthly" key="rent_monthly" label="Rent Monthly"/>
                         </div>
                     </div>
                     <div class="field is-horizontal">

@@ -17796,3 +17796,7 @@ label.panel-block:hover {
   margin-left: 5px;
 }
 
+#mapid {
+  height: 300px;
+}
+

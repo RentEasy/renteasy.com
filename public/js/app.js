@@ -34449,6 +34449,7 @@ var render = function() {
                             _c("text-input", {
                               key: "rent_monthly",
                               attrs: {
+                                type: "number",
                                 errors: slotProps.errors.rent_monthly,
                                 label: "Rent Monthly"
                               },
@@ -47611,6 +47612,39 @@ document.addEventListener('DOMContentLoaded', function (event) {
       });
     });
   })();
+
+  (function () {
+    var coords = [40.4419646, -80.0130456];
+    var found = false;
+
+    if (localStorage.getItem('coords')) {
+      found = true;
+      coords = JSON.parse(localStorage.getItem('coords'));
+    }
+
+    var map = L.map('mapid').setView(coords, 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; & ❤ to <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    if (found === false && 'geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        localStorage.setItem('coords', JSON.stringify([position.coords.latitude, position.coords.longitude]));
+        map.flyTo([position.coords.latitude, position.coords.longitude], 10);
+      }, function (err) {
+        console.log(err);
+      });
+    } else {
+      console.log("Cannot get geolocation from user");
+    }
+
+    var pins = document.querySelectorAll('.generate-pin');
+    pins.forEach(function (el) {
+      L.marker([el.dataset.coordsLatitude, el.dataset.coordsLongitude]).addTo(map).bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
+    }); // L.marker([40.4419646,-80.0130456]).addTo(map)
+    //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    //     .openPopup();
+  })();
 });
 
 /***/ }),
@@ -48090,8 +48124,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/clone1018/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/luke/Code/RentEasy/renteasy/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

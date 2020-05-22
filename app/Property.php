@@ -69,4 +69,24 @@ class Property extends Model
     {
         return $this->hasMany(Rental::class);
     }
+
+    public function latitude()
+    {
+        list($lat, $lon) = $this->latLon($this->coordinates);
+        return $lat;
+    }
+
+    public function longitude()
+    {
+        list($lat, $lon) = $this->latLon($this->coordinates);
+        return $lon;
+    }
+
+    private function latLon($coords)
+    {
+        $re = '/\((-*\d.+),[\s](-*\d.+)\)/m';
+
+        preg_match($re, $coords, $matches);
+        return [$matches[1], $matches[2]];
+    }
 }
