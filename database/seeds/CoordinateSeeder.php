@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use MStaack\LaravelPostgis\Geometries\Point;
 
 class CoordinateSeeder extends Seeder
 {
@@ -11,13 +12,13 @@ class CoordinateSeeder extends Seeder
      */
     public function run()
     {
-        $properties = \App\Property::whereNull('coordinates')->get();
+        $properties = \App\Property::get();
 
         $center = [40.4419646,-80.0130456];
 
         foreach($properties as $property) {
-            list($lat, $lon) = $this->generateRandomPoint($center, 10);
-            $property->coordinates = "($lat, $lon)";
+            list($lat, $lon) = $this->generateRandomPoint($center, 20);
+            $property->coordinates = new Point($lat, $lon);
             $property->save();
         }
     }

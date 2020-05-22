@@ -47,6 +47,8 @@ Vue.component('form-rows', require('./components/FormRows.vue').default);
 Vue.component('text-input', require('./components/inputs/TextInput.vue').default);
 Vue.component('dropdown-input', require('./components/inputs/DropdownInput.vue').default);
 
+Vue.component('rental-list-view', require('./components/rentals/ListView.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -148,43 +150,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
             modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('is-active'));
         });
     })();
-
-    (function() {
-        let coords = [40.4419646,-80.0130456];
-        let found = false;
-        if (localStorage.getItem('coords')) {
-            found = true;
-            coords = JSON.parse(localStorage.getItem('coords'));
-        }
-
-        var map = L.map('mapid').setView(coords, 13);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; & ❤ to <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        if (found === false && 'geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                localStorage.setItem('coords', JSON.stringify([position.coords.latitude, position.coords.longitude]));
-                map.flyTo([position.coords.latitude, position.coords.longitude], 10);
-            }, function(err) {
-                console.log(err);
-            });
-        } else {
-            console.log("Cannot get geolocation from user");
-        }
-
-        let pins = document.querySelectorAll('.generate-pin');
-
-        pins.forEach(function(el) {
-            L.marker([el.dataset.coordsLatitude, el.dataset.coordsLongitude]).addTo(map)
-                .bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
-        })
-
-        // L.marker([40.4419646,-80.0130456]).addTo(map)
-        //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        //     .openPopup();
-    })();
+    //
+    // (function() {
+    //     let coords = [40.4419646,-80.0130456];
+    //     let found = false;
+    //     if (localStorage.getItem('coords')) {
+    //         found = true;
+    //         coords = JSON.parse(localStorage.getItem('coords'));
+    //     }
+    //
+    //     var map = L.map('mapid').setView(coords, 13);
+    //
+    //     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //         attribution: '&copy; & ❤ to <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //     }).addTo(map);
+    //
+    //     if (found === false && 'geolocation' in navigator) {
+    //         navigator.geolocation.getCurrentPosition(function(position) {
+    //             localStorage.setItem('coords', JSON.stringify([position.coords.latitude, position.coords.longitude]));
+    //             map.flyTo([position.coords.latitude, position.coords.longitude], 10);
+    //         }, function(err) {
+    //             console.log(err);
+    //         });
+    //     } else {
+    //         console.log("Cannot get geolocation from user");
+    //     }
+    //
+    //     let pins = document.querySelectorAll('.generate-pin');
+    //
+    //     pins.forEach(function(el) {
+    //         L.marker([el.dataset.coordsLatitude, el.dataset.coordsLongitude]).addTo(map)
+    //             .bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
+    //     })
+    //
+    //     // L.marker([40.4419646,-80.0130456]).addTo(map)
+    //     //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    //     //     .openPopup();
+    // })();
 
 
 });

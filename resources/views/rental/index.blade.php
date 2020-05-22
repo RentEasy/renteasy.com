@@ -4,6 +4,11 @@
 
 @section('content')
 
+    <rental-list-view info-route="{{ route('api.v1.rentals.info') }}" property-route="{{ route('api.v1.rentals') }}"></rental-list-view>
+
+@endsection
+
+@section('old')
 
     <div class="box cta">
         <div class="level">
@@ -31,11 +36,11 @@
     <div id="mapid"></div>
 
     <div class="columns is-multiline">
-    @foreach ($rentals as $rental)
-        <div class="column is-one-quarter">
-            <x-rental-card :rental="$rental" />
-        </div>
-    @endforeach
+        @foreach ($rentals as $rental)
+            <div class="column is-one-quarter">
+                <x-rental-card :rental="$rental" />
+            </div>
+        @endforeach
     </div>
 
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use MStaack\LaravelPostgis\Eloquent\PostgisTrait;
 
 /**
  * App\Property
@@ -58,6 +59,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Property extends Model
 {
+    use PostgisTrait;
+
+    protected $postgisFields = [
+        'coordinates'
+    ];
+
+    protected $postgisTypes = [
+        'coordinates' => [
+            'geomtype' => 'geography',
+            'srid' => 4326
+        ],
+    ];
+
     protected $fillable = [
         'address',
         'city',
@@ -70,23 +84,4 @@ class Property extends Model
         return $this->hasMany(Rental::class);
     }
 
-    public function latitude()
-    {
-        list($lat, $lon) = $this->latLon($this->coordinates);
-        return $lat;
-    }
-
-    public function longitude()
-    {
-        list($lat, $lon) = $this->latLon($this->coordinates);
-        return $lon;
-    }
-
-    private function latLon($coords)
-    {
-        $re = '/\((-*\d.+),[\s](-*\d.+)\)/m';
-
-        preg_match($re, $coords, $matches);
-        return [$matches[1], $matches[2]];
-    }
 }
