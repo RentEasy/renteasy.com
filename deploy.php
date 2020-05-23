@@ -32,6 +32,17 @@ task('build', function () {
     run('cd {{release_path}} && build');
 });
 
+task('npm', function () {
+
+    run('cd {{release_path}} && npm ci');
+});
+after('deploy:vendors', 'npm');
+
+task('npm_build', function() {
+    run('cd {{release_path}} && npm run production');
+});
+after('npm', 'npm_build');
+
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
