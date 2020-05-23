@@ -12,7 +12,7 @@ class RentalController extends Controller
 
     public function index()
     {
-        $rentals = Rental::with('property')->paginate(8);
+        $rentals = Rental::with('property')->paginate(16);
 
         return new RentalCollection($rentals);
     }

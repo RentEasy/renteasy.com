@@ -7,9 +7,19 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
-    <meta name="description"
-          content="Leasary is a rental property marketplace focused on modernizing the traditionally pen-and-paper rental industry. We help landlords & tenants solve frustrating issues like applications, maintenance, and payments while also building innovative contract generation, and marketplaces for new tenants.">
+    @if(View::hasSection('title'))
+        <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
+    @else
+        <title>{{ config('app.name', 'Laravel') }}</title>
+    @endif
+
+    @if(View::hasSection('description'))
+        <meta name="description"
+              content="@yield('description')">
+    @else
+        <meta name="description"
+              content="Leasary is a rental property marketplace focused on modernizing the traditionally pen-and-paper rental industry. We help landlords & tenants solve frustrating issues like applications, maintenance, and payments while also building innovative contract generation, and marketplaces for new tenants.">
+    @endif
 
     <script src="{{ asset('js/app.js') }}?hash={{ md5_file(public_path('js/app.js')) }}" defer></script>
 

@@ -2,6 +2,8 @@
 
 @section('title', $rental->property->address)
 
+@section('description', $rental->googleDescription())
+
 @section('content')
 
     <div class="columns">
@@ -63,6 +65,8 @@
                         </div>
                     </div>
                     <div class="content">
+
+                        <p>{{ $rental->description() }}</p>
 
                         <a href="{{ route('rentals.index') }}">Back to Rentals</a>
 

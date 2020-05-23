@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use NumberFormatter;
 
 /**
  * App\Rental
@@ -48,6 +49,49 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Rental extends Model
 {
+
+    public function googleDescription()
+    {
+        $nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        $houseModifier = 'single family home';
+        $bedroomModifier = $nf->format($this->bedrooms);
+        $bathroomModifier = $nf->format($this->bathrooms);
+        $applyModifier = is_null($this->current_tenancy_id) ? 'For Rent - ' : '';
+        $appModifier = config('app.name');
+
+        $photos = max($this->photos->count(), 2);
+
+        return "{$applyModifier}View $photos photos of {$this->property->address} in {$this->property->city}, {$this->property->state} {$this->property->zipcode}
+        a $bedroomModifier bed, $bathroomModifier bath, {$this->sqft} sqft $houseModifier. Explore it and others on $appModifier.";
+    }
+
+    public function description()
+    {
+        $nf = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        $paragraph = [];
+
+        $houseModifier = 'house';
+        $bedroomModifier = $nf->format($this->bedrooms);
+        $bathroomModifier = $nf->format($this->bathrooms);
+
+        $paragraph[] = "Single family $houseModifier in {$this->property->city} has $bedroomModifier bedrooms and $bathroomModifier bathrooms.";
+
+        if($this->sqft < 700) {
+            $paragraph[] = "A small efficient space for living a simpler life.";
+        } elseif($this->sqft < 1300) {
+            $paragraph[] = "A quaint little burrow for a budding family, or a someone who just needs some space.";
+        } elseif ($this->sqft < 2100) {
+            $paragraph[] = "An amazing single family $bedroomModifier bedroom $houseModifier.";
+        } else {
+            $paragraph[] = "A large $houseModifier big enough for most,";
+        }
+
+        $paragraph[] = "Located centrally in {$this->property->city}, this $houseModifier is close to shopping & dining.";
+
+        return implode(' ', $paragraph);
+
+    }
+
     public function property()
     {
         return $this->belongsTo(Property::class);
