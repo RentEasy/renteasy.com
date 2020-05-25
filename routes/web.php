@@ -27,6 +27,9 @@ Route::get('/about/terms', 'AboutController@terms')->name('about.terms');
 Route::get('/about/cookie', 'AboutController@cookie')->name('about.cookie');
 Route::post('/about/newsletter', 'AboutController@newsletter')->name('about.newsletter');
 
+Route::get('/blog', 'BlogController@index')->name('blog.index');
+Route::get('/blog/{article:slug}', 'BlogController@show')->name('blog.show');
+
 Route::middleware(['auth'])->namespace('Dashboard')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', 'DashboardController@index')->name('index');
     Route::resource('/rentals', 'RentalController');

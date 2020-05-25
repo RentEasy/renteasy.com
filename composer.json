@@ -9,8 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "ext-intl": "*",
         "bosnadev/database": "^0.20.0",
         "doctrine/dbal": "^2.10",
+        "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -18,8 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "mstaack/laravel-postgis": "^5.0",
-        "ramsey/uuid": "3.x",
-        "ext-intl": "*"
+        "ramsey/uuid": "3.x"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

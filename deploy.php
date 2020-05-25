@@ -51,6 +51,7 @@ task('reload:php-fpm', function () {
 });
 
 after('deploy', 'reload:php-fpm');
+//before('deploy', 'artisan:blog:render');
 
 before('deploy:symlink', 'deploy:public_disk');
 before('deploy:symlink', 'artisan:migrate');

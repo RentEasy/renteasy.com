@@ -57,6 +57,9 @@
                 <div class="column is-3">
                     <h2><strong>Blog</strong></h2>
                     <ul>
+                        @foreach(\App\Article::orderByDesc('updated_at')->where('online', true)->limit(5)->get() as $article)
+                            <li><a href="{{ route('blog.show', $article) }}">{{ $article->title }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="column is-4">

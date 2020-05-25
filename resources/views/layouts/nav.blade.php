@@ -15,6 +15,9 @@
                 <a class="navbar-item" href="{{ route('rentals.index') }}">
                     {{ __('Rentals') }}
                 </a>
+                <a class="navbar-item" href="{{ route('blog.index') }}">
+                    {{ __('Blog') }}
+                </a>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                         About

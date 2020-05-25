@@ -51,6 +51,7 @@
                                 <li><a>Applicants</a></li>
                                 <li><a>Details</a></li>
                                 <li><a>Photos</a></li>
+                                <li><a>Posting Assistant</a></li>
                             </ul>
                         </div>
                         <div>
@@ -220,6 +221,22 @@
                                         <img src="{{ asset('storage/' . $photo->filename) }}" alt="{{ $photo->name }}">
                                     </figure>
                                 @endforeach
+
+                            </section>
+                            <section class="tab-content">
+
+                                <div class="notification is-info">
+                                    Posting assistant is for helping you post & manage your postings on various listing sites like Zillow & Craigslist.
+                                </div>
+
+                                <div class="content">
+                                    <h3>Craigslist</h3>
+
+
+
+
+                                    <h3>Zillow</h3>
+                                </div>
 
                             </section>
                         </div>
