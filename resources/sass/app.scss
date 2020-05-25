@@ -19,6 +19,7 @@
         font-size: 1.2rem;
         font-weight: 600;
     }
+
     .subtitle {
         font-size: 1rem;
         font-weight: 300;
@@ -29,6 +30,7 @@
     position: relative;
     overflow: hidden;
 }
+
 .hero-background {
     position: absolute;
     object-fit: cover;
@@ -36,6 +38,7 @@
     width: 100%;
     height: 100%;
 }
+
 .hero-background.is-transparent {
     opacity: 0.3;
 }
@@ -147,50 +150,57 @@
         -webkit-box-shadow: none;
         box-shadow: none;
     }
+
     .box {
         margin-top: 5rem;
     }
+
     .avatar {
         margin-top: -70px;
         padding-bottom: 20px;
     }
+
     .avatar img {
         padding: 5px;
         background: #fff;
         border-radius: 50%;
-        -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-        box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+        -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+        box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
     }
+
     input {
         font-weight: 300;
     }
+
     p {
         font-weight: 700;
     }
+
     p.subtitle {
         padding-top: 1rem;
     }
 
-    .login-hr{
+    .login-hr {
         border-bottom: 1px solid black;
     }
 
-    .has-text-black{
+    .has-text-black {
         color: black;
     }
 
-    .field{
+    .field {
         padding-bottom: 10px;
     }
 
-    .fa{
+    .fa {
         margin-left: 5px;
     }
 }
 
 
-
-#mapid { height: 300px; }
+#mapid {
+    height: 300px;
+}
 
 
 // blog
@@ -218,7 +228,13 @@
         margin-bottom: -200px;
     }
     .hero-body {
-        height: 500px;
+        height: 200px;
+    }
+
+    @include from($tablet) {
+        .hero-body {
+            height: 400px;
+        }
     }
 
     .single .articles {
@@ -270,9 +286,10 @@
         margin-bottom: 3rem;
     }
 
-    .article-body {
-        line-height: 1.4;
-        margin: 0 6rem;
+    @include from($widescreen) {
+        .article-body {
+            margin: 0 6rem;
+        }
     }
 
     .promo-block .container {

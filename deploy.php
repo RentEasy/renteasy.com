@@ -7,7 +7,7 @@ require 'recipe/laravel.php';
 set('application', 'renteasy');
 
 // Project repository
-set('repository', 'git@github.com:RentEasy/renteasy.git');
+set('repository', 'git@github.com:Leasary/leasary.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -51,8 +51,8 @@ task('reload:php-fpm', function () {
 });
 
 after('deploy', 'reload:php-fpm');
-//before('deploy', 'artisan:blog:render');
 
 before('deploy:symlink', 'deploy:public_disk');
 before('deploy:symlink', 'artisan:migrate');
+//after('artisan:migrate', 'artisan:blog:render');
 

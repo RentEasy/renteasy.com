@@ -17829,7 +17829,13 @@ label.panel-block:hover {
 }
 
 #blog .hero-body {
-  height: 500px;
+  height: 200px;
+}
+
+@media screen and (min-width: 769px) {
+  #blog .hero-body {
+    height: 400px;
+  }
 }
 
 #blog .articles .content p {
@@ -17878,9 +17884,10 @@ label.panel-block:hover {
   margin-bottom: 3rem;
 }
 
-#blog .article-body {
-  line-height: 1.4;
-  margin: 0 6rem;
+@media screen and (min-width: 1216px) {
+  #blog .article-body {
+    margin: 0 6rem;
+  }
 }
 
 #blog .promo-block .container {

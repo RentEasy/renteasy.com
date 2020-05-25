@@ -15,7 +15,7 @@
         <div class="container">
             <!-- START ARTICLE FEED -->
             <section class="articles">
-                <div class="column is-8 is-offset-2">
+                <div class="column is-8 is-offset-2 is-12-mobile is-offset-0-mobile">
 
                     <div id="post-7"
                          class="card article">
