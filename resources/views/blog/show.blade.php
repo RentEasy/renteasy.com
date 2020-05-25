@@ -3,6 +3,12 @@
 @section('title', $article->title)
 @section('description', $article->description)
 
+@section('head')
+    <meta property="og:title" content="{{ $article->title }}" />
+    <meta property="og:description" content="{{ $article->description }}" />
+    <meta property="og:image" content="{{ asset('img/pittsburgh-row-houses.jpg') }}" />
+@endsection
+
 @section('content')
     <div id="blog">
 
