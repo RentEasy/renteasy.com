@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'description' => 'Leasary is a rental property marketplace focused on modernizing the traditionally pen-and-paper rental industry. We help landlords & tenants solve frustrating issues like applications, maintenance, and payments while also building innovative contract generation, and marketplaces for new tenants.',
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------

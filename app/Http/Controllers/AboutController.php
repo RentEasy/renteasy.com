@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
+    public function contact()
+    {
+        return view('about.contact');
+    }
+
     public function forRenters()
     {
         return view('about.for-renters');

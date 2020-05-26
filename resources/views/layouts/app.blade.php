@@ -13,13 +13,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
     @endif
 
-    @if(View::hasSection('description'))
-        <meta name="description"
-              content="@yield('description')">
-    @else
-        <meta name="description"
-              content="Leasary is a rental property marketplace focused on modernizing the traditionally pen-and-paper rental industry. We help landlords & tenants solve frustrating issues like applications, maintenance, and payments while also building innovative contract generation, and marketplaces for new tenants.">
-    @endif
+    <meta name="description" content="@yield('description', config('app.description'))">
 
     <script src="{{ asset('js/app.js') }}?hash={{ md5_file(public_path('js/app.js')) }}" defer></script>
 
@@ -38,11 +32,24 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#556595">
 
-    @yield('head')
-
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
+
+    <!-- why is so much social tagging required? -->
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:title" content="@yield('title', config('app.name'))" />
+    <meta property="og:description" content="@yield('description', config('app.description'))" />
+    <meta property="og:image" content="@yield('image', asset('img/pittsburgh-row-houses.jpg'))" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@LeasaryHomes">
+    <meta name="twitter:creator" content="@yield('creator', '@LeasaryHomes')">
+    <meta name="twitter:title" content="@yield('title', config('app.name'))">
+    <meta name="twitter:description" content="@yield('description', config('app.description'))">
+    <meta name="twitter:image" content="@yield('image', asset('img/pittsburgh-row-houses.jpg'))">
+
+    @yield('head')
+
 </head>
 <body>
 <main id="app">

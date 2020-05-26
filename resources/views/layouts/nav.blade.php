@@ -33,6 +33,9 @@
                         <a href="{{ route('about.for-landlords') }}" class="navbar-item">
                             For Landlords
                         </a>
+                        <a href="{{ route('about.contact') }}" class="navbar-item">
+                            Contact Us
+                        </a>
                     </div>
                 </div>
             </div>

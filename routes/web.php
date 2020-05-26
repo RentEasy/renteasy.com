@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
 
+Route::get('/about/contact', 'AboutController@contact')->name('about.contact');
 Route::get('/about/company', 'AboutController@company')->name('about.company');
 Route::get('/about/for-renters', 'AboutController@forRenters')->name('about.for-renters');
 Route::get('/about/for-landlords', 'AboutController@forLandlords')->name('about.for-landlords');

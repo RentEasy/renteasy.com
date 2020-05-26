@@ -54,5 +54,9 @@ after('deploy', 'reload:php-fpm');
 
 before('deploy:symlink', 'deploy:public_disk');
 before('deploy:symlink', 'artisan:migrate');
-//after('artisan:migrate', 'artisan:blog:render');
+task('artisan:blog:render', function () {
+    run('{{bin/php}} {{release_path}}/artisan blog:render');
+})->once();
+
+after('artisan:migrate', 'artisan:blog:render');
 
