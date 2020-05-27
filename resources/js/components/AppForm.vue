@@ -10,83 +10,104 @@
         </div>
 
 
-        <tab-content title="About">
-            <div id="app-about" class="columns">
+        <tab-content :before-change="validateStep.bind(this, 1)" title="About">
+            <div id="app-about" class="columns content">
 
                 <div class="column">
-                    <div v-if="generalErrors.about.length > 0" class="notification is-danger is-light">
-                        {{ joinErrors(generalErrors.about) }}
-                    </div>
-
-
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <text-input v-model="fields.first_name" :errors="errors.first_name" label="First Name"/>
-                            <text-input v-model="fields.middle_name" :errors="errors.middle_name" label="Middle Name"/>
-                            <text-input v-model="fields.last_name" :errors="errors.last_name" label="Last Name"/>
+                    <section>
+                        <h3>Personal Information</h3>
+                        <div v-if="generalErrors.about.length > 0" class="notification is-danger is-light">
+                            {{ joinErrors(generalErrors.about) }}
                         </div>
-                    </div>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <text-input v-model="fields.suffix" :errors="errors.suffix" label="Suffix"/>
-                            <text-input type="date" v-model="fields.date_of_birth" :errors="errors.date_of_birth"
-                                        label="Date of Birth"/>
-                            <text-input type="date" v-model="fields.preferred_move_in"
-                                        :errors="errors.preferred_move_in"
-                                        label="Preferred Move In"/>
-                            <dropdown-input v-model="fields.preferred_term" :errors="errors.preferred_term"
-                                            label="Preferred Term" :options="options.termOptions"/>
-                        </div>
-                    </div>
 
-                    <h3>Contact Information</h3>
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <text-input type="email" v-model="fields.email" :errors="errors.email" label="Email"/>
-                            <text-input type="tel" v-model="fields.phone" :errors="errors.phone" label="Phone"/>
-                        </div>
-                    </div>
-
-                    <h3>Identification</h3>
-
-                    <div v-if="generalErrors.identification.length > 0" class="notification is-danger is-light">
-                        {{ joinErrors(generalErrors.identification) }}
-                    </div>
-
-                    <form-rows v-model.sync="fields.identification" :errors="errors.identification"
-                               v-slot:default="slotProps">
                         <div class="field is-horizontal">
                             <div class="field-body">
-                                <dropdown-input v-model="slotProps.row.id_type" :errors="slotProps.errors.id_type"
-                                                label="ID Type" :options="options.identificationTypeOptions"/>
-                                <dropdown-input v-model="slotProps.row.id_state" :errors="slotProps.errors.id_state"
-                                                label="ID State" :options="options.stateOptions"/>
-                                <text-input v-model="slotProps.row.id_number" :errors="slotProps.errors.id_number"
-                                            label="ID Number"/>
+                                <text-input v-model="fields.first_name" :errors="errors.first_name" label="First Name"/>
+                                <text-input v-model="fields.middle_name" :errors="errors.middle_name" label="Middle Name"/>
+                                <text-input v-model="fields.last_name" :errors="errors.last_name" label="Last Name"/>
                             </div>
                         </div>
-                    </form-rows>
-
-                    <h3>References</h3>
-
-                    <div v-if="generalErrors.reference.length > 0" class="notification is-danger is-light">
-                        {{ joinErrors(generalErrors.reference) }}
-                    </div>
-                    <form-rows v-model.sync="fields.reference" :errors="errors.reference" v-slot:default="slotProps">
                         <div class="field is-horizontal">
                             <div class="field-body">
-                                <text-input v-model="slotProps.row.ref_first_name"
-                                            :errors="slotProps.errors.ref_first_name" label="First Name"></text-input>
-                                <text-input v-model="slotProps.row.ref_last_name"
-                                            :errors="slotProps.errors.ref_last_name" label="Last Name"></text-input>
-                                <dropdown-input v-model="slotProps.row.ref_relation"
-                                                :errors="slotProps.errors.ref_relation"
-                                                label="Relation" :options="options.relationOptions"/>
-                                <text-input v-model="slotProps.row.ref_phone" :errors="slotProps.errors.ref_phone"
-                                            label="Phone"></text-input>
+                                <text-input v-model="fields.suffix" :errors="errors.suffix" label="Suffix"/>
+                                <text-input type="date" v-model="fields.date_of_birth" :errors="errors.date_of_birth"
+                                            label="Date of Birth"/>
+                                <text-input type="number" v-model="fields.social_security_number"
+                                            :errors="errors.social_security_number" label="Social Security Number"/>
                             </div>
                         </div>
-                    </form-rows>
+                    </section>
+
+
+                    <section>
+                        <h3>Preferences</h3>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+
+                                <text-input type="date" v-model="fields.preferred_move_in"
+                                            :errors="errors.preferred_move_in"
+                                            label="Preferred Move In Date"/>
+                                <dropdown-input v-model="fields.preferred_term" :errors="errors.preferred_term"
+                                                label="Preferred Term" :options="options.termOptions"/>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <h3>Contact Information</h3>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <text-input type="email" v-model="fields.email" :errors="errors.email" label="Email"/>
+                                <text-input type="tel" v-model="fields.phone" :errors="errors.phone" label="Phone"/>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>Identification</h3>
+
+                        <div v-if="generalErrors.identification.length > 0" class="notification is-danger is-light">
+                            {{ joinErrors(generalErrors.identification) }}
+                        </div>
+
+                        <form-rows v-model.sync="fields.identification" :errors="errors.identification"
+                                   v-slot:default="slotProps">
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <dropdown-input v-model="slotProps.row.id_type" :errors="slotProps.errors.id_type"
+                                                    label="ID Type" :options="options.identificationTypeOptions"/>
+                                    <dropdown-input v-model="slotProps.row.id_state" :errors="slotProps.errors.id_state"
+                                                    label="ID State" :options="options.stateOptions"/>
+                                    <text-input v-model="slotProps.row.id_number" :errors="slotProps.errors.id_number"
+                                                label="ID Number"/>
+                                </div>
+                            </div>
+                        </form-rows>
+                    </section>
+
+                    <section>
+                        <h3>References</h3>
+
+                        <div v-if="generalErrors.reference.length > 0" class="notification is-danger is-light">
+                            {{ joinErrors(generalErrors.reference) }}
+                        </div>
+                        <form-rows v-model.sync="fields.reference" :errors="errors.reference" v-slot:default="slotProps">
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <text-input v-model="slotProps.row.ref_first_name"
+                                                :errors="slotProps.errors.ref_first_name" label="First Name"></text-input>
+                                    <text-input v-model="slotProps.row.ref_last_name"
+                                                :errors="slotProps.errors.ref_last_name" label="Last Name"></text-input>
+                                    <dropdown-input v-model="slotProps.row.ref_relation"
+                                                    :errors="slotProps.errors.ref_relation"
+                                                    label="Relation" :options="options.relationOptions"/>
+                                    <text-input v-model="slotProps.row.ref_phone" :errors="slotProps.errors.ref_phone"
+                                                label="Phone"></text-input>
+                                </div>
+                            </div>
+                        </form-rows>
+                    </section>
 
                 </div>
 
@@ -97,9 +118,22 @@
             </div>
         </tab-content>
 
-        <tab-content title="Employment History">
-            <div id="app-employment" class="columns">
+        <tab-content :before-change="validateStep.bind(this, 2)" title="Employment History">
+            <div id="app-employment" class="columns content">
                 <div class="column">
+                    <h3>Current Income</h3>
+
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <text-input v-model="fields.income_annual"
+                                        :errors="fields.income_annual" label="Annual Income"/>
+                            <text-input v-model="fields.income_comments"
+                                        :errors="fields.income_comments" label="Comments"/>
+                            <text-input v-model="fields.income_proof" :errors="fields.income_proof"
+                                        label="Proof of Income"/>
+                        </div>
+                    </div>
+
                     <h3>Employment History</h3>
 
                     <div v-if="generalErrors.employer.length > 0" class="notification is-danger is-light">
@@ -136,16 +170,6 @@
                                             label="Supervisor Phone"/>
                             </div>
                         </div>
-                        <div class="field is-horizontal">
-                            <div class="field-body">
-                                <text-input v-model="slotProps.row.income_annual"
-                                            :errors="slotProps.errors.income_annual" label="Annualized Income"/>
-                                <text-input v-model="slotProps.row.income_comments"
-                                            :errors="slotProps.errors.income_comments" label="Comments"/>
-                                <text-input v-model="slotProps.row.income_proof" :errors="slotProps.errors.income_proof"
-                                            label="Income Proof"/>
-                            </div>
-                        </div>
                     </form-rows>
                 </div>
                 <div class="column is-3">
@@ -154,8 +178,8 @@
             </div>
         </tab-content>
 
-        <tab-content title="Residence History">
-            <div id="app-residence" class="columns">
+        <tab-content :before-change="validateStep.bind(this, 3)" title="Residence History">
+            <div id="app-residence" class="columns content">
                 <div class="column">
 
                     <h3>Residence History</h3>
@@ -183,7 +207,7 @@
                                 <dropdown-input v-model="slotProps.row.state" :errors="slotProps.errors.state"
                                                 key="state" label="State" :options="options.stateOptions"/>
                                 <text-input v-model="slotProps.row.zip" :errors="slotProps.errors.zip" key="zip"
-                                            label="Zipcode"/>
+                                            label="Zip Code"/>
                             </div>
                         </div>
                         <div class="field is-horizontal">
@@ -219,8 +243,8 @@
             </div>
         </tab-content>
 
-        <tab-content title="Occupants">
-            <div id="app-occupants" class="columns">
+        <tab-content :before-change="validateStep.bind(this, 4)" title="Occupants">
+            <div id="app-occupants" class="columns content">
                 <div class="column">
 
                     <h3>Pets</h3>
@@ -269,8 +293,8 @@
             </div>
         </tab-content>
 
-        <tab-content title="Final">
-            <div id="app-submit" class="columns">
+        <tab-content :before-change="validateStep.bind(this, 5)" title="Final">
+            <div id="app-submit" class="columns content">
                 <div class="column">
 
                     <h3>Account Information</h3>
@@ -294,7 +318,6 @@
             </div>
         </tab-content>
 
-
         <div v-if="success" class="notification is-success is-light">
             Message sent!
         </div>
@@ -302,15 +325,22 @@
     </form-wizard>
 </template>
 
+<style>
+    section {
+        margin-bottom: 40px;
+    }
+</style>
+
 <script>
     import VueFormWizard from 'vue-form-wizard';
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
     export default {
-        components: [VueFormWizard],
+        components: {VueFormWizard},
         props: [
             'submitRoute',
             'formOptionsRoute',
+            'validateStepRoute',
         ],
         mounted() {
             axios.get(this.formOptionsRoute).then(response => {
@@ -361,6 +391,27 @@
             },
         },
         methods: {
+            validateStep(step) {
+                console.log('validateStep', step);
+                let parent = this;
+                parent.fields.step = step;
+
+                return new Promise((resolve, reject) => {
+                    axios.post(parent.validateStepRoute, parent.fields).then(response => {
+                        parent.setErrors({});
+                        parent.errorMessage = null;
+                        resolve(true);
+                    }).catch(error => {
+                        if (error.response.status === 422) {
+                            reject();
+                            parent.setErrors(error.response.data.errors || {});
+                            parent.errorMessage = error.response.data.message || null;
+                            window.scrollTo(0, 0);
+                        }
+                    });
+                });
+
+            },
             joinErrors(errors) {
                 return errors.join('<br>')
             },

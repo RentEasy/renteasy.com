@@ -42,9 +42,10 @@ Route::middleware(['auth'])->namespace('Dashboard')->prefix('dashboard')->name('
 Route::resource('/rentals', 'RentalController', [
     'only' => ['index', 'show']
 ]);
-Route::get('/rentals/{rental}/apply', 'RentalController@apply')->name('rentals.apply');
-Route::get('/rentals/{rental}/form-options', 'RentalController@getFormOptions')->name('rentals.getFormOptions');
-Route::post('/rentals/{rental}/submit-application', 'RentalController@submitApplication')->name('rentals.submitApplication');
+Route::get('/rentals/{rental}/apply', 'ApplyController@apply')->name('rentals.apply');
+Route::get('/rentals/{rental}/form-options', 'ApplyController@getFormOptions')->name('rentals.getFormOptions');
+Route::post('/rentals/{rental}/submit-application', 'ApplyController@submitApplication')->name('rentals.submitApplication');
+Route::post('/rentals/{rental}/validate-step', 'ApplyController@validateStep')->name('rentals.validateStep');
 //
 //Route::prefix('/rentals/{rental}/apply')->group(function() {
 //    Route::get('/about', 'ApplyController@about')->name('rentals.apply');

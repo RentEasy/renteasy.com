@@ -2216,11 +2216,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: [vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a],
-  props: ['submitRoute', 'formOptionsRoute'],
+  components: {
+    VueFormWizard: vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  props: ['submitRoute', 'formOptionsRoute', 'validateStepRoute'],
   mounted: function mounted() {
     var _this = this;
 
@@ -2269,6 +2300,25 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    validateStep: function validateStep(step) {
+      console.log('validateStep', step);
+      var parent = this;
+      parent.fields.step = step;
+      return new Promise(function (resolve, reject) {
+        axios.post(parent.validateStepRoute, parent.fields).then(function (response) {
+          parent.setErrors({});
+          parent.errorMessage = null;
+          resolve(true);
+        })["catch"](function (error) {
+          if (error.response.status === 422) {
+            reject();
+            parent.setErrors(error.response.data.errors || {});
+            parent.errorMessage = error.response.data.message || null;
+            window.scrollTo(0, 0);
+          }
+        });
+      });
+    },
     joinErrors: function joinErrors(errors) {
       return errors.join('<br>');
     },
@@ -2355,6 +2405,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2888,6 +2944,44 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 // module
 exports.push([module.i, ".vue-form-wizard .wizard-btn{display:inline-block;margin-bottom:0;font-weight:400;text-align:center;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;background-image:none;border:1px solid transparent;white-space:nowrap;padding:6px 12px;font-size:14px;line-height:1.42857;border-radius:4px}.vue-form-wizard .wizard-btn.disabled,.vue-form-wizard .wizard-btn[disabled],fieldset[disabled] .vue-form-wizard .wizard-btn{cursor:not-allowed;opacity:.65;filter:alpha(opacity=65);-webkit-box-shadow:none;box-shadow:none}.vue-form-wizard *{-webkit-box-sizing:border-box;box-sizing:border-box}.vue-form-wizard a{text-decoration:none}.vue-form-wizard .wizard-nav{margin-bottom:0;padding-left:0;list-style:none}.vue-form-wizard .wizard-nav>li{position:relative;display:block}.vue-form-wizard .wizard-nav>li>a{position:relative;display:block;padding:10px 15px}.vue-form-wizard .wizard-nav>li>a:focus,.vue-form-wizard .wizard-nav>li>a:hover{text-decoration:none;background-color:#eee}.vue-form-wizard .wizard-nav>li.disabled>a{color:#777}.vue-form-wizard .wizard-nav>li.disabled>a:focus,.vue-form-wizard .wizard-nav>li.disabled>a:hover{color:#777;text-decoration:none;background-color:transparent;cursor:not-allowed}.vue-form-wizard .wizard-progress-bar{float:left;width:0;height:100%;font-size:12px;line-height:20px;color:#fff;text-align:center;background-color:#337ab7;-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);-webkit-transition:width .6s ease;transition:width .6s ease}.vue-form-wizard .navbar .navbar-nav>li>a.wizard-btn,.vue-form-wizard .wizard-btn{-webkit-box-sizing:border-box;box-sizing:border-box;border-width:2px;background-color:transparent;font-size:14px;font-weight:600;padding:6px 12px;min-width:140px}.vue-form-wizard .navbar .navbar-nav>li>a.wizard-btn:focus,.vue-form-wizard .navbar .navbar-nav>li>a.wizard-btn:hover,.vue-form-wizard .wizard-btn:focus,.vue-form-wizard .wizard-btn:hover{outline:0!important}.vue-form-wizard .wizard-nav-pills{margin-top:0;position:relative;text-align:center;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}.vue-form-wizard .wizard-nav-pills a,.vue-form-wizard .wizard-nav-pills li{-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-positive:1;flex-grow:1}.vue-form-wizard .wizard-nav-pills>li>a,.vue-form-wizard .wizard-nav-pills a{display:-webkit-box;display:-ms-flexbox;display:flex}.vue-form-wizard .wizard-nav-pills>li>a{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;padding:0;margin:0 auto;color:rgba(0,0,0,.2);position:relative;top:3px}.vue-form-wizard .wizard-nav-pills>li>a:focus,.vue-form-wizard .wizard-nav-pills>li>a:hover{background-color:transparent;color:rgba(0,0,0,.2);outline:0!important}.vue-form-wizard .wizard-nav-pills>li>a.disabled{pointer-events:none;cursor:default}.vue-form-wizard .wizard-nav-pills>li.active>a,.vue-form-wizard .wizard-nav-pills>li.active>a:focus,.vue-form-wizard .wizard-nav-pills>li.active>a:hover{background-color:transparent;-webkit-transition:font-size .2s linear;transition:font-size .2s linear}.vue-form-wizard .wizard-nav-pills>li.active>a .wizard-icon,.vue-form-wizard .wizard-nav-pills>li.active>a:focus .wizard-icon,.vue-form-wizard .wizard-nav-pills>li.active>a:hover .wizard-icon{color:#fff;font-size:24px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-transition:all .2s linear;transition:all .2s linear}.vue-form-wizard{padding-bottom:20px}.vue-form-wizard .is_error{border-color:#c84513!important}.vue-form-wizard .is_error .icon-container{background:#c84513!important}.vue-form-wizard.xs .wizard-icon-circle{width:40px;height:40px;font-size:16px}.vue-form-wizard.xs .wizard-icon-circle.tab_shape{height:25px}.vue-form-wizard.xs .wizard-nav-pills>li.active>a .wizard-icon{font-size:16px}.vue-form-wizard.xs .wizard-navigation .wizard-progress-with-circle{position:relative;top:25px;height:4px}.vue-form-wizard.sm .wizard-icon-circle{width:50px;height:50px;font-size:20px}.vue-form-wizard.sm .wizard-icon-circle.tab_shape{height:30px}.vue-form-wizard.sm .wizard-nav-pills>li.active>a .wizard-icon{font-size:20px}.vue-form-wizard.sm .wizard-navigation .wizard-progress-with-circle{position:relative;top:30px;height:4px}.vue-form-wizard.md .wizard-icon-circle{width:70px;height:70px;font-size:24px}.vue-form-wizard.md .wizard-icon-circle.tab_shape{height:40px}.vue-form-wizard.md .wizard-nav-pills>li.active>a .wizard-icon{font-size:24px}.vue-form-wizard.md .wizard-navigation .wizard-progress-with-circle{position:relative;top:40px;height:4px}.vue-form-wizard.lg .wizard-icon-circle{width:90px;height:90px;font-size:28px}.vue-form-wizard.lg .wizard-icon-circle.tab_shape{height:50px}.vue-form-wizard.lg .wizard-nav-pills>li.active>a .wizard-icon{font-size:28px}.vue-form-wizard.lg .wizard-navigation .wizard-progress-with-circle{position:relative;top:50px;height:4px}.vue-form-wizard .wizard-icon-circle{font-size:18px;border:3px solid #f3f2ee;border-radius:50%;font-weight:600;width:70px;height:70px;background-color:#fff;position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-ms-flex-line-pack:center;align-content:center}.vue-form-wizard .wizard-icon-circle.square_shape{border-radius:0}.vue-form-wizard .wizard-icon-circle.tab_shape{width:100%;min-width:100px;height:40px;border:none;background-color:#f3f2ee;border-radius:0}.vue-form-wizard .wizard-icon-circle .wizard-icon-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-flex:1;-ms-flex:1;flex:1;border-radius:40%}.vue-form-wizard .wizard-icon-circle .wizard-icon-container.square_shape,.vue-form-wizard .wizard-icon-circle .wizard-icon-container.tab_shape{border-radius:0}.vue-form-wizard .wizard-icon-circle .wizard-icon{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.vue-form-wizard .wizard-tab-content{min-height:100px;padding:30px 20px 10px}.vue-form-wizard .wizard-header{padding:15px;position:relative;border-radius:3px 3px 0 0;text-align:center}.vue-form-wizard .wizard-title{color:#252422;font-weight:300;margin:0;text-align:center}.vue-form-wizard .category{font-size:14px;font-weight:400;color:#9a9a9a;margin-bottom:0;text-align:center}.vue-form-wizard .wizard-navigation .wizard-progress-with-circle{position:relative;top:40px;height:4px}.vue-form-wizard .wizard-navigation .wizard-progress-with-circle .wizard-progress-bar{-webkit-box-shadow:none;box-shadow:none;-webkit-transition:width .3s ease;transition:width .3s ease}.vue-form-wizard .clearfix:after{content:\"\";clear:both;display:table}.vue-form-wizard .wizard-card-footer{padding:0 20px}.vue-form-wizard .wizard-card-footer .wizard-footer-left{float:left}.vue-form-wizard .wizard-card-footer .wizard-footer-right{float:right}@media screen and (max-width:350px){.vue-form-wizard .wizard-card-footer{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.vue-form-wizard .wizard-card-footer .wizard-footer-left,.vue-form-wizard .wizard-card-footer .wizard-footer-right{float:none;-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.vue-form-wizard .wizard-card-footer .wizard-footer-right button{margin-top:10px}}.vue-form-wizard.vertical .wizard-card-footer{display:block}.vue-form-wizard.vertical .wizard-nav-pills{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.vue-form-wizard.vertical .wizard-navigation{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}.vue-form-wizard.vertical .wizard-card-footer{padding-top:30px}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nsection {\n    margin-bottom: 40px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nbutton {\n    margin-top: 10px;\n}\n", ""]);
 
 // exports
 
@@ -48124,6 +48218,66 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./AppForm.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./FormRows.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rentals/ListView.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rentals/ListView.vue?vue&type=style&index=0&lang=css& ***!
@@ -48825,70 +48979,473 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("tab-content", { attrs: { title: "About" } }, [
-        _c("div", { staticClass: "columns", attrs: { id: "app-about" } }, [
+      _c(
+        "tab-content",
+        {
+          attrs: {
+            "before-change": _vm.validateStep.bind(this, 1),
+            title: "About"
+          }
+        },
+        [
           _c(
             "div",
-            { staticClass: "column" },
+            { staticClass: "columns content", attrs: { id: "app-about" } },
             [
-              _vm.generalErrors.about.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.joinErrors(_vm.generalErrors.about)) +
-                          "\n                "
+              _c("div", { staticClass: "column" }, [
+                _c("section", [
+                  _c("h3", [_vm._v("Personal Information")]),
+                  _vm._v(" "),
+                  _vm.generalErrors.about.length > 0
+                    ? _c(
+                        "div",
+                        { staticClass: "notification is-danger is-light" },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.joinErrors(_vm.generalErrors.about)) +
+                              "\n                    "
+                          )
+                        ]
                       )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("div", { staticClass: "field is-horizontal" }, [
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field is-horizontal" }, [
+                    _c(
+                      "div",
+                      { staticClass: "field-body" },
+                      [
+                        _c("text-input", {
+                          attrs: {
+                            errors: _vm.errors.first_name,
+                            label: "First Name"
+                          },
+                          model: {
+                            value: _vm.fields.first_name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "first_name", $$v)
+                            },
+                            expression: "fields.first_name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            errors: _vm.errors.middle_name,
+                            label: "Middle Name"
+                          },
+                          model: {
+                            value: _vm.fields.middle_name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "middle_name", $$v)
+                            },
+                            expression: "fields.middle_name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            errors: _vm.errors.last_name,
+                            label: "Last Name"
+                          },
+                          model: {
+                            value: _vm.fields.last_name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "last_name", $$v)
+                            },
+                            expression: "fields.last_name"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field is-horizontal" }, [
+                    _c(
+                      "div",
+                      { staticClass: "field-body" },
+                      [
+                        _c("text-input", {
+                          attrs: { errors: _vm.errors.suffix, label: "Suffix" },
+                          model: {
+                            value: _vm.fields.suffix,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "suffix", $$v)
+                            },
+                            expression: "fields.suffix"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            type: "date",
+                            errors: _vm.errors.date_of_birth,
+                            label: "Date of Birth"
+                          },
+                          model: {
+                            value: _vm.fields.date_of_birth,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "date_of_birth", $$v)
+                            },
+                            expression: "fields.date_of_birth"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            type: "number",
+                            errors: _vm.errors.social_security_number,
+                            label: "Social Security Number"
+                          },
+                          model: {
+                            value: _vm.fields.social_security_number,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.fields,
+                                "social_security_number",
+                                $$v
+                              )
+                            },
+                            expression: "fields.social_security_number"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("section", [
+                  _c("h3", [_vm._v("Preferences")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field is-horizontal" }, [
+                    _c(
+                      "div",
+                      { staticClass: "field-body" },
+                      [
+                        _c("text-input", {
+                          attrs: {
+                            type: "date",
+                            errors: _vm.errors.preferred_move_in,
+                            label: "Preferred Move In Date"
+                          },
+                          model: {
+                            value: _vm.fields.preferred_move_in,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "preferred_move_in", $$v)
+                            },
+                            expression: "fields.preferred_move_in"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("dropdown-input", {
+                          attrs: {
+                            errors: _vm.errors.preferred_term,
+                            label: "Preferred Term",
+                            options: _vm.options.termOptions
+                          },
+                          model: {
+                            value: _vm.fields.preferred_term,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "preferred_term", $$v)
+                            },
+                            expression: "fields.preferred_term"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("section", [
+                  _c("h3", [_vm._v("Contact Information")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field is-horizontal" }, [
+                    _c(
+                      "div",
+                      { staticClass: "field-body" },
+                      [
+                        _c("text-input", {
+                          attrs: {
+                            type: "email",
+                            errors: _vm.errors.email,
+                            label: "Email"
+                          },
+                          model: {
+                            value: _vm.fields.email,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "email", $$v)
+                            },
+                            expression: "fields.email"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            type: "tel",
+                            errors: _vm.errors.phone,
+                            label: "Phone"
+                          },
+                          model: {
+                            value: _vm.fields.phone,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "phone", $$v)
+                            },
+                            expression: "fields.phone"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "field-body" },
+                  "section",
                   [
-                    _c("text-input", {
-                      attrs: {
-                        errors: _vm.errors.first_name,
-                        label: "First Name"
-                      },
-                      model: {
-                        value: _vm.fields.first_name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "first_name", $$v)
-                        },
-                        expression: "fields.first_name"
-                      }
-                    }),
+                    _c("h3", [_vm._v("Identification")]),
                     _vm._v(" "),
-                    _c("text-input", {
-                      attrs: {
-                        errors: _vm.errors.middle_name,
-                        label: "Middle Name"
-                      },
-                      model: {
-                        value: _vm.fields.middle_name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "middle_name", $$v)
-                        },
-                        expression: "fields.middle_name"
-                      }
-                    }),
+                    _vm.generalErrors.identification.length > 0
+                      ? _c(
+                          "div",
+                          { staticClass: "notification is-danger is-light" },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.joinErrors(
+                                    _vm.generalErrors.identification
+                                  )
+                                ) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c("text-input", {
-                      attrs: {
-                        errors: _vm.errors.last_name,
-                        label: "Last Name"
-                      },
+                    _c("form-rows", {
+                      attrs: { errors: _vm.errors.identification },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function(slotProps) {
+                            return [
+                              _c(
+                                "div",
+                                { staticClass: "field is-horizontal" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "field-body" },
+                                    [
+                                      _c("dropdown-input", {
+                                        attrs: {
+                                          errors: slotProps.errors.id_type,
+                                          label: "ID Type",
+                                          options:
+                                            _vm.options
+                                              .identificationTypeOptions
+                                        },
+                                        model: {
+                                          value: slotProps.row.id_type,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "id_type",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "slotProps.row.id_type"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("dropdown-input", {
+                                        attrs: {
+                                          errors: slotProps.errors.id_state,
+                                          label: "ID State",
+                                          options: _vm.options.stateOptions
+                                        },
+                                        model: {
+                                          value: slotProps.row.id_state,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "id_state",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "slotProps.row.id_state"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("text-input", {
+                                        attrs: {
+                                          errors: slotProps.errors.id_number,
+                                          label: "ID Number"
+                                        },
+                                        model: {
+                                          value: slotProps.row.id_number,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "id_number",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "slotProps.row.id_number"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ]),
                       model: {
-                        value: _vm.fields.last_name,
+                        value: _vm.fields.identification,
                         callback: function($$v) {
-                          _vm.$set(_vm.fields, "last_name", $$v)
+                          _vm.$set(_vm.fields, "identification", $$v)
                         },
-                        expression: "fields.last_name"
+                        expression: "fields.identification"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "section",
+                  [
+                    _c("h3", [_vm._v("References")]),
+                    _vm._v(" "),
+                    _vm.generalErrors.reference.length > 0
+                      ? _c(
+                          "div",
+                          { staticClass: "notification is-danger is-light" },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.joinErrors(_vm.generalErrors.reference)
+                                ) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("form-rows", {
+                      attrs: { errors: _vm.errors.reference },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function(slotProps) {
+                            return [
+                              _c(
+                                "div",
+                                { staticClass: "field is-horizontal" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "field-body" },
+                                    [
+                                      _c("text-input", {
+                                        attrs: {
+                                          errors:
+                                            slotProps.errors.ref_first_name,
+                                          label: "First Name"
+                                        },
+                                        model: {
+                                          value: slotProps.row.ref_first_name,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "ref_first_name",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "slotProps.row.ref_first_name"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("text-input", {
+                                        attrs: {
+                                          errors:
+                                            slotProps.errors.ref_last_name,
+                                          label: "Last Name"
+                                        },
+                                        model: {
+                                          value: slotProps.row.ref_last_name,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "ref_last_name",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "slotProps.row.ref_last_name"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("dropdown-input", {
+                                        attrs: {
+                                          errors: slotProps.errors.ref_relation,
+                                          label: "Relation",
+                                          options: _vm.options.relationOptions
+                                        },
+                                        model: {
+                                          value: slotProps.row.ref_relation,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "ref_relation",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "slotProps.row.ref_relation"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("text-input", {
+                                        attrs: {
+                                          errors: slotProps.errors.ref_phone,
+                                          label: "Phone"
+                                        },
+                                        model: {
+                                          value: slotProps.row.ref_phone,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              slotProps.row,
+                                              "ref_phone",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "slotProps.row.ref_phone"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ]),
+                      model: {
+                        value: _vm.fields.reference,
+                        callback: function($$v) {
+                          _vm.$set(_vm.fields, "reference", $$v)
+                        },
+                        expression: "fields.reference"
                       }
                     })
                   ],
@@ -48896,1170 +49453,951 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "field is-horizontal" }, [
-                _c(
-                  "div",
-                  { staticClass: "field-body" },
-                  [
-                    _c("text-input", {
-                      attrs: { errors: _vm.errors.suffix, label: "Suffix" },
-                      model: {
-                        value: _vm.fields.suffix,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "suffix", $$v)
-                        },
-                        expression: "fields.suffix"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("text-input", {
-                      attrs: {
-                        type: "date",
-                        errors: _vm.errors.date_of_birth,
-                        label: "Date of Birth"
-                      },
-                      model: {
-                        value: _vm.fields.date_of_birth,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "date_of_birth", $$v)
-                        },
-                        expression: "fields.date_of_birth"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("text-input", {
-                      attrs: {
-                        type: "date",
-                        errors: _vm.errors.preferred_move_in,
-                        label: "Preferred Move In"
-                      },
-                      model: {
-                        value: _vm.fields.preferred_move_in,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "preferred_move_in", $$v)
-                        },
-                        expression: "fields.preferred_move_in"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("dropdown-input", {
-                      attrs: {
-                        errors: _vm.errors.preferred_term,
-                        label: "Preferred Term",
-                        options: _vm.options.termOptions
-                      },
-                      model: {
-                        value: _vm.fields.preferred_term,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "preferred_term", $$v)
-                        },
-                        expression: "fields.preferred_term"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("h3", [_vm._v("Contact Information")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "field is-horizontal" }, [
-                _c(
-                  "div",
-                  { staticClass: "field-body" },
-                  [
-                    _c("text-input", {
-                      attrs: {
-                        type: "email",
-                        errors: _vm.errors.email,
-                        label: "Email"
-                      },
-                      model: {
-                        value: _vm.fields.email,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "email", $$v)
-                        },
-                        expression: "fields.email"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("text-input", {
-                      attrs: {
-                        type: "tel",
-                        errors: _vm.errors.phone,
-                        label: "Phone"
-                      },
-                      model: {
-                        value: _vm.fields.phone,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fields, "phone", $$v)
-                        },
-                        expression: "fields.phone"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("h3", [_vm._v("Identification")]),
-              _vm._v(" "),
-              _vm.generalErrors.identification.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.joinErrors(_vm.generalErrors.identification)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("form-rows", {
-                attrs: { errors: _vm.errors.identification },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(slotProps) {
-                      return [
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("dropdown-input", {
-                                attrs: {
-                                  errors: slotProps.errors.id_type,
-                                  label: "ID Type",
-                                  options: _vm.options.identificationTypeOptions
-                                },
-                                model: {
-                                  value: slotProps.row.id_type,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "id_type", $$v)
-                                  },
-                                  expression: "slotProps.row.id_type"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("dropdown-input", {
-                                attrs: {
-                                  errors: slotProps.errors.id_state,
-                                  label: "ID State",
-                                  options: _vm.options.stateOptions
-                                },
-                                model: {
-                                  value: slotProps.row.id_state,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "id_state", $$v)
-                                  },
-                                  expression: "slotProps.row.id_state"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.id_number,
-                                  label: "ID Number"
-                                },
-                                model: {
-                                  value: slotProps.row.id_number,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "id_number", $$v)
-                                  },
-                                  expression: "slotProps.row.id_number"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.fields.identification,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fields, "identification", $$v)
-                  },
-                  expression: "fields.identification"
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", [_vm._v("References")]),
-              _vm._v(" "),
-              _vm.generalErrors.reference.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.joinErrors(_vm.generalErrors.reference)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("form-rows", {
-                attrs: { errors: _vm.errors.reference },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(slotProps) {
-                      return [
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.ref_first_name,
-                                  label: "First Name"
-                                },
-                                model: {
-                                  value: slotProps.row.ref_first_name,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "ref_first_name",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.ref_first_name"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.ref_last_name,
-                                  label: "Last Name"
-                                },
-                                model: {
-                                  value: slotProps.row.ref_last_name,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "ref_last_name",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.ref_last_name"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("dropdown-input", {
-                                attrs: {
-                                  errors: slotProps.errors.ref_relation,
-                                  label: "Relation",
-                                  options: _vm.options.relationOptions
-                                },
-                                model: {
-                                  value: slotProps.row.ref_relation,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "ref_relation", $$v)
-                                  },
-                                  expression: "slotProps.row.ref_relation"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.ref_phone,
-                                  label: "Phone"
-                                },
-                                model: {
-                                  value: slotProps.row.ref_phone,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "ref_phone", $$v)
-                                  },
-                                  expression: "slotProps.row.ref_phone"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.fields.reference,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fields, "reference", $$v)
-                  },
-                  expression: "fields.reference"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-3" }, [
-            _c("p", [
-              _vm._v(
-                "These contact details are used to prepare your lease, and give the landlord contact information\n                    after they approve your application."
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tab-content", { attrs: { title: "Employment History" } }, [
-        _c("div", { staticClass: "columns", attrs: { id: "app-employment" } }, [
-          _c(
-            "div",
-            { staticClass: "column" },
-            [
-              _c("h3", [_vm._v("Employment History")]),
-              _vm._v(" "),
-              _vm.generalErrors.employer.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.joinErrors(_vm.generalErrors.employer)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("form-rows", {
-                attrs: { errors: _vm.errors.employer },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(slotProps) {
-                      return [
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("dropdown-input", {
-                                attrs: {
-                                  errors: slotProps.errors.employer_status,
-                                  label: "Status",
-                                  options: _vm.options.employmentStatusOptions
-                                },
-                                model: {
-                                  value: slotProps.row.employer_status,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_status",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.employer_status"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.employer_name,
-                                  label: "Employer Name"
-                                },
-                                model: {
-                                  value: slotProps.row.employer_name,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_name",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.employer_name"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.employer_position,
-                                  label: "Your Position"
-                                },
-                                model: {
-                                  value: slotProps.row.employer_position,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_position",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.employer_position"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.employer_city,
-                                  label: "City"
-                                },
-                                model: {
-                                  value: slotProps.row.employer_city,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_city",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.employer_city"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("dropdown-input", {
-                                attrs: {
-                                  errors: slotProps.errors.employer_state,
-                                  label: "State",
-                                  options: _vm.options.stateOptions
-                                },
-                                model: {
-                                  value: slotProps.row.employer_state,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_state",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.employer_state"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                attrs: {
-                                  type: "date",
-                                  errors: slotProps.errors.employer_start_date,
-                                  label: "Start Date"
-                                },
-                                model: {
-                                  value: slotProps.row.employer_start_date,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_start_date",
-                                      $$v
-                                    )
-                                  },
-                                  expression:
-                                    "slotProps.row.employer_start_date"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  type: "date",
-                                  errors: slotProps.errors.employer_end_date,
-                                  label: "End Date"
-                                },
-                                model: {
-                                  value: slotProps.row.employer_end_date,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_end_date",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.employer_end_date"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.employer_supervisor,
-                                  label: "Supervisor"
-                                },
-                                model: {
-                                  value: slotProps.row.employer_supervisor,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_supervisor",
-                                      $$v
-                                    )
-                                  },
-                                  expression:
-                                    "slotProps.row.employer_supervisor"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors:
-                                    slotProps.errors.employer_supervisor_phone,
-                                  label: "Supervisor Phone"
-                                },
-                                model: {
-                                  value:
-                                    slotProps.row.employer_supervisor_phone,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "employer_supervisor_phone",
-                                      $$v
-                                    )
-                                  },
-                                  expression:
-                                    "slotProps.row.employer_supervisor_phone"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.income_annual,
-                                  label: "Annualized Income"
-                                },
-                                model: {
-                                  value: slotProps.row.income_annual,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "income_annual",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.income_annual"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.income_comments,
-                                  label: "Comments"
-                                },
-                                model: {
-                                  value: slotProps.row.income_comments,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "income_comments",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.income_comments"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.income_proof,
-                                  label: "Income Proof"
-                                },
-                                model: {
-                                  value: slotProps.row.income_proof,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "income_proof", $$v)
-                                  },
-                                  expression: "slotProps.row.income_proof"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.fields.employer,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fields, "employer", $$v)
-                  },
-                  expression: "fields.employer"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-3" }, [
-            _c("p", [_vm._v("bla bla")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tab-content", { attrs: { title: "Residence History" } }, [
-        _c("div", { staticClass: "columns", attrs: { id: "app-residence" } }, [
-          _c(
-            "div",
-            { staticClass: "column" },
-            [
-              _c("h3", [_vm._v("Residence History")]),
-              _vm._v(" "),
-              _vm.generalErrors.rental_history.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.joinErrors(_vm.generalErrors.rental_history)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("form-rows", {
-                attrs: { errors: _vm.errors.rental_history },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(slotProps) {
-                      return [
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.street_address,
-                                  label: "Street Address"
-                                },
-                                model: {
-                                  value: slotProps.row.street_address,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "street_address",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.street_address"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  errors: slotProps.errors.unit_apt,
-                                  label: "Unit / Apt"
-                                },
-                                model: {
-                                  value: slotProps.row.unit_apt,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "unit_apt", $$v)
-                                  },
-                                  expression: "slotProps.row.unit_apt"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                key: "city",
-                                attrs: {
-                                  errors: slotProps.errors.city,
-                                  label: "City"
-                                },
-                                model: {
-                                  value: slotProps.row.city,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "city", $$v)
-                                  },
-                                  expression: "slotProps.row.city"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("dropdown-input", {
-                                key: "state",
-                                attrs: {
-                                  errors: slotProps.errors.state,
-                                  label: "State",
-                                  options: _vm.options.stateOptions
-                                },
-                                model: {
-                                  value: slotProps.row.state,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "state", $$v)
-                                  },
-                                  expression: "slotProps.row.state"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "zip",
-                                attrs: {
-                                  errors: slotProps.errors.zip,
-                                  label: "Zipcode"
-                                },
-                                model: {
-                                  value: slotProps.row.zip,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "zip", $$v)
-                                  },
-                                  expression: "slotProps.row.zip"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                key: "landlord_name",
-                                attrs: {
-                                  errors: slotProps.errors.landlord_name,
-                                  label: "Landlord Name"
-                                },
-                                model: {
-                                  value: slotProps.row.landlord_name,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "landlord_name",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.landlord_name"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "landlord_phone",
-                                attrs: {
-                                  errors: slotProps.errors.landlord_phone,
-                                  label: "Landlord Phone"
-                                },
-                                model: {
-                                  value: slotProps.row.landlord_phone,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "landlord_phone",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.landlord_phone"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "rent_monthly",
-                                attrs: {
-                                  type: "number",
-                                  errors: slotProps.errors.rent_monthly,
-                                  label: "Rent Monthly"
-                                },
-                                model: {
-                                  value: slotProps.row.rent_monthly,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "rent_monthly", $$v)
-                                  },
-                                  expression: "slotProps.row.rent_monthly"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("dropdown-input", {
-                                key: "rent_own_other",
-                                attrs: {
-                                  errors: slotProps.errors.rent_own_other,
-                                  label: "Rent / Own",
-                                  options: _vm.options.rentOrOwnOptions
-                                },
-                                model: {
-                                  value: slotProps.row.rent_own_other,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "rent_own_other",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.rent_own_other"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  type: "date",
-                                  errors: slotProps.errors.start_date,
-                                  label: "Start Date"
-                                },
-                                model: {
-                                  value: slotProps.row.start_date,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "start_date", $$v)
-                                  },
-                                  expression: "slotProps.row.start_date"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                attrs: {
-                                  type: "date",
-                                  errors: slotProps.errors.end_date,
-                                  label: "End Date"
-                                },
-                                model: {
-                                  value: slotProps.row.end_date,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "end_date", $$v)
-                                  },
-                                  expression: "slotProps.row.end_date"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.fields.rental_history,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fields, "rental_history", $$v)
-                  },
-                  expression: "fields.rental_history"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-3" }, [
-            _c("p", [_vm._v("Bla bla")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tab-content", { attrs: { title: "Occupants" } }, [
-        _c("div", { staticClass: "columns", attrs: { id: "app-occupants" } }, [
-          _c(
-            "div",
-            { staticClass: "column" },
-            [
-              _c("h3", [_vm._v("Pets")]),
-              _vm._v(" "),
-              _vm.generalErrors.pet.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.joinErrors(_vm.generalErrors.pet)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("form-rows", {
-                attrs: { errors: _vm.errors.pet },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(slotProps) {
-                      return [
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("dropdown-input", {
-                                key: "pet_type",
-                                attrs: {
-                                  errors: slotProps.errors.pet_type,
-                                  label: "Pet Type",
-                                  options: _vm.options.petTypeOptions
-                                },
-                                model: {
-                                  value: slotProps.row.pet_type,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "pet_type", $$v)
-                                  },
-                                  expression: "slotProps.row.pet_type"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "pet_breed",
-                                attrs: {
-                                  errors: slotProps.errors.pet_breed,
-                                  label: "Pet Breed"
-                                },
-                                model: {
-                                  value: slotProps.row.pet_breed,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "pet_breed", $$v)
-                                  },
-                                  expression: "slotProps.row.pet_breed"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "pet_weight",
-                                attrs: {
-                                  errors: slotProps.errors.pet_weight,
-                                  label: "Pet Weight"
-                                },
-                                model: {
-                                  value: slotProps.row.pet_weight,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "pet_weight", $$v)
-                                  },
-                                  expression: "slotProps.row.pet_weight"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.fields.pet,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fields, "pet", $$v)
-                  },
-                  expression: "fields.pet"
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", [_vm._v("Vehicles")]),
-              _vm._v(" "),
-              _vm.generalErrors.vehicle.length > 0
-                ? _c(
-                    "div",
-                    { staticClass: "notification is-danger is-light" },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.joinErrors(_vm.generalErrors.vehicle)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("form-rows", {
-                attrs: { errors: _vm.errors.vehicle },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(slotProps) {
-                      return [
-                        _c("div", { staticClass: "field is-horizontal" }, [
-                          _c(
-                            "div",
-                            { staticClass: "field-body" },
-                            [
-                              _c("text-input", {
-                                key: "vehicle_year",
-                                attrs: {
-                                  type: "number",
-                                  errors: slotProps.errors.vehicle_year,
-                                  label: "Year"
-                                },
-                                model: {
-                                  value: slotProps.row.vehicle_year,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "vehicle_year", $$v)
-                                  },
-                                  expression: "slotProps.row.vehicle_year"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "vehicle_make",
-                                attrs: {
-                                  errors: slotProps.errors.vehicle_make,
-                                  label: "Make"
-                                },
-                                model: {
-                                  value: slotProps.row.vehicle_make,
-                                  callback: function($$v) {
-                                    _vm.$set(slotProps.row, "vehicle_make", $$v)
-                                  },
-                                  expression: "slotProps.row.vehicle_make"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "vehicle_model",
-                                attrs: {
-                                  errors: slotProps.errors.vehicle_model,
-                                  label: "Model"
-                                },
-                                model: {
-                                  value: slotProps.row.vehicle_model,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "vehicle_model",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.vehicle_model"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("text-input", {
-                                key: "vehicle_plate",
-                                attrs: {
-                                  errors: slotProps.errors.vehicle_plate,
-                                  label: "Plate"
-                                },
-                                model: {
-                                  value: slotProps.row.vehicle_plate,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      slotProps.row,
-                                      "vehicle_plate",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "slotProps.row.vehicle_plate"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ]
-                    }
-                  }
-                ]),
-                model: {
-                  value: _vm.fields.vehicle,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fields, "vehicle", $$v)
-                  },
-                  expression: "fields.vehicle"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-3" }, [
-            _c("p", [_vm._v("bla bla bla")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tab-content", { attrs: { title: "Final" } }, [
-        _c("div", { staticClass: "columns", attrs: { id: "app-submit" } }, [
-          _c("div", { staticClass: "column" }, [
-            _c("h3", [_vm._v("Account Information")]),
-            _vm._v(" "),
-            _vm.generalErrors.account.length > 0
-              ? _c("div", { staticClass: "notification is-danger is-light" }, [
+              _c("div", { staticClass: "column is-3" }, [
+                _c("p", [
                   _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.joinErrors(_vm.generalErrors.account)) +
-                      "\n                "
+                    "These contact details are used to prepare your lease, and give the landlord contact information\n                    after they approve your application."
                   )
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "field is-horizontal" }, [
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "tab-content",
+        {
+          attrs: {
+            "before-change": _vm.validateStep.bind(this, 2),
+            title: "Employment History"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "columns content", attrs: { id: "app-employment" } },
+            [
               _c(
                 "div",
-                { staticClass: "field-body" },
+                { staticClass: "column" },
                 [
-                  _c("text-input", {
-                    attrs: {
-                      type: "password",
-                      errors: _vm.errors.password,
-                      label: "Password"
-                    },
-                    model: {
-                      value: _vm.fields.password,
-                      callback: function($$v) {
-                        _vm.$set(_vm.fields, "password", $$v)
-                      },
-                      expression: "fields.password"
-                    }
-                  }),
+                  _c("h3", [_vm._v("Current Income")]),
                   _vm._v(" "),
-                  _c("text-input", {
-                    attrs: {
-                      type: "password",
-                      errors: _vm.errors.password_confirmation,
-                      label: "Password Confirmation"
-                    },
+                  _c("div", { staticClass: "field is-horizontal" }, [
+                    _c(
+                      "div",
+                      { staticClass: "field-body" },
+                      [
+                        _c("text-input", {
+                          attrs: {
+                            errors: _vm.fields.income_annual,
+                            label: "Annual Income"
+                          },
+                          model: {
+                            value: _vm.fields.income_annual,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "income_annual", $$v)
+                            },
+                            expression: "fields.income_annual"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            errors: _vm.fields.income_comments,
+                            label: "Comments"
+                          },
+                          model: {
+                            value: _vm.fields.income_comments,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "income_comments", $$v)
+                            },
+                            expression: "fields.income_comments"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("text-input", {
+                          attrs: {
+                            errors: _vm.fields.income_proof,
+                            label: "Proof of Income"
+                          },
+                          model: {
+                            value: _vm.fields.income_proof,
+                            callback: function($$v) {
+                              _vm.$set(_vm.fields, "income_proof", $$v)
+                            },
+                            expression: "fields.income_proof"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v("Employment History")]),
+                  _vm._v(" "),
+                  _vm.generalErrors.employer.length > 0
+                    ? _c(
+                        "div",
+                        { staticClass: "notification is-danger is-light" },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.joinErrors(_vm.generalErrors.employer)
+                              ) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("form-rows", {
+                    attrs: { errors: _vm.errors.employer },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(slotProps) {
+                          return [
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("dropdown-input", {
+                                    attrs: {
+                                      errors: slotProps.errors.employer_status,
+                                      label: "Status",
+                                      options:
+                                        _vm.options.employmentStatusOptions
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_status,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_status",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "slotProps.row.employer_status"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors: slotProps.errors.employer_name,
+                                      label: "Employer Name"
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_name,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_name",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.employer_name"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors:
+                                        slotProps.errors.employer_position,
+                                      label: "Your Position"
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_position,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_position",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "slotProps.row.employer_position"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors: slotProps.errors.employer_city,
+                                      label: "City"
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_city,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_city",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.employer_city"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("dropdown-input", {
+                                    attrs: {
+                                      errors: slotProps.errors.employer_state,
+                                      label: "State",
+                                      options: _vm.options.stateOptions
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_state,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_state",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.employer_state"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("text-input", {
+                                    attrs: {
+                                      type: "date",
+                                      errors:
+                                        slotProps.errors.employer_start_date,
+                                      label: "Start Date"
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_start_date,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_start_date",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "slotProps.row.employer_start_date"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      type: "date",
+                                      errors:
+                                        slotProps.errors.employer_end_date,
+                                      label: "End Date"
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_end_date,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_end_date",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "slotProps.row.employer_end_date"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors:
+                                        slotProps.errors.employer_supervisor,
+                                      label: "Supervisor"
+                                    },
+                                    model: {
+                                      value: slotProps.row.employer_supervisor,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_supervisor",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "slotProps.row.employer_supervisor"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors:
+                                        slotProps.errors
+                                          .employer_supervisor_phone,
+                                      label: "Supervisor Phone"
+                                    },
+                                    model: {
+                                      value:
+                                        slotProps.row.employer_supervisor_phone,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "employer_supervisor_phone",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "slotProps.row.employer_supervisor_phone"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        }
+                      }
+                    ]),
                     model: {
-                      value: _vm.fields.password_confirmation,
+                      value: _vm.fields.employer,
                       callback: function($$v) {
-                        _vm.$set(_vm.fields, "password_confirmation", $$v)
+                        _vm.$set(_vm.fields, "employer", $$v)
                       },
-                      expression: "fields.password_confirmation"
+                      expression: "fields.employer"
                     }
                   })
                 ],
                 1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-3" }, [
-            _c("p", [_vm._v("bla bla bla")])
-          ])
-        ])
-      ]),
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-3" }, [
+                _c("p", [_vm._v("bla bla")])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "tab-content",
+        {
+          attrs: {
+            "before-change": _vm.validateStep.bind(this, 3),
+            title: "Residence History"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "columns content", attrs: { id: "app-residence" } },
+            [
+              _c(
+                "div",
+                { staticClass: "column" },
+                [
+                  _c("h3", [_vm._v("Residence History")]),
+                  _vm._v(" "),
+                  _vm.generalErrors.rental_history.length > 0
+                    ? _c(
+                        "div",
+                        { staticClass: "notification is-danger is-light" },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.joinErrors(_vm.generalErrors.rental_history)
+                              ) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("form-rows", {
+                    attrs: { errors: _vm.errors.rental_history },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(slotProps) {
+                          return [
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors: slotProps.errors.street_address,
+                                      label: "Street Address"
+                                    },
+                                    model: {
+                                      value: slotProps.row.street_address,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "street_address",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.street_address"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      errors: slotProps.errors.unit_apt,
+                                      label: "Unit / Apt"
+                                    },
+                                    model: {
+                                      value: slotProps.row.unit_apt,
+                                      callback: function($$v) {
+                                        _vm.$set(slotProps.row, "unit_apt", $$v)
+                                      },
+                                      expression: "slotProps.row.unit_apt"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("text-input", {
+                                    key: "city",
+                                    attrs: {
+                                      errors: slotProps.errors.city,
+                                      label: "City"
+                                    },
+                                    model: {
+                                      value: slotProps.row.city,
+                                      callback: function($$v) {
+                                        _vm.$set(slotProps.row, "city", $$v)
+                                      },
+                                      expression: "slotProps.row.city"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("dropdown-input", {
+                                    key: "state",
+                                    attrs: {
+                                      errors: slotProps.errors.state,
+                                      label: "State",
+                                      options: _vm.options.stateOptions
+                                    },
+                                    model: {
+                                      value: slotProps.row.state,
+                                      callback: function($$v) {
+                                        _vm.$set(slotProps.row, "state", $$v)
+                                      },
+                                      expression: "slotProps.row.state"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "zip",
+                                    attrs: {
+                                      errors: slotProps.errors.zip,
+                                      label: "Zip Code"
+                                    },
+                                    model: {
+                                      value: slotProps.row.zip,
+                                      callback: function($$v) {
+                                        _vm.$set(slotProps.row, "zip", $$v)
+                                      },
+                                      expression: "slotProps.row.zip"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("text-input", {
+                                    key: "landlord_name",
+                                    attrs: {
+                                      errors: slotProps.errors.landlord_name,
+                                      label: "Landlord Name"
+                                    },
+                                    model: {
+                                      value: slotProps.row.landlord_name,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "landlord_name",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.landlord_name"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "landlord_phone",
+                                    attrs: {
+                                      errors: slotProps.errors.landlord_phone,
+                                      label: "Landlord Phone"
+                                    },
+                                    model: {
+                                      value: slotProps.row.landlord_phone,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "landlord_phone",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.landlord_phone"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "rent_monthly",
+                                    attrs: {
+                                      type: "number",
+                                      errors: slotProps.errors.rent_monthly,
+                                      label: "Rent Monthly"
+                                    },
+                                    model: {
+                                      value: slotProps.row.rent_monthly,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "rent_monthly",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.rent_monthly"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("dropdown-input", {
+                                    key: "rent_own_other",
+                                    attrs: {
+                                      errors: slotProps.errors.rent_own_other,
+                                      label: "Rent / Own",
+                                      options: _vm.options.rentOrOwnOptions
+                                    },
+                                    model: {
+                                      value: slotProps.row.rent_own_other,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "rent_own_other",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.rent_own_other"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      type: "date",
+                                      errors: slotProps.errors.start_date,
+                                      label: "Start Date"
+                                    },
+                                    model: {
+                                      value: slotProps.row.start_date,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "start_date",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.start_date"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    attrs: {
+                                      type: "date",
+                                      errors: slotProps.errors.end_date,
+                                      label: "End Date"
+                                    },
+                                    model: {
+                                      value: slotProps.row.end_date,
+                                      callback: function($$v) {
+                                        _vm.$set(slotProps.row, "end_date", $$v)
+                                      },
+                                      expression: "slotProps.row.end_date"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.fields.rental_history,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fields, "rental_history", $$v)
+                      },
+                      expression: "fields.rental_history"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-3" }, [
+                _c("p", [_vm._v("Bla bla")])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "tab-content",
+        {
+          attrs: {
+            "before-change": _vm.validateStep.bind(this, 4),
+            title: "Occupants"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "columns content", attrs: { id: "app-occupants" } },
+            [
+              _c(
+                "div",
+                { staticClass: "column" },
+                [
+                  _c("h3", [_vm._v("Pets")]),
+                  _vm._v(" "),
+                  _vm.generalErrors.pet.length > 0
+                    ? _c(
+                        "div",
+                        { staticClass: "notification is-danger is-light" },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.joinErrors(_vm.generalErrors.pet)) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("form-rows", {
+                    attrs: { errors: _vm.errors.pet },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(slotProps) {
+                          return [
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("dropdown-input", {
+                                    key: "pet_type",
+                                    attrs: {
+                                      errors: slotProps.errors.pet_type,
+                                      label: "Pet Type",
+                                      options: _vm.options.petTypeOptions
+                                    },
+                                    model: {
+                                      value: slotProps.row.pet_type,
+                                      callback: function($$v) {
+                                        _vm.$set(slotProps.row, "pet_type", $$v)
+                                      },
+                                      expression: "slotProps.row.pet_type"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "pet_breed",
+                                    attrs: {
+                                      errors: slotProps.errors.pet_breed,
+                                      label: "Pet Breed"
+                                    },
+                                    model: {
+                                      value: slotProps.row.pet_breed,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "pet_breed",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.pet_breed"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "pet_weight",
+                                    attrs: {
+                                      errors: slotProps.errors.pet_weight,
+                                      label: "Pet Weight"
+                                    },
+                                    model: {
+                                      value: slotProps.row.pet_weight,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "pet_weight",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.pet_weight"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.fields.pet,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fields, "pet", $$v)
+                      },
+                      expression: "fields.pet"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v("Vehicles")]),
+                  _vm._v(" "),
+                  _vm.generalErrors.vehicle.length > 0
+                    ? _c(
+                        "div",
+                        { staticClass: "notification is-danger is-light" },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.joinErrors(_vm.generalErrors.vehicle)
+                              ) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("form-rows", {
+                    attrs: { errors: _vm.errors.vehicle },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(slotProps) {
+                          return [
+                            _c("div", { staticClass: "field is-horizontal" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field-body" },
+                                [
+                                  _c("text-input", {
+                                    key: "vehicle_year",
+                                    attrs: {
+                                      type: "number",
+                                      errors: slotProps.errors.vehicle_year,
+                                      label: "Year"
+                                    },
+                                    model: {
+                                      value: slotProps.row.vehicle_year,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "vehicle_year",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.vehicle_year"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "vehicle_make",
+                                    attrs: {
+                                      errors: slotProps.errors.vehicle_make,
+                                      label: "Make"
+                                    },
+                                    model: {
+                                      value: slotProps.row.vehicle_make,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "vehicle_make",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.vehicle_make"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "vehicle_model",
+                                    attrs: {
+                                      errors: slotProps.errors.vehicle_model,
+                                      label: "Model"
+                                    },
+                                    model: {
+                                      value: slotProps.row.vehicle_model,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "vehicle_model",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.vehicle_model"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("text-input", {
+                                    key: "vehicle_plate",
+                                    attrs: {
+                                      errors: slotProps.errors.vehicle_plate,
+                                      label: "Plate"
+                                    },
+                                    model: {
+                                      value: slotProps.row.vehicle_plate,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          slotProps.row,
+                                          "vehicle_plate",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "slotProps.row.vehicle_plate"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.fields.vehicle,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fields, "vehicle", $$v)
+                      },
+                      expression: "fields.vehicle"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-3" }, [
+                _c("p", [_vm._v("bla bla bla")])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "tab-content",
+        {
+          attrs: {
+            "before-change": _vm.validateStep.bind(this, 5),
+            title: "Final"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "columns content", attrs: { id: "app-submit" } },
+            [
+              _c("div", { staticClass: "column" }, [
+                _c("h3", [_vm._v("Account Information")]),
+                _vm._v(" "),
+                _vm.generalErrors.account.length > 0
+                  ? _c(
+                      "div",
+                      { staticClass: "notification is-danger is-light" },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.joinErrors(_vm.generalErrors.account)) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "field is-horizontal" }, [
+                  _c(
+                    "div",
+                    { staticClass: "field-body" },
+                    [
+                      _c("text-input", {
+                        attrs: {
+                          type: "password",
+                          errors: _vm.errors.password,
+                          label: "Password"
+                        },
+                        model: {
+                          value: _vm.fields.password,
+                          callback: function($$v) {
+                            _vm.$set(_vm.fields, "password", $$v)
+                          },
+                          expression: "fields.password"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("text-input", {
+                        attrs: {
+                          type: "password",
+                          errors: _vm.errors.password_confirmation,
+                          label: "Password Confirmation"
+                        },
+                        model: {
+                          value: _vm.fields.password_confirmation,
+                          callback: function($$v) {
+                            _vm.$set(_vm.fields, "password_confirmation", $$v)
+                          },
+                          expression: "fields.password_confirmation"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-3" }, [
+                _c("p", [_vm._v("bla bla bla")])
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _vm.success
         ? _c("div", { staticClass: "notification is-success is-light" }, [
@@ -50187,7 +50525,7 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.addMore }
         },
-        [_vm._v("Add More")]
+        [_vm._v("+ Add Another")]
       )
     ],
     2
@@ -75482,7 +75820,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AppForm_vue_vue_type_template_id_204d616a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppForm.vue?vue&type=template&id=204d616a& */ "./resources/js/components/AppForm.vue?vue&type=template&id=204d616a&");
 /* harmony import */ var _AppForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppForm.vue?vue&type=script&lang=js& */ "./resources/js/components/AppForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppForm.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -75490,7 +75830,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AppForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _AppForm_vue_vue_type_template_id_204d616a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _AppForm_vue_vue_type_template_id_204d616a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -75519,6 +75859,22 @@ component.options.__file = "resources/js/components/AppForm.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AppForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./AppForm.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AppForm.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -75620,7 +75976,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormRows_vue_vue_type_template_id_a90d20b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormRows.vue?vue&type=template&id=a90d20b0& */ "./resources/js/components/FormRows.vue?vue&type=template&id=a90d20b0&");
 /* harmony import */ var _FormRows_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormRows.vue?vue&type=script&lang=js& */ "./resources/js/components/FormRows.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormRows.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -75628,7 +75986,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _FormRows_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _FormRows_vue_vue_type_template_id_a90d20b0___WEBPACK_IMPORTED_MODULE_0__["render"],
   _FormRows_vue_vue_type_template_id_a90d20b0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -75657,6 +76015,22 @@ component.options.__file = "resources/js/components/FormRows.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./FormRows.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormRows.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./FormRows.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormRows.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FormRows_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

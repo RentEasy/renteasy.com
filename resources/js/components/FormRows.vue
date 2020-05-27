@@ -10,9 +10,15 @@
                 </div>
             </article>
         </div>
-        <button type="button" class="button is-info is-small" v-on:click="addMore">Add More</button>
+        <button type="button" class="button is-info is-small" v-on:click="addMore">+ Add Another</button>
     </div>
 </template>
+
+<style>
+    button {
+        margin-top: 10px;
+    }
+</style>
 
 <script>
     export default {
