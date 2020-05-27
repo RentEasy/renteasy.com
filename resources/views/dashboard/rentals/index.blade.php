@@ -26,7 +26,13 @@
                 <tbody>
                 @foreach($rentals as $rental)
                     <tr>
-                        <td><span class="tag is-success">Rented</span></td>
+                        <td>
+                            @if($rental->current_tenancy_id)
+                            <span class="tag is-success">Rented</span>
+                            @else
+                                <span class="tag is-info">Listed</span>
+                            @endif
+                        </td>
                         <td><a href="{{ route('dashboard.rentals.show', [$rental]) }}">{{ $rental->property->address }}</a></td>
                         <td>{{ $rental->property->city }}</td>
                         <td>{{ $rental->property->state }}</td>

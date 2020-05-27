@@ -64,7 +64,7 @@
                                 <tr>
                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
                                     <td>{{ $rental->property->address }}</td>
-                                    <td class="level-right"><a class="button is-small is-primary" href="{{ route('rentals.show', [$rental]) }}">View</a></td>
+                                    <td class="level-right"><a class="button is-small is-primary" href="{{ route('dashboard.rentals.show', [$rental]) }}">View</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
