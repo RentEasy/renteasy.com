@@ -27,8 +27,9 @@ class ApplyController extends Controller
             'preferred_move_in' => 'date',
             'preferred_term' => '',
             'phone' => 'required',
+            'social_security_number' => 'required',
 
-            'reference' => 'required|array|min:1',
+            'reference' => 'array',
             'reference.*.ref_first_name' => 'required',
             'reference.*.ref_last_name' => 'required',
             'reference.*.ref_relation' => 'required',
@@ -42,6 +43,10 @@ class ApplyController extends Controller
             'identification.*.id_number' => 'required',
         ],
         2 => [
+            'income_annual' => 'required',
+            'income_comments' => 'required',
+            'income_proof' => 'required',
+
             'employer' => 'required|array|min:1',
             'employer.*.employer_status' => 'required',
             'employer.*.employer_name' => 'required',
@@ -52,9 +57,6 @@ class ApplyController extends Controller
             'employer.*.employer_state' => 'required',
             'employer.*.employer_supervisor' => 'required',
             'employer.*.employer_supervisor_phone' => 'required',
-            'employer.*.income_annual' => 'required',
-            'employer.*.income_comments' => 'required',
-            'employer.*.income_proof' => 'required',
         ],
         3 => [
             'rental_history' => 'required|array|min:1',

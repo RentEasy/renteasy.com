@@ -11,110 +11,149 @@
 
 
         <tab-content :before-change="validateStep.bind(this, 1)" title="About">
-            <div id="app-about" class="columns content">
+            <div id="app-about" class="content">
 
-                <div class="column">
-                    <section>
-                        <h3>Personal Information</h3>
-                        <div v-if="generalErrors.about.length > 0" class="notification is-danger is-light">
-                            {{ joinErrors(generalErrors.about) }}
-                        </div>
-
-                        <div class="field is-horizontal">
-                            <div class="field-body">
-                                <text-input v-model="fields.first_name" :errors="errors.first_name" label="First Name"/>
-                                <text-input v-model="fields.middle_name" :errors="errors.middle_name" label="Middle Name"/>
-                                <text-input v-model="fields.last_name" :errors="errors.last_name" label="Last Name"/>
+                <section>
+                    <h3>Personal Information</h3>
+                    <div class="columns">
+                        <div class="column">
+                            <div v-if="generalErrors.about.length > 0" class="notification is-danger is-light">
+                                {{ joinErrors(generalErrors.about) }}
                             </div>
-                        </div>
-                        <div class="field is-horizontal">
-                            <div class="field-body">
-                                <text-input v-model="fields.suffix" :errors="errors.suffix" label="Suffix"/>
-                                <text-input type="date" v-model="fields.date_of_birth" :errors="errors.date_of_birth"
-                                            label="Date of Birth"/>
-                                <text-input type="number" v-model="fields.social_security_number"
-                                            :errors="errors.social_security_number" label="Social Security Number"/>
-                            </div>
-                        </div>
-                    </section>
 
-
-                    <section>
-                        <h3>Preferences</h3>
-                        <div class="field is-horizontal">
-                            <div class="field-body">
-
-                                <text-input type="date" v-model="fields.preferred_move_in"
-                                            :errors="errors.preferred_move_in"
-                                            label="Preferred Move In Date"/>
-                                <dropdown-input v-model="fields.preferred_term" :errors="errors.preferred_term"
-                                                label="Preferred Term" :options="options.termOptions"/>
-                            </div>
-                        </div>
-                    </section>
-
-
-                    <section>
-                        <h3>Contact Information</h3>
-                        <div class="field is-horizontal">
-                            <div class="field-body">
-                                <text-input type="email" v-model="fields.email" :errors="errors.email" label="Email"/>
-                                <text-input type="tel" v-model="fields.phone" :errors="errors.phone" label="Phone"/>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h3>Identification</h3>
-
-                        <div v-if="generalErrors.identification.length > 0" class="notification is-danger is-light">
-                            {{ joinErrors(generalErrors.identification) }}
-                        </div>
-
-                        <form-rows v-model.sync="fields.identification" :errors="errors.identification"
-                                   v-slot:default="slotProps">
                             <div class="field is-horizontal">
                                 <div class="field-body">
-                                    <dropdown-input v-model="slotProps.row.id_type" :errors="slotProps.errors.id_type"
-                                                    label="ID Type" :options="options.identificationTypeOptions"/>
-                                    <dropdown-input v-model="slotProps.row.id_state" :errors="slotProps.errors.id_state"
-                                                    label="ID State" :options="options.stateOptions"/>
-                                    <text-input v-model="slotProps.row.id_number" :errors="slotProps.errors.id_number"
-                                                label="ID Number"/>
+                                    <text-input v-model="fields.first_name" :errors="errors.first_name"
+                                                label="First Name"/>
+                                    <text-input v-model="fields.middle_name" :errors="errors.middle_name"
+                                                label="Middle Name"/>
+                                    <text-input v-model="fields.last_name" :errors="errors.last_name"
+                                                label="Last Name"/>
                                 </div>
                             </div>
-                        </form-rows>
-                    </section>
-
-                    <section>
-                        <h3>References</h3>
-
-                        <div v-if="generalErrors.reference.length > 0" class="notification is-danger is-light">
-                            {{ joinErrors(generalErrors.reference) }}
-                        </div>
-                        <form-rows v-model.sync="fields.reference" :errors="errors.reference" v-slot:default="slotProps">
                             <div class="field is-horizontal">
                                 <div class="field-body">
-                                    <text-input v-model="slotProps.row.ref_first_name"
-                                                :errors="slotProps.errors.ref_first_name" label="First Name"></text-input>
-                                    <text-input v-model="slotProps.row.ref_last_name"
-                                                :errors="slotProps.errors.ref_last_name" label="Last Name"></text-input>
-                                    <dropdown-input v-model="slotProps.row.ref_relation"
-                                                    :errors="slotProps.errors.ref_relation"
-                                                    label="Relation" :options="options.relationOptions"/>
-                                    <text-input v-model="slotProps.row.ref_phone" :errors="slotProps.errors.ref_phone"
-                                                label="Phone"></text-input>
+                                    <text-input v-model="fields.suffix" :errors="errors.suffix" label="Suffix"/>
+                                    <text-input type="date" v-model="fields.date_of_birth"
+                                                :errors="errors.date_of_birth"
+                                                label="Date of Birth"/>
+                                    <text-input type="number" v-model="fields.social_security_number"
+                                                :errors="errors.social_security_number" label="Social Security Number"/>
                                 </div>
                             </div>
-                        </form-rows>
-                    </section>
+                        </div>
+                        <div class="column is-3">
 
-                </div>
+                        </div>
+                    </div>
+                </section>
 
-                <div class="column is-3">
-                    <p>These contact details are used to prepare your lease, and give the landlord contact information
-                        after they approve your application.</p>
-                </div>
+
+                <section>
+                    <h3>Preferences</h3>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+
+                                    <text-input type="date" v-model="fields.preferred_move_in"
+                                                :errors="errors.preferred_move_in"
+                                                label="Preferred Move In Date"/>
+                                    <dropdown-input v-model="fields.preferred_term" :errors="errors.preferred_term"
+                                                    label="Preferred Term" :options="options.termOptions"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <p>If you have any move-in preferences you can denote those here.</p>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h3>Contact Information</h3>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <text-input type="email" v-model="fields.email" :errors="errors.email"
+                                                label="Email"/>
+                                    <text-input type="tel" v-model="fields.phone" :errors="errors.phone" label="Phone"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <p>These contact details are used to prepare your lease, and give the landlord contact information after they approve your application.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Identification</h3>
+                    <div class="columns">
+                        <div class="column">
+                            <div v-if="generalErrors.identification.length > 0" class="notification is-danger is-light">
+                                {{ joinErrors(generalErrors.identification) }}
+                            </div>
+
+                            <form-rows v-model.sync="fields.identification" :errors="errors.identification"
+                                       v-slot:default="slotProps">
+                                <div class="field is-horizontal">
+                                    <div class="field-body">
+                                        <dropdown-input v-model="slotProps.row.id_type"
+                                                        :errors="slotProps.errors.id_type"
+                                                        label="ID Type" :options="options.identificationTypeOptions"/>
+                                        <dropdown-input v-model="slotProps.row.id_state"
+                                                        :errors="slotProps.errors.id_state"
+                                                        label="ID State" :options="options.stateOptions"/>
+                                        <text-input v-model="slotProps.row.id_number"
+                                                    :errors="slotProps.errors.id_number"
+                                                    label="ID Number"/>
+                                    </div>
+                                </div>
+                            </form-rows>
+                        </div>
+                        <div class="column is-3">
+                            <p>At least one form of identification is required to verify your rental application.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>References</h3>
+
+                    <div class="columns">
+                        <div class="column">
+                            <div v-if="generalErrors.reference.length > 0" class="notification is-danger is-light">
+                                {{ joinErrors(generalErrors.reference) }}
+                            </div>
+                            <form-rows v-model.sync="fields.reference" :errors="errors.reference"
+                                       v-slot:default="slotProps">
+                                <div class="field is-horizontal">
+                                    <div class="field-body">
+                                        <text-input v-model="slotProps.row.ref_first_name"
+                                                    :errors="slotProps.errors.ref_first_name"
+                                                    label="First Name"></text-input>
+                                        <text-input v-model="slotProps.row.ref_last_name"
+                                                    :errors="slotProps.errors.ref_last_name"
+                                                    label="Last Name"></text-input>
+                                        <dropdown-input v-model="slotProps.row.ref_relation"
+                                                        :errors="slotProps.errors.ref_relation"
+                                                        label="Relation" :options="options.relationOptions"/>
+                                        <text-input v-model="slotProps.row.ref_phone"
+                                                    :errors="slotProps.errors.ref_phone"
+                                                    label="Phone"></text-input>
+                                    </div>
+                                </div>
+                            </form-rows>
+                        </div>
+                        <div class="column is-3">
+                            <p>No references are required, but they can greatly help landlord's decision making.</p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </tab-content>
 
@@ -328,6 +367,15 @@
 <style>
     section {
         margin-bottom: 40px;
+    }
+
+    i.wizard-icon {
+        font-style: normal;
+    }
+
+    /* Development */
+    .wizard-tab-container {
+        display: block !important;
     }
 </style>
 

@@ -153,6 +153,9 @@ return [
         'employer' => [
             'required' => 'At least one previous employer is required.'
         ],
+        'identification' => [
+            'required' => 'At least one type of identification is required.'
+        ],
     ],
 
     /*
