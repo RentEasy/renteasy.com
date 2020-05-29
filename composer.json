@@ -20,7 +20,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "mstaack/laravel-postgis": "^5.0",
-        "ramsey/uuid": "3.x"
+        "ramsey/uuid": "3.x",
+        "tomorrow-ideas/plaid-sdk-php": "^0.7.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

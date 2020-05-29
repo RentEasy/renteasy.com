@@ -2703,6 +2703,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PlaidEasyApply.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PlaidEasyApply.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['plaidRoute'],
+  data: function data() {
+    return {
+      plaid: null
+    };
+  },
+  mounted: function mounted() {
+    var parent = this;
+    this.plaid = Plaid.create({
+      clientName: 'Leasary',
+      // Optional, specify an array of ISO-3166-1 alpha-2 country
+      // codes to initialize Link; European countries will have GDPR
+      // consent panel
+      countryCodes: ['US'],
+      env: 'sandbox',
+      // Replace with your public_key from the Dashboard
+      key: '122d540602a66f92ef3ec797a4492a',
+      product: ['transactions', 'assets'],
+      // Optional, use webhooks to get transaction and error updates
+      webhook: 'https://requestb.in',
+      // Optional, specify a language to localize Link
+      language: 'en',
+      // Optional, specify userLegalName and userEmailAddress to
+      // enable all Auth features
+      userLegalName: 'John Appleseed',
+      userEmailAddress: 'jappleseed@yourapp.com',
+      onLoad: function onLoad() {// Optional, called when Link loads
+      },
+      onSuccess: function onSuccess(public_token, metadata) {
+        console.log(public_token, metadata); // Send the public_token to your app server.
+        // The metadata object contains info about the institution the
+        // user selected and the account ID or IDs, if the
+        // Select Account view is enabled.
+
+        axios.post(parent.plaidRoute, {
+          public_token: public_token
+        });
+      },
+      onExit: function onExit(err, metadata) {
+        // The user exited the Link flow.
+        if (err != null) {} // The user encountered a Plaid API error prior to exiting.
+        // metadata contains information about the institution
+        // that the user selected and the most recent API request IDs.
+        // Storing this information can be helpful for support.
+
+      },
+      onEvent: function onEvent(eventName, metadata) {// Optionally capture Link flow events, streamed through
+        // this callback as your users connect an Item to Plaid.
+        // For example:
+        // eventName = "TRANSITION_VIEW"
+        // metadata  = {
+        //   link_session_id: "123-abc",
+        //   mfa_type:        "questions",
+        //   timestamp:       "2017-09-14T14:42:19.350Z",
+        //   view_name:       "MFA",
+        // }
+      }
+    });
+  },
+  methods: {
+    startProcess: function startProcess() {
+      this.plaid.open();
+    },
+    something: function something() {}
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/DropdownInput.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/inputs/DropdownInput.vue?vue&type=script&lang=js& ***!
@@ -37440,6 +37527,32 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PlaidEasyApply.vue?vue&type=template&id=44d0d3d7&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PlaidEasyApply.vue?vue&type=template&id=44d0d3d7& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("button", { on: { click: _vm.startProcess } }, [
+    _vm._v("Link Account")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/DropdownInput.vue?vue&type=template&id=7663abbe&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/inputs/DropdownInput.vue?vue&type=template&id=7663abbe& ***!
@@ -62207,6 +62320,7 @@ Vue.component('form-rows', __webpack_require__(/*! ./components/FormRows.vue */ 
 Vue.component('text-input', __webpack_require__(/*! ./components/inputs/TextInput.vue */ "./resources/js/components/inputs/TextInput.vue")["default"]);
 Vue.component('dropdown-input', __webpack_require__(/*! ./components/inputs/DropdownInput.vue */ "./resources/js/components/inputs/DropdownInput.vue")["default"]);
 Vue.component('rental-list-view', __webpack_require__(/*! ./components/rentals/ListView.vue */ "./resources/js/components/rentals/ListView.vue")["default"]);
+Vue.component('plaid-easy-apply', __webpack_require__(/*! ./components/PlaidEasyApply.vue */ "./resources/js/components/PlaidEasyApply.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -62758,6 +62872,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewsletterComponent_vue_vue_type_template_id_3519d7ae___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewsletterComponent_vue_vue_type_template_id_3519d7ae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PlaidEasyApply.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/PlaidEasyApply.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PlaidEasyApply_vue_vue_type_template_id_44d0d3d7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PlaidEasyApply.vue?vue&type=template&id=44d0d3d7& */ "./resources/js/components/PlaidEasyApply.vue?vue&type=template&id=44d0d3d7&");
+/* harmony import */ var _PlaidEasyApply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PlaidEasyApply.vue?vue&type=script&lang=js& */ "./resources/js/components/PlaidEasyApply.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PlaidEasyApply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PlaidEasyApply_vue_vue_type_template_id_44d0d3d7___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PlaidEasyApply_vue_vue_type_template_id_44d0d3d7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PlaidEasyApply.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PlaidEasyApply.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/PlaidEasyApply.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaidEasyApply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PlaidEasyApply.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PlaidEasyApply.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaidEasyApply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PlaidEasyApply.vue?vue&type=template&id=44d0d3d7&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/PlaidEasyApply.vue?vue&type=template&id=44d0d3d7& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaidEasyApply_vue_vue_type_template_id_44d0d3d7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PlaidEasyApply.vue?vue&type=template&id=44d0d3d7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PlaidEasyApply.vue?vue&type=template&id=44d0d3d7&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaidEasyApply_vue_vue_type_template_id_44d0d3d7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlaidEasyApply_vue_vue_type_template_id_44d0d3d7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

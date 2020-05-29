@@ -13,6 +13,8 @@ use App\RentalApplicationRentalHistory;
 use App\RentalApplicationVehicle;
 use App\User;
 use Illuminate\Http\Request;
+use TomorrowIdeas\Plaid\Plaid;
+use TomorrowIdeas\Plaid\PlaidRequestException;
 
 class ApplyController extends Controller
 {
@@ -221,6 +223,58 @@ class ApplyController extends Controller
             'relationOptions' => config('options.application.relations'),
             'identificationTypeOptions' => config('options.application.identificationTypes'),
             'employmentStatusOptions' => config('options.application.employmentStatus'),
+        ]);
+    }
+
+    public function postPlaid(Request $request)
+    {
+        $request->validate([
+            'public_token' => 'required'
+        ]);
+
+        $client = new Plaid(
+            config('services.plaid.client_id'),
+            config('services.plaid.secret'),
+            config('services.plaid.public_key')
+        );
+        $client->setEnvironment(config('services.plaid.env'));
+
+        try {
+            $r = $client->exchangeToken($request->get('public_token'));
+
+            $identity = $client->getIdentity($r->access_token);
+
+//            $assetReport = $client->createAssetReport([$r->access_token], 180);
+            $assetReport = $client->getAssetReport($request->get('asset_report_id'));
+        } catch (PlaidRequestException $e) {
+            dd($e->getResponse());
+            return response()->isClientError();
+        }
+
+
+        return response()->json($assetReport);
+
+
+        $addresses = $emails = $phones = [];
+        foreach($identity->accounts as $account) {
+            foreach($account->owners as $owner) {
+                foreach($owner->addresses as $address) {
+                    $addresses[md5(json_encode($address))] = $address->data;
+                    $addresses[md5(json_encode($address))] = $address->data;
+                }
+                foreach($owner->emails as $email) {
+                    $emails[md5($email->data)] = $email->data;
+                }
+                foreach($owner->phone_numbers as $phone) {
+                    $phones[md5($phone->data)] = $phone->data;
+                }
+            }
+        }
+
+        return response()->json([
+            'addresses' => $addresses,
+            'emails' => $emails,
+            'phones' => $phones,
         ]);
     }
 }

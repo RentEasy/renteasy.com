@@ -46,6 +46,8 @@ Route::get('/rentals/{rental}/apply', 'ApplyController@apply')->name('rentals.ap
 Route::get('/rentals/{rental}/form-options', 'ApplyController@getFormOptions')->name('rentals.getFormOptions');
 Route::post('/rentals/{rental}/submit-application', 'ApplyController@submitApplication')->name('rentals.submitApplication');
 Route::post('/rentals/{rental}/validate-step', 'ApplyController@validateStep')->name('rentals.validateStep');
+Route::get('/rentals/{rental}/plaid', 'ApplyController@postPlaid')->name('rentals.postPlaid');
+Route::post('/rentals/{rental}/plaid', 'ApplyController@postPlaid')->name('rentals.postPlaid');
 //
 //Route::prefix('/rentals/{rental}/apply')->group(function() {
 //    Route::get('/about', 'ApplyController@about')->name('rentals.apply');

@@ -49,6 +49,8 @@ Vue.component('dropdown-input', require('./components/inputs/DropdownInput.vue')
 
 Vue.component('rental-list-view', require('./components/rentals/ListView.vue').default);
 
+Vue.component('plaid-easy-apply', require('./components/PlaidEasyApply.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

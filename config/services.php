@@ -30,4 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'plaid' => [
+        'client_id' => env('PLAID_CLIENT_ID'),
+        'secret' => env('PLAID_SECRET'),
+        'public_key' => env('PLAID_PUBLIC_KEY'),
+        'country_codes' => env('PLAID_COUNTRY_CODES', 'US'),
+        'env' => env('PLAID_ENV', 'sandbox'),
+    ]
+
 ];

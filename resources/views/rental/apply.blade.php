@@ -4,6 +4,8 @@
 
 @section('content')
     <div class="">
+        <plaid-easy-apply plaid-route="{{ route('rentals.postPlaid', [$rental]) }}" />
+
         <app-form
             submit-route="{{ route('rentals.submitApplication', [$rental]) }}"
             form-options-route="{{ route('rentals.getFormOptions', [$rental]) }}"
