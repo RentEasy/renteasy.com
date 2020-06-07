@@ -7,18 +7,25 @@ use PHPUnit\Framework\TestCase;
 
 class PlaidTenantCheckTest extends TestCase
 {
+
+    public function testIngestion()
+    {
+        $check = new PlaidTenantCheck();
+        $assets = json_decode(file_get_contents('tests/Unit/Domain/TenantCheck/fixtures/assets.json'));
+
+        $check->ingest($assets);
+
+        $this->assertTrue(true);
+    }
+
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testRegularIncome()
     {
         $check = new PlaidTenantCheck();
-
-        $assets = json_decode(file_get_contents('tests/Unit/Domain/TenantCheck/fixtures/assets.json'));
-
-        $check->ingest($assets);
 
         $superRegularIncome = collect([
             '2019-12' => -501.38,
@@ -41,6 +48,10 @@ class PlaidTenantCheckTest extends TestCase
         $this->assertTrue($check->hasRegularIncome($regularIncome));
 
         $peakMonths = collect([
+            '2020-08' => -508.38,
+            '2020-09' => -508.38,
+            '2020-10' => -508.38,
+            '2020-11' => -508.38,
             '2019-12' => -501.38,
             '2020-01' => -5002.38,
             '2020-02' => -508.38,
@@ -59,8 +70,5 @@ class PlaidTenantCheckTest extends TestCase
             '2020-05' => -501.38,
         ]);
         $this->assertFalse($check->hasRegularIncome($irregularIncome));
-
-
-        $this->assertEquals(100, $check->generateScore());
     }
 }

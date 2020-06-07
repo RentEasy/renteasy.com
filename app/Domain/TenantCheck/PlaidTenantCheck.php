@@ -2,6 +2,7 @@
 
 namespace App\Domain\TenantCheck;
 
+use App\Domain\Enum;
 use Illuminate\Support\Collection;
 
 class PlaidTenantCheck
@@ -45,7 +46,7 @@ class PlaidTenantCheck
 //        });
     }
 
-    public function hasRegularIncome(Collection $monthlyIncome) : bool
+    public function hasRegularIncome(Collection $monthlyIncome) : RegularIncomeResultReason
     {
         /*
          * Basic premise:
@@ -67,7 +68,7 @@ class PlaidTenantCheck
 
         if($monthlyIncome->count() < $monthQualifier) {
             // Check to ensure there's enough coverage in their accounts
-            return false;
+            return RegularIncomeResultReason::RejectedNotEnoughHistory;
         }
 
         // First check, income reliability
@@ -88,6 +89,12 @@ class PlaidTenantCheck
             return true;
         }
 
+        $totalRegularMonths = $monthlyIncome->count() - $irregularIncome->count();
+        if($totalRegularMonths > $monthQualifier) {
+            // Second check, you can have some irregular income if you have overall stable
+            return true;
+        }
+
         return false;
     }
 
@@ -96,4 +103,21 @@ class PlaidTenantCheck
         return 100;
     }
 
+}
+
+class RegularIncomeResult
+{
+
+    public bool $hasRegularIncome;
+    public float $avgMonthlyIncome;
+
+    public RegularIncomeResult $result;
+
+}
+
+abstract class RegularIncomeResultReason extends Enum {
+    const Untested = 0;
+    const Accepted = 1;
+    const Rejected = 2;
+    const RejectedNotEnoughHistory = 3;
 }
