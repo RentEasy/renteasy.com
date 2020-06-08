@@ -374,9 +374,9 @@
     }
 
     /* Development */
-    .wizard-tab-container {
-        display: block !important;
-    }
+    /*.wizard-tab-container {*/
+    /*    display: block !important;*/
+    /*}*/
 </style>
 
 <script>
