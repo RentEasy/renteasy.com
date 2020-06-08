@@ -3010,7 +3010,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nsection {\n    margin-bottom: 40px;\n}\ni.wizard-icon {\n    font-style: normal;\n}\n\n/* Development */\n.wizard-tab-container {\n    display: block !important;\n}\n", ""]);
+exports.push([module.i, "\nsection {\n    margin-bottom: 40px;\n}\ni.wizard-icon {\n    font-style: normal;\n}\n\n/* Development */\n/*.wizard-tab-container {*/\n/*    display: block !important;*/\n/*}*/\n", ""]);
 
 // exports
 

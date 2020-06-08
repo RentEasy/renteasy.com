@@ -36,6 +36,9 @@
                         <a href="{{ route('about.contact') }}" class="navbar-item">
                             Contact Us
                         </a>
+                        <a href="https://www.notion.so/leasary/Leasary-5e72a1d402b248d3b954501939eaf62e" class="navbar-item">
+                            Company Wiki
+                        </a>
                     </div>
                 </div>
             </div>
